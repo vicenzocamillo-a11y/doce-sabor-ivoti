@@ -56,16 +56,16 @@ Para acrescentar fotos novas: coloque o arquivo em `assets/` (de preferência
 O feed do **Facebook** é o plugin oficial da página e se atualiza sozinho: o
 que a equipe postar aparece ali sem ninguém mexer no site.
 
-O **Instagram** não tem embed gratuito de perfil inteiro — o Meta só oferece
-isso via API com token, que precisa ser renovado. Por isso a seção traz um
-cartão que leva ao perfil. Dois caminhos para ter as fotos na página:
+Do **Instagram** (@docesaborivoti) a seção traz três publicações reais,
+embutidas pelo recurso oficial `.../p/CODIGO/embed` — gratuito e sem token.
+Elas são fixas: para trocar, substitua os códigos em `.ig-post iframe` no
+`index.html`. Os códigos atuais são `Dbf_5jQCZcc`, `DBOlZ7gMIoE` e
+`DLfYNy6T6G8`.
 
-1. **Posts escolhidos a dedo** — com os links das publicações dá para embutir
-   cada uma (gratuito e oficial, usa `.../p/CODIGO/embed`). A desvantagem é
-   que não atualiza sozinho.
-2. **Feed automático** — exige um serviço externo (LightWidget, SnapWidget,
-   Elfsight) ou a Graph API com token. Envolve conta de terceiro e, em alguns
-   casos, mensalidade.
+Um feed do Instagram que se atualiza sozinho não existe de graça: o Meta só
+oferece isso pela Graph API com token renovável, ou por serviço de terceiro
+(LightWidget, SnapWidget, Elfsight), que envolve conta externa e às vezes
+mensalidade.
 
 ## Dados: o que é verificado e o que não é
 
@@ -83,9 +83,11 @@ Verificado em fonte pública:
    veio da ficha que foi passada para quem montou o site, não de uma fonte
    que eu pudesse conferir. Confira no perfil e ajuste em dois lugares:
    `index.html` (texto) e o `reviewCount` no bloco `application/ld+json`.
-2. **Horários** (7h30–21h30 de segunda a sábado, 15h–21h no domingo). As
-   fontes públicas divergem. Corrija a tabela `.hours-table` no `index.html`:
-   o selo "aberto agora" e o JSON-LD acompanham sozinhos.
+2. **Horários** — agora **7h às 20h, todos os dias**, conforme a bio do
+   próprio Instagram da casa. Antes o site dizia 7h30–21h30, que veio de
+   agregador. Para corrigir, mexa só na tabela `.hours-table` do
+   `index.html`: o selo "aberto agora" (topo, menu do celular e seção de
+   horários) e o JSON-LD acompanham sozinhos.
 3. **"desde 1999"**, no hero e na seção Nossa casa.
 4. **Telefone** (51) 98037-5842, usado em `wa.me/5551980375842` e `tel:`.
 

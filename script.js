@@ -56,9 +56,9 @@ document.addEventListener('keydown', event => {
 /* Selo "aberto agora" — lido da tabela de horários, que é a única fonte.
    Mudou a tabela no HTML, muda o selo aqui automaticamente. */
 const hoursTable = document.querySelector('.hours-table');
-const openState = document.querySelector('#open-state');
+const openStates = document.querySelectorAll('.open-state');
 
-if (hoursTable && openState) {
+if (hoursTable && openStates.length) {
   const toMinutes = text => {
     const m = text.match(/(\d{1,2})\s*h\s*(\d{2})?/i);
     return m ? Number(m[1]) * 60 + Number(m[2] || 0) : null;
@@ -89,13 +89,18 @@ if (hoursTable && openState) {
     }
   });
 
-  openState.hidden = false;
-  openState.className = `open-state ${isOpen ? 'is-open' : 'is-closed'}`;
-  openState.textContent = isOpen
+  const texto = isOpen
     ? `Aberto agora · até ${closesAt}`
     : opensAt
       ? `Fechado · abre às ${opensAt}`
       : 'Fechado agora';
+
+  openStates.forEach(selo => {
+    const noTopo = selo.classList.contains('topbar-open');
+    selo.hidden = false;
+    selo.className = `open-state ${noTopo ? 'topbar-open ' : ''}${isOpen ? 'is-open' : 'is-closed'}`;
+    selo.textContent = texto;
+  });
 }
 
 /* Sombra no topo depois que a página rola. */
@@ -108,7 +113,6 @@ window.addEventListener('scroll', onScroll, { passive: true });
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const revealTargets = document.querySelectorAll('main > section:not(.hero), .score, footer');
 if (!reduceMotion && 'IntersectionObserver' in window) {
-  revealTargets.forEach(el => el.classList.add('reveal'));
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -116,5 +120,11 @@ if (!reduceMotion && 'IntersectionObserver' in window) {
       io.unobserve(entry.target);
     });
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-  revealTargets.forEach(el => io.observe(el));
+
+  /* Nada que ja esta na tela entra escondido: o primeiro quadro fica inteiro. */
+  revealTargets.forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight) return;
+    el.classList.add('reveal');
+    io.observe(el);
+  });
 }
