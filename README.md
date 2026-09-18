@@ -11,7 +11,7 @@ hospedagem estática.
 index.html        página única
 style.css         estilos
 fonts.css         Playfair Display e DM Sans, servidas localmente
-script.js         menu, lightbox, selo de horário
+script.js         menu, lightbox, selo de horário, fita de sabores e animações
 favicon.jpg
 site.webmanifest  instalação como app no celular
 robots.txt

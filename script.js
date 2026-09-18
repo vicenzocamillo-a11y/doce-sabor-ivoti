@@ -1,3 +1,5 @@
+document.documentElement.classList.add('js');
+
 const toggle = document.querySelector('.menu-toggle');
 const menu = document.querySelector('#mobile-menu');
 
@@ -94,4 +96,25 @@ if (hoursTable && openState) {
     : opensAt
       ? `Fechado · abre às ${opensAt}`
       : 'Fechado agora';
+}
+
+/* Sombra no topo depois que a página rola. */
+const topbar = document.querySelector('.topbar');
+const onScroll = () => topbar.classList.toggle('is-scrolled', window.scrollY > 8);
+onScroll();
+window.addEventListener('scroll', onScroll, { passive: true });
+
+/* Seções entram com um leve fade ao rolar. Sem JS nada fica escondido. */
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const revealTargets = document.querySelectorAll('main > section:not(.hero), .score, footer');
+if (!reduceMotion && 'IntersectionObserver' in window) {
+  revealTargets.forEach(el => el.classList.add('reveal'));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      io.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  revealTargets.forEach(el => io.observe(el));
 }
