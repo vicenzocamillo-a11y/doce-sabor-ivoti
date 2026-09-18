@@ -1,5 +1,6 @@
 # Publica o site no GitHub Pages a cada push.
-# Antes do primeiro uso: Settings › Pages › Source: "GitHub Actions".
+# O passo configure-pages tenta ligar o Pages sozinho (enablement).
+# Se falhar: Settings › Pages › Source: "GitHub Actions".
 name: Publicar no GitHub Pages
 
 on:
@@ -25,6 +26,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
