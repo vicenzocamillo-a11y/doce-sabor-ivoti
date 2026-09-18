@@ -27,6 +27,8 @@ A página segue o padrão das redes grandes de cafeteria e padaria:
 1. **Barra de utilidade** — "aberto agora", endereço e telefone, sempre no topo.
 2. **Topo fixo** enxuto: logo, navegação e o botão de WhatsApp.
 3. **Hero de largura total** com a foto das cucas, chamada e duas ações.
+3. **Faixa de números** com as notas, a posição no Tripadvisor, os prêmios
+   e o horário — só dados conferidos em fonte pública.
 4. **Menu** — três cartões com foto, categoria, nome e o que tem em cada um.
 5. **Faixa escura** com os três prêmios de 2024.
 6. **Nossa casa** — a história, desde 1999.
@@ -69,11 +71,17 @@ ampliação ao clique já funciona sozinha.
 O feed do **Facebook** é o plugin oficial da página e se atualiza sozinho: o
 que a equipe postar aparece ali sem ninguém mexer no site.
 
-Do **Instagram** (@docesaborivoti) a seção traz três publicações reais,
+Do **Instagram** (@docesaborivoti) a seção traz seis publicações reais —
+três do feed e três reels —,
 embutidas pelo recurso oficial `.../p/CODIGO/embed` — gratuito e sem token.
-Elas são fixas: para trocar, substitua os códigos em `.ig-post iframe` no
-`index.html`. Os códigos atuais são `Dbf_5jQCZcc`, `DBOlZ7gMIoE` e
-`DLfYNy6T6G8`.
+Elas são fixas: para trocar, substitua os códigos em `.ig-post iframe` e
+`.reel-post iframe` no `index.html`. Os códigos atuais são `Dbf_5jQCZcc`,
+`DBOlZ7gMIoE` e `DLfYNy6T6G8` (feed) e `DGBcKmetGy_`, `DG0zEr8JA1o` e
+`DEp2kk8sWYR` (reels).
+
+As publicações carregam no navegador de quem visita, direto do Instagram —
+por isso são a forma mais barata de ter muita foto real na página sem
+guardar arquivo nenhum no repositório.
 
 Um feed do Instagram que se atualiza sozinho não existe de graça: o Meta só
 oferece isso pela Graph API com token renovável, ou por serviço de terceiro
