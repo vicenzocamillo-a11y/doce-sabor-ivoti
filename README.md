@@ -9,6 +9,7 @@ hospedagem estática.
 
 ```
 index.html        página única
+404.html          página de erro do GitHub Pages, com link de volta
 style.css         estilos
 fonts.css         Playfair Display e DM Sans, servidas localmente
 script.js         menu, ampliação de foto, selo de horário e animações
@@ -51,10 +52,15 @@ A página segue o padrão das redes grandes de cafeteria e padaria:
 | Waze | seção Visite |
 | WhatsApp | topo, menu, Facebook, Visite e barra fixa do celular |
 | Telefone | barra de utilidade, menu do celular, Visite e rodapé |
-| Aberto agora / fechado | três selos calculados da tabela de horários |
+| Aberto agora / fechado | três selos calculados da tabela de horários, no fuso de Ivoti |
 
-Também configurados: dados estruturados `schema.org/Bakery`, Open Graph com
-imagem própria, manifest, robots e sitemap.
+Também configurados: dados estruturados `schema.org/Bakery` (endereço,
+telefone, horários, nota, prêmios, mapa e perfis), Open Graph com imagem
+própria, manifest, robots, sitemap com data, página 404, pré-carregamento da
+foto de abertura e pré-conexão com Instagram e Facebook.
+
+O selo "aberto agora" calcula no **horário de Ivoti** (America/Sao_Paulo),
+não no do visitante — quem olha de outro fuso vê o estado real da casa.
 
 ## Fotos e redes sociais
 

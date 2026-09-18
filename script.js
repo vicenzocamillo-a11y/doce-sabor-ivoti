@@ -67,9 +67,21 @@ if (hoursTable && openStates.length) {
     return m ? Number(m[1]) * 60 + Number(m[2] || 0) : null;
   };
 
-  const now = new Date();
-  const today = now.getDay();
-  const nowMinutes = now.getHours() * 60 + now.getMinutes();
+  /* Hora de Ivoti (America/Sao_Paulo), e nao a do visitante: quem olha de
+     outro fuso tambem precisa saber se a casa esta aberta AGORA la. */
+  let today, nowMinutes;
+  try {
+    const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/Sao_Paulo', weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23'
+    }).formatToParts(new Date());
+    const get = type => parts.find(part => part.type === type)?.value;
+    today = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 }[get('weekday')];
+    nowMinutes = (Number(get('hour')) % 24) * 60 + Number(get('minute'));
+  } catch {
+    const now = new Date();
+    today = now.getDay();
+    nowMinutes = now.getHours() * 60 + now.getMinutes();
+  }
   let isOpen = false;
   let closesAt = null;
   let opensAt = null;
