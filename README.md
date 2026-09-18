@@ -11,7 +11,7 @@ hospedagem estática.
 index.html        página única
 style.css         estilos
 fonts.css         Playfair Display e DM Sans, servidas localmente
-script.js         menu, lightbox, selo de horário, fita de sabores e animações
+script.js         menu, galeria, selo de horário e animações
 favicon.jpg
 site.webmanifest  instalação como app no celular
 robots.txt
@@ -24,6 +24,9 @@ PRODUCT.md        briefing do produto
 
 | Recurso | Onde |
 |---|---|
+| Galeria de fotos | seção **Fotos**, com ampliação ao toque |
+| Publicações do Facebook | seção **Novidades**, feed ao vivo da página |
+| Instagram | cartão na galeria, na seção Novidades e no rodapé |
 | Mapa do Google embutido | seção final, acima dos horários |
 | Ficha do Google (avaliações) | cartão "Google" e link "Ver ficha no Google" |
 | Avaliar no Google | botão no cartão amarelo "Sua vez" |
@@ -32,12 +35,37 @@ PRODUCT.md        briefing do produto
 | Waze | seção de horários |
 | WhatsApp | topo, café colonial, Visite e barra fixa do celular |
 | Telefone | menu do celular e seção Visite |
-| Instagram e Facebook | seção Nossa casa e rodapé |
 | Aberto agora / fechado | selo calculado da tabela de horários |
 
 Também configurados: dados estruturados `schema.org/Bakery` (endereço,
 telefone, horários, nota, prêmios), Open Graph com imagem própria para a
 prévia do link no WhatsApp, manifest, robots e sitemap.
+
+## Fotos e redes sociais
+
+Cada fotografia aparece **uma única vez** no site. São quatro imagens reais:
+`cucas` abre a página, e `buffet`, `confeitaria` e `casa-real` ficam na
+galeria da seção Fotos. Repetir uma foto em duas seções faz o site parecer
+montado por robô — foi exatamente o que corrigimos.
+
+Para acrescentar fotos novas: coloque o arquivo em `assets/` (de preferência
+`.webp`) e copie um dos blocos `<button class="menu-photo">` dentro de
+`.gallery-grid` no `index.html`, trocando `src`, `alt`, `data-photo`,
+`data-caption` e o rótulo. A ampliação já funciona sozinha.
+
+O feed do **Facebook** é o plugin oficial da página e se atualiza sozinho: o
+que a equipe postar aparece ali sem ninguém mexer no site.
+
+O **Instagram** não tem embed gratuito de perfil inteiro — o Meta só oferece
+isso via API com token, que precisa ser renovado. Por isso a seção traz um
+cartão que leva ao perfil. Dois caminhos para ter as fotos na página:
+
+1. **Posts escolhidos a dedo** — com os links das publicações dá para embutir
+   cada uma (gratuito e oficial, usa `.../p/CODIGO/embed`). A desvantagem é
+   que não atualiza sozinho.
+2. **Feed automático** — exige um serviço externo (LightWidget, SnapWidget,
+   Elfsight) ou a Graph API com token. Envolve conta de terceiro e, em alguns
+   casos, mensalidade.
 
 ## Dados: o que é verificado e o que não é
 
