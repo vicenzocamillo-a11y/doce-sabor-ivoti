@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vicenzocamillo-a11y.github.io/doce-sabor-ivoti/sitemap.xml

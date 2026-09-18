@@ -1,0 +1,13 @@
+{
+  "name": "Doce Sabor Ivoti — Padaria e Confeitaria",
+  "short_name": "Doce Sabor",
+  "description": "Padaria, confeitaria e café colonial na Av. Presidente Lucena, 1983 — Ivoti/RS.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fffaf6",
+  "theme_color": "#cf1746",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "assets/logo-oficial.jpg", "sizes": "720x720", "type": "image/jpeg", "purpose": "any" }
+  ]
+}

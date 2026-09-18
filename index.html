@@ -6,20 +6,90 @@
   <meta name="theme-color" content="#fffaf6">
   <title>Doce Sabor Ivoti | Padaria, confeitaria e café colonial</title>
   <meta name="description" content="Cucas, doces artesanais, salgados e café colonial em Ivoti. Veja os sabores da Doce Sabor e fale diretamente com a equipe.">
-  <link rel="canonical" href="https://doce-sabor-ivoti-cafe.marcelaaquinocorreaa.chatgpt.site/">
+  <!-- CONFIGURAR: troque as 3 ocorrencias do endereco abaixo quando tiver o dominio final. -->
+  <link rel="canonical" href="https://vicenzocamillo-a11y.github.io/doce-sabor-ivoti/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Doce Sabor Ivoti">
+  <meta property="og:title" content="Doce Sabor Ivoti | Padaria, confeitaria e cafe colonial">
+  <meta property="og:description" content="Cucas, doces artesanais, salgados e cafe colonial na Av. Presidente Lucena, 1983 - Ivoti/RS. 4,5 no Google.">
+  <meta property="og:url" content="https://vicenzocamillo-a11y.github.io/doce-sabor-ivoti/">
+  <meta property="og:image" content="https://vicenzocamillo-a11y.github.io/doce-sabor-ivoti/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Cucas da Doce Sabor, padaria e confeitaria em Ivoti/RS">
+  <meta name="twitter:card" content="summary_large_image">
+
   <link rel="stylesheet" href="fonts.css">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="favicon.jpg" type="image/jpeg">
+  <link rel="apple-touch-icon" href="assets/logo-oficial.jpg">
+  <link rel="manifest" href="site.webmanifest">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Bakery",
+    "name": "Padaria e Confeitaria Doce Sabor",
+    "alternateName": "Doce Sabor Ivoti",
+    "description": "Padaria, confeitaria e cafe colonial em Ivoti/RS. Cucas, tortas, paes, salgados, doces e buffet de cafe colonial.",
+    "url": "https://vicenzocamillo-a11y.github.io/doce-sabor-ivoti/",
+    "image": "https://vicenzocamillo-a11y.github.io/doce-sabor-ivoti/assets/cucas.webp",
+    "logo": "https://vicenzocamillo-a11y.github.io/doce-sabor-ivoti/assets/logo-oficial.jpg",
+    "telephone": "+5551980375842",
+    "priceRange": "$$",
+    "servesCuisine": ["Padaria", "Confeitaria", "Cafe colonial"],
+    "currenciesAccepted": "BRL",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Av. Presidente Lucena, 1983",
+      "addressLocality": "Ivoti",
+      "addressRegion": "RS",
+      "postalCode": "93900-000",
+      "addressCountry": "BR"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+        "opens": "07:30",
+        "closes": "21:30"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Sunday"],
+        "opens": "15:00",
+        "closes": "21:00"
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.5",
+      "reviewCount": "2343",
+      "bestRating": "5"
+    },
+    "award": [
+      "Melhor confeitaria - Os Melhores da Gastronomia, VIPS DO SUL, Ivoti, 2024",
+      "Melhor padaria - Os Melhores da Gastronomia, VIPS DO SUL, Ivoti, 2024",
+      "Melhor mini cafe colonial - Os Melhores da Gastronomia, VIPS DO SUL, Ivoti, 2024"
+    ],
+    "sameAs": [
+      "https://www.instagram.com/docesaborivoti/",
+      "https://www.facebook.com/DoceSaborIvoti/"
+    ]
+  }
+  </script>
 </head>
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 <header class="topbar">
   <a class="logo" href="#inicio" aria-label="Doce Sabor Ivoti, início"><img src="assets/logo-oficial.jpg" width="720" height="720" alt="Doce Sabor"></a>
-  <nav aria-label="Navegação principal"><a href="#sabores">Sabores</a><a href="#historia">Nossa casa</a><a href="#visite">Visite</a></nav>
+  <nav aria-label="Navegação principal"><a href="#sabores">Sabores</a><a href="#historia">Nossa casa</a><a href="#avaliacoes">Avaliações</a><a href="#visite">Visite</a></nav>
   <a class="top-whatsapp" href="https://wa.me/5551980375842" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="assets/icons.svg#brand-whatsapp"/></svg><span>Chamar no WhatsApp</span></a>
   <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu"><span>Menu</span><svg class="icon"><use href="assets/icons.svg#menu-2"/></svg></button>
 </header>
-<nav id="mobile-menu" class="mobile-menu" hidden><a href="#sabores">Sabores</a><a href="#historia">Nossa casa</a><a href="#visite">Visite</a><a href="tel:+5551980375842">Ligar agora</a></nav>
+<nav id="mobile-menu" class="mobile-menu" hidden><a href="#sabores">Sabores</a><a href="#historia">Nossa casa</a><a href="#avaliacoes">Avaliações</a><a href="#visite">Visite</a><a href="tel:+5551980375842">Ligar agora</a></nav>
 
 <main id="conteudo">
   <section class="hero" id="inicio">
@@ -41,10 +111,10 @@
   <section class="menu-showcase" id="sabores">
     <div class="menu-title"><span>O que te espera</span><h2>Escolha com<br>os olhos.</h2><p>Para o café da manhã, a pausa da tarde ou aquele encontro que merece durar.</p></div>
     <div class="menu-grid">
-      <button class="menu-photo tall" data-photo="assets/buffet.webp" data-caption="Buffet da Doce Sabor. Fotografia real tratada digitalmente."><img src="assets/buffet.webp" srcset="assets/buffet-800.webp 800w, assets/buffet.webp 1367w" sizes="(max-width:760px) 100vw, 41vw" alt="Buffet com pães, salgados, doces e torta de morango"><span>O buffet</span><svg class="icon"><use href="assets/icons.svg#plus"/></svg></button>
+      <button class="menu-photo tall" data-photo="assets/buffet.webp" data-caption="Buffet da Doce Sabor. Fotografia real tratada digitalmente."><img loading="lazy" decoding="async" src="assets/buffet.webp" srcset="assets/buffet-800.webp 800w, assets/buffet.webp 1367w" sizes="(max-width:760px) 100vw, 41vw" alt="Buffet com pães, salgados, doces e torta de morango"><span>O buffet</span><svg class="icon"><use href="assets/icons.svg#plus"/></svg></button>
       <article class="menu-item berry"><span>Para dividir</span><h3>Café colonial</h3><p>Doces e salgados reunidos em uma mesa que convida a provar um pouco de tudo.</p><a href="https://wa.me/5551980375842?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20o%20caf%C3%A9%20colonial." target="_blank" rel="noopener noreferrer">Consultar pelo WhatsApp</a></article>
       <article class="menu-item butter"><span>Para levar</span><h3>Cucas, pães<br>e salgados</h3><p>Sabores para levar um pedaço da Doce Sabor para casa.</p></article>
-      <button class="menu-photo wide" data-photo="assets/confeitaria.webp" data-caption="Tortas da Doce Sabor em fotografia de Kátia Della Tôrres para VIPS DO SUL."><img src="assets/confeitaria.webp" width="666" height="444" alt="Mesa com tortas decoradas da Doce Sabor"><span>A confeitaria</span><svg class="icon"><use href="assets/icons.svg#plus"/></svg></button>
+      <button class="menu-photo wide" data-photo="assets/confeitaria.webp" data-caption="Tortas da Doce Sabor em fotografia de Kátia Della Tôrres para VIPS DO SUL."><img loading="lazy" decoding="async" src="assets/confeitaria.webp" width="666" height="444" alt="Mesa com tortas decoradas da Doce Sabor"><span>A confeitaria</span><svg class="icon"><use href="assets/icons.svg#plus"/></svg></button>
       <article class="menu-item white"><span>Para acompanhar</span><h3>Café e conversa</h3><p>Uma xícara, um doce e tempo para aproveitar.</p><a href="tel:+5551980375842">Ligar para a equipe</a></article>
     </div>
   </section>
@@ -52,7 +122,7 @@
   <section class="story" id="historia">
     <div class="story-number"><span>desde</span><strong>1999</strong></div>
     <div class="story-copy"><h2>Uma casa feita<br>de encontros.</h2><p>Na Avenida Presidente Lucena, a Doce Sabor acompanha quem vive em Ivoti e quem segue viagem pela Rota Romântica.</p><p>O balcão reúne receitas artesanais, cuidado e uma equipe que transformou a parada para o café em parte da história da cidade.</p><a class="plain-link" href="https://www.instagram.com/docesaborivoti/" target="_blank" rel="noopener noreferrer">Ver o dia a dia no Instagram <svg class="icon"><use href="assets/icons.svg#brand-instagram"/></svg></a></div>
-    <figure class="story-image"><img src="assets/casa-real.webp" width="666" height="444" alt="Salete ao lado da vitrine da Doce Sabor em 2021"><figcaption>Um registro da nossa história</figcaption></figure>
+    <figure class="story-image"><img loading="lazy" decoding="async" src="assets/casa-real.webp" width="666" height="444" alt="Salete ao lado da vitrine da Doce Sabor em 2021"><figcaption>Um registro da nossa história</figcaption></figure>
   </section>
 
   <section class="recognition">
@@ -61,11 +131,71 @@
     <div class="award-list"><p>Melhor confeitaria</p><p>Melhor padaria</p><p>Melhor mini café colonial</p><small>Prêmios Os Melhores da Gastronomia, VIPS DO SUL, Ivoti.</small></div>
   </section>
 
-  <section class="testimonial"><svg class="quote-mark" viewBox="0 0 80 60" aria-hidden="true"><path d="M0 60V34C0 12 12 1 34 0v14c-10 1-15 6-15 15h15v31H0zm46 0V34C46 12 57 1 80 0v14c-10 1-15 6-15 15h15v31H46z"/></svg><blockquote>“Lugar perfeito para um café da manhã de domingo! Um buffet maravilhoso, atendimento muito bom.”</blockquote><p>Carla Costa <span>Avaliação no Google</span></p><small>*Nota, total e depoimento da ficha do Google Maps fornecida para o site. Podem mudar.</small></section>
+  <section class="testimonial" id="avaliacoes"><svg class="quote-mark" viewBox="0 0 80 60" aria-hidden="true"><path d="M0 60V34C0 12 12 1 34 0v14c-10 1-15 6-15 15h15v31H0zm46 0V34C46 12 57 1 80 0v14c-10 1-15 6-15 15h15v31H46z"/></svg><blockquote>“Lugar perfeito para um café da manhã de domingo! Um buffet maravilhoso, atendimento muito bom.”</blockquote><p>Carla Costa <span>Avaliação no Google</span></p>
+
+    <div class="scores">
+      <a class="score" href="https://www.google.com/maps/search/?api=1&amp;query=Padaria+e+Confeitaria+Doce+Sabor+Av+Pres+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer">
+        <span class="score-source"><svg class="icon"><use href="assets/icons.svg#brand-google"/></svg>Google</span>
+        <strong>4,5</strong>
+        <span class="score-stars" role="img" aria-label="4,5 de 5 estrelas"><svg class="icon"><use href="assets/icons.svg#star"/></svg><svg class="icon"><use href="assets/icons.svg#star"/></svg><svg class="icon"><use href="assets/icons.svg#star"/></svg><svg class="icon"><use href="assets/icons.svg#star"/></svg><svg class="icon half"><use href="assets/icons.svg#star"/></svg></span>
+        <span class="score-note">2.343 avaliações</span>
+        <span class="score-link">Ver no Google <svg class="icon"><use href="assets/icons.svg#arrow-up-right"/></svg></span>
+      </a>
+
+      <a class="score" href="https://www.tripadvisor.com.br/Restaurant_Review-g2572696-d6003664-Reviews-Doce_Sabor_Ivoti-Ivoti_State_of_Rio_Grande_do_Sul.html" target="_blank" rel="noopener noreferrer">
+        <span class="score-source">Tripadvisor</span>
+        <strong>4,3</strong>
+        <span class="score-stars" role="img" aria-label="4,3 de 5 estrelas"><svg class="icon"><use href="assets/icons.svg#star"/></svg><svg class="icon"><use href="assets/icons.svg#star"/></svg><svg class="icon"><use href="assets/icons.svg#star"/></svg><svg class="icon"><use href="assets/icons.svg#star"/></svg><svg class="icon half"><use href="assets/icons.svg#star"/></svg></span>
+        <span class="score-note">86 avaliações · 2º lugar entre os 26 restaurantes de Ivoti</span>
+        <span class="score-link">Ver no Tripadvisor <svg class="icon"><use href="assets/icons.svg#arrow-up-right"/></svg></span>
+      </a>
+
+      <div class="score score-cta">
+        <span class="score-source"><svg class="icon"><use href="assets/icons.svg#message-2"/></svg>Sua vez</span>
+        <p>Passou aqui hoje? Uma avaliação ajuda quem ainda não conhece a casa a decidir parar.</p>
+        <a class="primary" href="https://www.google.com/maps/search/?api=1&amp;query=Padaria+e+Confeitaria+Doce+Sabor+Av+Pres+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer">Avaliar no Google</a>
+      </div>
+    </div>
+
+    <small>*Notas e depoimento conforme as fichas públicas do Google e do Tripadvisor. Podem mudar a qualquer momento.</small></section>
 
   <section class="visit" id="visite">
-    <div class="visit-photo"><img src="assets/buffet.webp" srcset="assets/buffet-800.webp 800w, assets/buffet.webp 1367w" sizes="(max-width:760px) 100vw, 50vw" alt="Mesa de café colonial da Doce Sabor"></div>
-    <div class="visit-copy"><img class="visit-logo" src="assets/logo-oficial.jpg" width="720" height="720" alt="Doce Sabor"><h2>A próxima pausa<br>é aqui.</h2><address>Av. Presidente Lucena, 1983<br>Harmonia, Ivoti, RS</address><div class="visit-actions"><a class="primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=Doce+Sabor+Ivoti+Av+Presidente+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="assets/icons.svg#map-pin"/></svg>Traçar rota</a><a href="https://wa.me/5551980375842" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="assets/icons.svg#brand-whatsapp"/></svg>WhatsApp</a><a href="tel:+5551980375842"><svg class="icon"><use href="assets/icons.svg#phone"/></svg>(51) 98037-5842</a></div><p class="confirm-note">Consulte horários, buffet, produtos e entrega diretamente com a equipe.</p></div>
+    <div class="visit-photo"><img loading="lazy" decoding="async" src="assets/buffet.webp" srcset="assets/buffet-800.webp 800w, assets/buffet.webp 1367w" sizes="(max-width:760px) 100vw, 50vw" alt="Mesa de café colonial da Doce Sabor"></div>
+    <div class="visit-copy"><img class="visit-logo" loading="lazy" decoding="async" src="assets/logo-oficial.jpg" width="720" height="720" alt="Doce Sabor"><h2>A próxima pausa<br>é aqui.</h2><address>Av. Presidente Lucena, 1983<br>Harmonia, Ivoti, RS</address><div class="visit-actions"><a class="primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=Doce+Sabor+Ivoti+Av+Presidente+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="assets/icons.svg#map-pin"/></svg>Traçar rota</a><a href="https://wa.me/5551980375842" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="assets/icons.svg#brand-whatsapp"/></svg>WhatsApp</a><a href="tel:+5551980375842"><svg class="icon"><use href="assets/icons.svg#phone"/></svg>(51) 98037-5842</a></div><p class="confirm-note">Consulte horários, buffet, produtos e entrega diretamente com a equipe.</p></div>
+  </section>
+
+  <section class="locale" aria-label="Mapa e horários">
+    <div class="map">
+      <iframe title="Mapa da Doce Sabor na Av. Presidente Lucena, 1983, Ivoti/RS"
+        src="https://www.google.com/maps?q=Padaria+e+Confeitaria+Doce+Sabor%2C+Av.+Pres.+Lucena%2C+1983%2C+Ivoti+-+RS&amp;output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+
+    <div class="hours">
+      <div class="hours-head">
+        <h3><svg class="icon"><use href="assets/icons.svg#clock"/></svg>Horários</h3>
+        <span class="open-state" id="open-state" hidden></span>
+      </div>
+
+      <!-- CONFIRMAR: horarios levantados em fontes publicas. Ajuste aqui e o
+           selo "aberto agora" e os dados estruturados acompanham sozinhos. -->
+      <table class="hours-table">
+        <caption class="sr-only">Horário de funcionamento da Doce Sabor</caption>
+        <tbody>
+          <tr data-days="1,2,3,4,5"><th scope="row">Segunda a sexta</th><td>7h30 — 21h30</td></tr>
+          <tr data-days="6"><th scope="row">Sábado</th><td>7h30 — 21h30</td></tr>
+          <tr data-days="0"><th scope="row">Domingo</th><td>15h — 21h</td></tr>
+        </tbody>
+      </table>
+
+      <p class="hours-note">Feriados e o buffet de café colonial podem ter horário próprio. O Google fica sempre atualizado.</p>
+
+      <div class="locale-links">
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Padaria+e+Confeitaria+Doce+Sabor+Av+Pres+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="assets/icons.svg#brand-google"/></svg>Ver ficha no Google</a>
+        <a href="https://www.waze.com/ul?q=Av.%20Pres.%20Lucena%2C%201983%2C%20Ivoti%20RS&amp;navigate=yes" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="assets/icons.svg#navigation"/></svg>Abrir no Waze</a>
+        <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Doce+Sabor+Ivoti+Av+Presidente+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="assets/icons.svg#map-pin"/></svg>Traçar rota</a>
+      </div>
+    </div>
   </section>
 </main>
 

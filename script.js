@@ -50,3 +50,48 @@ document.addEventListener('keydown', event => {
     toggle.focus();
   }
 });
+
+/* Selo "aberto agora" — lido da tabela de horários, que é a única fonte.
+   Mudou a tabela no HTML, muda o selo aqui automaticamente. */
+const hoursTable = document.querySelector('.hours-table');
+const openState = document.querySelector('#open-state');
+
+if (hoursTable && openState) {
+  const toMinutes = text => {
+    const m = text.match(/(\d{1,2})\s*h\s*(\d{2})?/i);
+    return m ? Number(m[1]) * 60 + Number(m[2] || 0) : null;
+  };
+
+  const now = new Date();
+  const today = now.getDay();
+  const nowMinutes = now.getHours() * 60 + now.getMinutes();
+  let isOpen = false;
+  let closesAt = null;
+  let opensAt = null;
+
+  hoursTable.querySelectorAll('tr').forEach(row => {
+    if (!(row.dataset.days || '').split(',').map(Number).includes(today)) return;
+    row.classList.add('today');
+
+    const [from, to] = row.querySelector('td').textContent.split('—');
+    if (!to) return;
+    const start = toMinutes(from);
+    const end = toMinutes(to);
+    if (start === null || end === null) return;
+
+    if (nowMinutes >= start && nowMinutes < end) {
+      isOpen = true;
+      closesAt = to.trim();
+    } else if (nowMinutes < start) {
+      opensAt = from.trim();
+    }
+  });
+
+  openState.hidden = false;
+  openState.className = `open-state ${isOpen ? 'is-open' : 'is-closed'}`;
+  openState.textContent = isOpen
+    ? `Aberto agora · até ${closesAt}`
+    : opensAt
+      ? `Fechado · abre às ${opensAt}`
+      : 'Fechado agora';
+}
