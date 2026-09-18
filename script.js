@@ -1,5 +1,6 @@
 document.documentElement.classList.add('js');
 
+/* ---------- menu do celular ---------- */
 const toggle = document.querySelector('.menu-toggle');
 const menu = document.querySelector('#mobile-menu');
 
@@ -24,6 +25,7 @@ window.matchMedia('(min-width: 761px)').addEventListener('change', event => {
   if (event.matches) closeMenu();
 });
 
+/* ---------- ampliar foto do menu ---------- */
 const photoDialog = document.querySelector('.photo-dialog');
 const dialogPhoto = document.querySelector('#dialog-photo');
 const dialogCaption = document.querySelector('#dialog-caption');
@@ -53,8 +55,9 @@ document.addEventListener('keydown', event => {
   }
 });
 
-/* Selo "aberto agora" — lido da tabela de horários, que é a única fonte.
-   Mudou a tabela no HTML, muda o selo aqui automaticamente. */
+/* ---------- selo "aberto agora" ----------
+   A tabela de horarios e a unica fonte. Mudou a tabela, mudam os selos
+   (barra do topo, menu do celular e seção Visite) sem tocar em mais nada. */
 const hoursTable = document.querySelector('.hours-table');
 const openStates = document.querySelectorAll('.open-state');
 
@@ -73,7 +76,6 @@ if (hoursTable && openStates.length) {
 
   hoursTable.querySelectorAll('tr').forEach(row => {
     if (!(row.dataset.days || '').split(',').map(Number).includes(today)) return;
-    row.classList.add('today');
 
     const [from, to] = row.querySelector('td').textContent.split('—');
     if (!to) return;
@@ -96,22 +98,22 @@ if (hoursTable && openStates.length) {
       : 'Fechado agora';
 
   openStates.forEach(selo => {
-    const noTopo = selo.classList.contains('topbar-open');
     selo.hidden = false;
-    selo.className = `open-state ${noTopo ? 'topbar-open ' : ''}${isOpen ? 'is-open' : 'is-closed'}`;
+    selo.classList.add(isOpen ? 'is-open' : 'is-closed');
     selo.textContent = texto;
   });
 }
 
-/* Sombra no topo depois que a página rola. */
+/* ---------- sombra no topo depois que a pagina rola ---------- */
 const topbar = document.querySelector('.topbar');
 const onScroll = () => topbar.classList.toggle('is-scrolled', window.scrollY > 8);
 onScroll();
 window.addEventListener('scroll', onScroll, { passive: true });
 
-/* Seções entram com um leve fade ao rolar. Sem JS nada fica escondido. */
+/* ---------- entrada suave, so para o que ainda nao esta na tela ---------- */
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const revealTargets = document.querySelectorAll('main > section:not(.hero), .score, footer');
+const revealTargets = document.querySelectorAll('main > section:not(.hero), .dish, .score, footer');
+
 if (!reduceMotion && 'IntersectionObserver' in window) {
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -119,9 +121,8 @@ if (!reduceMotion && 'IntersectionObserver' in window) {
       entry.target.classList.add('is-visible');
       io.unobserve(entry.target);
     });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
 
-  /* Nada que ja esta na tela entra escondido: o primeiro quadro fica inteiro. */
   revealTargets.forEach(el => {
     if (el.getBoundingClientRect().top < window.innerHeight) return;
     el.classList.add('reveal');

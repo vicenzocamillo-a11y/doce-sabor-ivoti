@@ -11,7 +11,7 @@ hospedagem estática.
 index.html        página única
 style.css         estilos
 fonts.css         Playfair Display e DM Sans, servidas localmente
-script.js         menu, galeria, selo de horário e animações
+script.js         menu, ampliação de foto, selo de horário e animações
 favicon.jpg
 site.webmanifest  instalação como app no celular
 robots.txt
@@ -20,38 +20,51 @@ assets/           fotos reais, logo oficial, ícones e imagem de compartilhament
 PRODUCT.md        briefing do produto
 ```
 
+## Estrutura
+
+A página segue o padrão das redes grandes de cafeteria e padaria:
+
+1. **Barra de utilidade** — "aberto agora", endereço e telefone, sempre no topo.
+2. **Topo fixo** enxuto: logo, navegação e o botão de WhatsApp.
+3. **Hero de largura total** com a foto das cucas, chamada e duas ações.
+4. **Menu** — três cartões com foto, categoria, nome e o que tem em cada um.
+5. **Faixa escura** com os três prêmios de 2024.
+6. **Nossa casa** — a história, desde 1999.
+7. **Avaliações** — Google, Tripadvisor e o convite para avaliar.
+8. **Fotos e novidades** — publicações reais do Instagram e do Facebook.
+9. **Visite** — mapa, endereço, horário e as ações de contato num bloco só.
+10. **Rodapé largo** em quatro colunas.
+
 ## O que está ligado
 
 | Recurso | Onde |
 |---|---|
-| Galeria de fotos | seção **Fotos**, com ampliação ao toque |
-| Publicações do Facebook | seção **Novidades**, feed ao vivo da página |
-| Instagram | cartão na galeria, na seção Novidades e no rodapé |
-| Mapa do Google embutido | seção final, acima dos horários |
+| Mapa do Google embutido | seção Visite |
 | Ficha do Google (avaliações) | cartão "Google" e link "Ver ficha no Google" |
 | Avaliar no Google | botão no cartão amarelo "Sua vez" |
 | Tripadvisor | cartão ao lado do Google |
-| Traçar rota | topo, seção Visite, barra fixa do celular |
-| Waze | seção de horários |
-| WhatsApp | topo, café colonial, Visite e barra fixa do celular |
-| Telefone | menu do celular e seção Visite |
-| Aberto agora / fechado | selo calculado da tabela de horários |
+| Instagram | três publicações embutidas, cabeçalho e rodapé |
+| Facebook | linha do tempo ao vivo, cabeçalho e rodapé |
+| Traçar rota | hero, seção Visite e barra fixa do celular |
+| Waze | seção Visite |
+| WhatsApp | topo, menu, Facebook, Visite e barra fixa do celular |
+| Telefone | barra de utilidade, menu do celular, Visite e rodapé |
+| Aberto agora / fechado | três selos calculados da tabela de horários |
 
-Também configurados: dados estruturados `schema.org/Bakery` (endereço,
-telefone, horários, nota, prêmios), Open Graph com imagem própria para a
-prévia do link no WhatsApp, manifest, robots e sitemap.
+Também configurados: dados estruturados `schema.org/Bakery`, Open Graph com
+imagem própria, manifest, robots e sitemap.
 
 ## Fotos e redes sociais
 
-Cada fotografia aparece **uma única vez** no site. São quatro imagens reais:
-`cucas` abre a página, e `buffet`, `confeitaria` e `casa-real` ficam na
-galeria da seção Fotos. Repetir uma foto em duas seções faz o site parecer
-montado por robô — foi exatamente o que corrigimos.
+Cada fotografia aparece **uma única vez**. São quatro imagens reais:
+`cucas` é o fundo do hero, e `buffet`, `casa-real` e `confeitaria` são as
+fotos dos três cartões do menu. Repetir uma foto em duas seções faz o site
+parecer montado por robô.
 
-Para acrescentar fotos novas: coloque o arquivo em `assets/` (de preferência
-`.webp`) e copie um dos blocos `<button class="menu-photo">` dentro de
-`.gallery-grid` no `index.html`, trocando `src`, `alt`, `data-photo`,
-`data-caption` e o rótulo. A ampliação já funciona sozinha.
+Para acrescentar um item ao menu: coloque a foto em `assets/` (de preferência
+`.webp`) e copie um bloco `<article class="dish">` no `index.html`, trocando
+`src`, `alt`, `data-photo`, `data-caption`, a categoria, o nome e a lista. A
+ampliação ao clique já funciona sozinha.
 
 O feed do **Facebook** é o plugin oficial da página e se atualiza sozinho: o
 que a equipe postar aparece ali sem ninguém mexer no site.
