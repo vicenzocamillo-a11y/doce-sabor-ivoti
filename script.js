@@ -4,18 +4,14 @@ document.documentElement.classList.add('js');
 const toggle = document.querySelector('.menu-toggle');
 const menu = document.querySelector('#mobile-menu');
 
-function closeMenu() {
-  toggle.setAttribute('aria-expanded', 'false');
-  toggle.setAttribute('aria-label', 'Abrir menu');
-  menu.hidden = true;
+function setMenu(open) {
+  toggle.setAttribute('aria-expanded', String(open));
+  toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+  menu.hidden = !open;
 }
 
-toggle.addEventListener('click', () => {
-  const open = toggle.getAttribute('aria-expanded') === 'true';
-  toggle.setAttribute('aria-expanded', String(!open));
-  toggle.setAttribute('aria-label', open ? 'Abrir menu' : 'Fechar menu');
-  menu.hidden = open;
-});
+const closeMenu = () => setMenu(false);
+toggle.addEventListener('click', () => setMenu(menu.hidden));
 
 menu.addEventListener('click', event => {
   if (event.target.closest('a')) closeMenu();
@@ -41,12 +37,14 @@ document.querySelectorAll('[data-photo]').forEach(button => {
   });
 });
 
-document.querySelector('.dialog-close').addEventListener('click', () => photoDialog.close());
-photoDialog.addEventListener('close', () => lastPhotoButton?.focus({ preventScroll: true }));
-
 const sourcesDialog = document.querySelector('.sources-dialog');
 document.querySelector('.sources-open').addEventListener('click', () => sourcesDialog.showModal());
-document.querySelector('.sources-close').addEventListener('click', () => sourcesDialog.close());
+
+[['.dialog-close', photoDialog], ['.sources-close', sourcesDialog]].forEach(([seletor, dialogo]) => {
+  document.querySelector(seletor).addEventListener('click', () => dialogo.close());
+});
+
+photoDialog.addEventListener('close', () => lastPhotoButton?.focus({ preventScroll: true }));
 
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape' && !menu.hidden) {
@@ -118,15 +116,28 @@ if (hoursTable && openStates.length) {
 
 /* ---------- sombra no topo depois que a pagina rola ---------- */
 const topbar = document.querySelector('.topbar');
-const onScroll = () => topbar.classList.toggle('is-scrolled', window.scrollY > 8);
+let rolado = null;
+const onScroll = () => {
+  const agora = window.scrollY > 8;
+  if (agora === rolado) return;   /* so escreve quando o estado vira */
+  rolado = agora;
+  topbar.classList.toggle('is-scrolled', agora);
+};
 onScroll();
 window.addEventListener('scroll', onScroll, { passive: true });
 
-/* ---------- entrada suave, so para o que ainda nao esta na tela ---------- */
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const revealTargets = document.querySelectorAll('main > section:not(.hero), .dish, .score, footer');
+/* ---------- entrada suave, so para o que ainda nao esta na tela ----------
+   Quem decide se ha movimento e o CSS (@media prefers-reduced-motion); aqui
+   so entra e sai a classe. Os filhos .dish e .score sairam da lista porque
+   animavam dentro de uma secao que ja animava, dobrando o trabalho de
+   composicao pelo mesmo efeito visual. */
+if ('IntersectionObserver' in window) {
+  const alvos = [...document.querySelectorAll('main > section:not(.hero), footer')];
 
-if (!reduceMotion && 'IntersectionObserver' in window) {
+  /* Le todas as posicoes primeiro e so entao escreve: intercalar leitura e
+     escrita forcava um recalculo de layout por elemento, logo no carregamento. */
+  const foraDaTela = alvos.filter(el => el.getBoundingClientRect().top >= window.innerHeight);
+
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -135,8 +146,7 @@ if (!reduceMotion && 'IntersectionObserver' in window) {
     });
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
 
-  revealTargets.forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight) return;
+  foraDaTela.forEach(el => {
     el.classList.add('reveal');
     io.observe(el);
   });

@@ -11,14 +11,14 @@ hospedagem estática.
 index.html        página única
 404.html          página de erro do GitHub Pages, com link de volta
                   (usa <base> porque o Pages a serve em qualquer caminho)
-style.css         estilos
-fonts.css         Playfair Display e DM Sans, servidas localmente
+style.css         estilos e as cinco @font-face
 script.js         menu, ampliação de foto, selo de horário e animações
-favicon.jpg
+favicon.png
 site.webmanifest  instalação como app no celular
 robots.txt
 sitemap.xml
-assets/           fotos reais, logo oficial, ícones e imagem de compartilhamento
+assets/           fotos reais, logo, ícones, fontes WOFF2 e imagem de
+                  compartilhamento
 PRODUCT.md        briefing do produto
 ```
 
@@ -104,6 +104,23 @@ Um feed do Instagram que se atualiza sozinho não existe de graça: o Meta só
 oferece isso pela Graph API com token renovável, ou por serviço de terceiro
 (LightWidget, SnapWidget, Elfsight), que envolve conta externa e às vezes
 mensalidade.
+
+## Peso da página
+
+Primeira visita em desktop: **703 KB**, contra 1.502 KB antes da limpeza.
+
+| O que mudou | Ganho |
+|---|---|
+| Nove TTF completos viraram cinco WOFF2 com subconjunto latino | 611 KB → 74 KB |
+| A foto dentro do diálogo fechado baixava em toda visita | −259 KB |
+| `og.png` virou JPEG | 739 KB → 115 KB no repositório |
+| `favicon.jpg` era byte a byte a logo de 720px, baixada duas vezes | −13 KB |
+| Degrau de 1200px no hero, que só tinha 800 e 1536 | −150 KB em celular 3x |
+| `sizes` das fotos do menu pedia quase o dobro do slot real | −139 KB em desktop 2x |
+
+O Playfair 600 e o 400 normais foram colapsados no 500: apareciam em um selo
+e numa citação, onde a diferença não se vê, e cada face solta custava mais de
+120 KB. Sobraram DM Sans 400/600/700 e Playfair 500 normal e itálico.
 
 ## Dados: o que é verificado e o que não é
 

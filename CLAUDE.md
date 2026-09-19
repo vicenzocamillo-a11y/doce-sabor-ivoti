@@ -44,6 +44,14 @@ O endereço aparece em vários lugares e precisa mudar junto se o domínio mudar
 `canonical` e `og:url` no `index.html`, `sitemap.xml`, `robots.txt` e o
 `<base href>` do `404.html`. Os comentários `CONFIGURAR:` marcam cada um.
 
+## Regras da folha de estilo
+
+O `style.css` traz as regras de manutenção no topo. As três que mais importam:
+um bloco `@media` por ponto de quebra e nunca dois; seção nova não declara
+padding nem largura, porque `main>section` e a lista de contêineres `.wrap`
+cuidam disso; e no celular muda a variável `--gutter`, não o padding de cada
+seção.
+
 ## Como a página se sustenta
 
 **A tabela de horários é a única fonte da verdade sobre horário.** O
@@ -86,5 +94,7 @@ Ao acrescentar resposta nas perguntas frequentes, acrescente também ao bloco
 
 A rede desta sessão bloqueia quase todo domínio externo, inclusive Google
 Fonts, Instagram, Facebook e bancos de imagem. Não dá para baixar fonte nem
-foto nova daqui. As fontes já estão locais em `assets/font-0.ttf` a `font-8.ttf`,
-declaradas em `fonts.css`.
+foto nova daqui. As fontes já estão locais, em WOFF2 com subconjunto
+latino, declaradas no topo do `style.css`: DM Sans 400/600/700 e Playfair
+Display 500 normal e itálico. Não há outra face — pedir um peso que não está
+nessa lista faz o navegador sintetizar, e fica feio.

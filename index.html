@@ -7,7 +7,9 @@
   <meta name="color-scheme" content="light">
   <title>Doce Sabor Ivoti | Padaria, confeitaria e café colonial</title>
   <meta name="description" content="Cucas, doces artesanais, salgados e café colonial em Ivoti. Veja os sabores da Doce Sabor e fale diretamente com a equipe.">
-  <!-- CONFIGURAR: troque as 3 ocorrencias do endereco abaixo quando tiver o dominio final. -->
+  <!-- CONFIGURAR: ao trocar o dominio, mude o endereco no canonical e no
+       og:url e og:image logo abaixo, no sitemap.xml, no robots.txt e no
+       <base> do 404.html. -->
   <link rel="canonical" href="https://vicenzocamillo-a11y.github.io/doce-sabor-ivoti/">
 
   <meta property="og:type" content="website">
@@ -16,20 +18,24 @@
   <meta property="og:title" content="Doce Sabor Ivoti | Padaria, confeitaria e cafe colonial">
   <meta property="og:description" content="Cucas, doces artesanais, salgados e cafe colonial na Av. Presidente Lucena, 1983 - Ivoti/RS. 4,5 no Google.">
   <meta property="og:url" content="https://vicenzocamillo-a11y.github.io/doce-sabor-ivoti/">
-  <meta property="og:image" content="https://vicenzocamillo-a11y.github.io/doce-sabor-ivoti/assets/og.png">
+  <meta property="og:image" content="https://vicenzocamillo-a11y.github.io/doce-sabor-ivoti/assets/og.jpg">
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Cucas da Doce Sabor, padaria e confeitaria em Ivoti/RS">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="preload" as="image" href="assets/cucas.webp" imagesrcset="assets/cucas-800.webp 800w, assets/cucas.webp 1536w" imagesizes="100vw" fetchpriority="high">
-  <link rel="preconnect" href="https://www.instagram.com">
-  <link rel="preconnect" href="https://www.facebook.com">
+  <link rel="preload" as="image" href="assets/cucas.webp" imagesrcset="assets/cucas-800.webp 800w, assets/cucas-1200.webp 1200w, assets/cucas.webp 1536w" imagesizes="100vw" fetchpriority="high">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="assets/playfair-500.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="assets/dmsans-400.woff2">
+  <!-- Os embeds ficam sete telas abaixo e sao lazy: DNS antecipado basta,
+       abrir conexao aqui roubaria banda da foto de abertura. -->
+  <link rel="dns-prefetch" href="https://www.instagram.com">
+  <link rel="dns-prefetch" href="https://www.facebook.com">
   <link rel="dns-prefetch" href="https://www.google.com">
-  <link rel="stylesheet" href="fonts.css">
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="favicon.jpg" type="image/jpeg">
-  <link rel="apple-touch-icon" href="assets/logo-oficial.jpg">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
 
   <script type="application/ld+json">
@@ -156,7 +162,7 @@
 
 <main id="conteudo">
   <section class="hero" id="inicio">
-    <img class="hero-bg" fetchpriority="high" decoding="async" src="assets/cucas.webp" srcset="assets/cucas-800.webp 800w, assets/cucas.webp 1536w" sizes="100vw" width="1536" height="1024" alt="Cucas da Doce Sabor cobertas com farofa">
+    <img class="hero-bg" fetchpriority="high" decoding="async" src="assets/cucas.webp" srcset="assets/cucas-800.webp 800w, assets/cucas-1200.webp 1200w, assets/cucas.webp 1536w" sizes="100vw" width="1536" height="1024" alt="Cucas da Doce Sabor cobertas com farofa">
     <div class="hero-inner">
       <p class="kicker light">Ivoti, Rio Grande do Sul · desde 1999</p>
       <h1>Café com<br><i>gosto de casa.</i></h1>
@@ -193,14 +199,14 @@
     <div class="dish-grid">
       <article class="dish">
         <button class="dish-photo" data-photo="assets/buffet.webp" data-caption="Buffet da Doce Sabor. Fotografia real tratada digitalmente." aria-label="Ampliar foto: Buffet com pães, salgados, doces e torta de morango">
-          <img loading="lazy" decoding="async" src="assets/buffet.webp" srcset="assets/buffet-800.webp 800w, assets/buffet.webp 1367w" sizes="(max-width:900px) 100vw, 33vw" alt="Buffet com pães, salgados, doces e torta de morango">
+          <img loading="lazy" decoding="async" src="assets/buffet.webp" srcset="assets/buffet-800.webp 800w, assets/buffet.webp 1367w" sizes="(max-width:900px) 100vw, (max-width:1080px) 50vw, min(431px, 33vw)" alt="Buffet com pães, salgados, doces e torta de morango">
           <span class="dish-zoom"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#plus"/></svg></span>
         </button>
         <div class="dish-body">
           <span class="kicker">Para dividir</span>
           <h3>Café colonial</h3>
           <ul class="dish-list"><li>Buffet de doces e salgados</li><li>Mesa farta para provar de tudo</li><li>Três vezes premiado em 2024</li></ul>
-          <a class="dish-link" href="https://wa.me/5551980375842?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20o%20caf%C3%A9%20colonial." target="_blank" rel="noopener noreferrer">Consultar pelo WhatsApp <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
+          <a class="link link-strong" href="https://wa.me/5551980375842?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20o%20caf%C3%A9%20colonial." target="_blank" rel="noopener noreferrer">Consultar pelo WhatsApp <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
         </div>
       </article>
       <article class="dish">
@@ -212,7 +218,6 @@
           <span class="kicker">Para levar</span>
           <h3>Da padaria</h3>
           <ul class="dish-list"><li>Cucas</li><li>Roscas</li><li>Pães quentinhos</li><li>Salgados frescos</li></ul>
-          
         </div>
       </article>
       <article class="dish">
@@ -224,7 +229,7 @@
           <span class="kicker">Para a mesa</span>
           <h3>Da confeitaria</h3>
           <ul class="dish-list"><li>Tortas</li><li>Doces artesanais</li><li>Café</li></ul>
-          <a class="dish-link" href="tel:+5551980375842">Encomendar por telefone <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
+          <a class="link link-strong" href="tel:+5551980375842">Encomendar por telefone <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
         </div>
       </article>
     </div>
@@ -253,8 +258,10 @@
 
   <section class="band">
     <div class="band-inner">
-      <span class="kicker light">Reconhecimento local</span>
-      <h2>Três vezes<br>uma favorita.</h2>
+      <div class="band-copy">
+        <span class="kicker light">Reconhecimento local</span>
+        <h2>Três vezes<br>uma favorita.</h2>
+      </div>
       <ul class="awards">
         <li><b>2024</b> Melhor confeitaria</li>
         <li><b>2024</b> Melhor padaria</li>
@@ -302,14 +309,14 @@
         <strong>4,5</strong>
         <span class="stars" role="img" aria-label="4,5 de 5 estrelas"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon half" aria-hidden="true"><use href="assets/icons.svg#star"/></svg></span>
         <span class="score-note">2.343 avaliações</span>
-        <span class="dish-link">Ver no Google <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></span>
+        <span class="link link-strong">Ver no Google <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></span>
       </a>
       <a class="score" href="https://www.tripadvisor.com.br/Restaurant_Review-g2572696-d6003664-Reviews-Doce_Sabor_Ivoti-Ivoti_State_of_Rio_Grande_do_Sul.html" target="_blank" rel="noopener noreferrer">
         <span class="score-source">Tripadvisor</span>
         <strong>4,3</strong>
-        <span class="stars" role="img" aria-label="4,3 de 5 estrelas"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon half" aria-hidden="true"><use href="assets/icons.svg#star"/></svg></span>
+        <span class="stars" role="img" aria-label="4,3 de 5 estrelas"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon half" style="--half:70%" aria-hidden="true"><use href="assets/icons.svg#star"/></svg></span>
         <span class="score-note">86 avaliações · 2º lugar entre os 26 restaurantes de Ivoti</span>
-        <span class="dish-link">Ver no Tripadvisor <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></span>
+        <span class="link link-strong">Ver no Tripadvisor <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></span>
       </a>
       <div class="score score-cta">
         <span class="score-source"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#message-2"/></svg>Sua vez</span>
@@ -465,7 +472,7 @@
   <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Doce+Sabor+Ivoti+Av+Presidente+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#map-pin"/></svg>Como chegar</a>
 </div>
 
-<dialog class="photo-dialog"><button class="dialog-close" aria-label="Fechar"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#x"/></svg></button><img id="dialog-photo" src="assets/buffet.webp" alt="Fotografia ampliada"><p id="dialog-caption"></p></dialog>
+<dialog class="photo-dialog"><button class="dialog-close" aria-label="Fechar"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#x"/></svg></button><img id="dialog-photo" alt="" decoding="async"><p id="dialog-caption"></p></dialog>
 <dialog class="sources-dialog"><button class="sources-close" aria-label="Fechar"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#x"/></svg></button><h2>Fotos e fontes</h2><p>A logo foi obtida no Facebook oficial da Doce Sabor. As fotografias das cucas e da confeitaria foram publicadas pela VIPS DO SUL, com crédito de Kátia Della Tôrres. A fotografia do buffet vem da galeria da Doce Sabor no Restaurant Guru. As fotos das cucas e do buffet tiveram luz, cor e resolução tratadas com IA, preservando a cena original.</p><p>Os registros históricos podem não representar a configuração atual da casa. Produtos, valores e horários devem ser confirmados com a equipe.</p><div><a href="https://www.facebook.com/DoceSaborIvoti/" target="_blank" rel="noopener noreferrer">Facebook oficial</a><a href="https://vipsdosul.com.br/site/index.php/dicas-da-semana/pagina-128" target="_blank" rel="noopener noreferrer">VIPS DO SUL</a><a href="https://restaurantguru.com.br/Doce-Sabor-Ivoti-Ivoti" target="_blank" rel="noopener noreferrer">Restaurant Guru</a></div></dialog>
-<script src="script.js"></script>
+<script src="script.js" defer></script>
 </body></html>
