@@ -21,7 +21,7 @@ menu.addEventListener('click', event => {
   if (event.target.closest('a')) closeMenu();
 });
 
-window.matchMedia('(min-width: 761px)').addEventListener('change', event => {
+window.matchMedia('(min-width: 901px)').addEventListener('change', event => {
   if (event.matches) closeMenu();
 });
 
@@ -72,7 +72,7 @@ if (hoursTable && openStates.length) {
   let today, nowMinutes;
   try {
     const parts = new Intl.DateTimeFormat('en-US', {
-      timeZone: 'America/Sao_Paulo', weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23'
+      timeZone: 'America/Sao_Paulo', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false, hourCycle: 'h23'
     }).formatToParts(new Date());
     const get = type => parts.find(part => part.type === type)?.value;
     today = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 }[get('weekday')];

@@ -10,6 +10,7 @@ hospedagem estática.
 ```
 index.html        página única
 404.html          página de erro do GitHub Pages, com link de volta
+                  (usa <base> porque o Pages a serve em qualquer caminho)
 style.css         estilos
 fonts.css         Playfair Display e DM Sans, servidas localmente
 script.js         menu, ampliação de foto, selo de horário e animações
@@ -28,17 +29,18 @@ A página segue o padrão das redes grandes de cafeteria e padaria:
 1. **Barra de utilidade** — "aberto agora", endereço e telefone, sempre no topo.
 2. **Topo fixo** enxuto: logo, navegação e o botão de WhatsApp.
 3. **Hero de largura total** com a foto das cucas, chamada e duas ações.
-3. **Faixa de números** com as notas, a posição no Tripadvisor, os prêmios
-   e o horário — só dados conferidos em fonte pública.
-4. **Menu** — três cartões com foto, categoria, nome e o que tem em cada um.
-   Prêmios numa faixa escura logo depois.
-7. **Nossa casa** — a história, desde 1999.
-8. **Rota Romântica** — por que a casa está no caminho de quem viaja.
-9. **Avaliações** — Google, Tripadvisor e o convite para avaliar.
-10. **Fotos e novidades** — publicações reais do Instagram e do Facebook.
-11. **Perguntas frequentes** — cinco respostas, em `<details>` nativo.
-12. **Visite** — mapa, endereço, horário e as ações de contato num bloco só.
-13. **Rodapé largo** em quatro colunas.
+4. **A casa em números**: notas, posição no Tripadvisor, prêmios e horário.
+   Só dados conferidos em fonte pública.
+5. **Menu** — três cartões com foto, categoria, nome e o que tem em cada um.
+6. **Encomendas** — os três passos e os dois canais, com o que informar.
+7. **Prêmios** numa faixa escura, com os três títulos de 2024.
+8. **Nossa casa** — a história, desde 1999.
+9. **Rota Romântica** — por que a casa está no caminho de quem viaja.
+10. **Avaliações** — Google, Tripadvisor e o convite para avaliar.
+11. **Fotos e novidades** — publicações reais do Instagram e do Facebook.
+12. **Perguntas frequentes** — cinco respostas, em `<details>` nativo.
+13. **Visite** — mapa, endereço, horário e as ações de contato num bloco só.
+14. **Rodapé largo** em quatro colunas.
 
 ## O que está ligado
 
