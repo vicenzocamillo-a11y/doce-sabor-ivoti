@@ -21,22 +21,6 @@ assets/           fotos reais, logo oficial, ícones e imagem de compartilhament
 PRODUCT.md        briefing do produto
 ```
 
-## Ideia visual
-
-Um **cardápio de café colonial impresso**. A página se organiza por réguas e
-listas tipografadas, não por caixas flutuantes. A abundância da mesa é o
-assunto, então o layout fica quieto para a comida aparecer.
-
-Decisões que vêm daí, e não de moda:
-
-- **Sem cartões com borda.** Categorias e avaliações são listas com régua.
-- **Sem etiqueta acima de cada título.** O título já diz do que se trata.
-- **Sem animação de entrada por rolagem.** A página chega pronta. O único
-  movimento é a foto do cardápio respondendo ao ponteiro.
-- **Playfair só em quatro momentos de título.** O resto é DM Sans com peso.
-- **Números em algarismos tabulares**, para alinharem na coluna.
-- **Hover que muda superfície, borda ou posição** — nunca só opacidade.
-
 ## Estrutura
 
 A página segue o padrão das redes grandes de cafeteria e padaria:
@@ -44,15 +28,15 @@ A página segue o padrão das redes grandes de cafeteria e padaria:
 1. **Barra de utilidade** — "aberto agora", endereço e telefone, sempre no topo.
 2. **Topo fixo** enxuto: logo, navegação e o botão de WhatsApp.
 3. **Hero de largura total** com a foto das cucas, chamada e duas ações.
-4. **A casa em números**: notas, posição no Tripadvisor, prêmios e horário.
-   Só dados conferidos em fonte pública.
-5. **Menu** — três colunas de cardápio: foto, nome e a lista de itens.
-6. **Prêmios** numa faixa escura, com o ano dito uma vez só.
-7. **Nossa casa** — a história, desde 1999.
-8. **Avaliações** — o depoimento, depois Google e Tripadvisor em linhas.
-9. **Fotos e novidades** — publicações reais do Instagram e do Facebook.
-10. **Visite** — mapa, endereço, horário e as ações de contato num bloco só.
-11. **Rodapé largo** em quatro colunas.
+3. **Faixa de números** com as notas, a posição no Tripadvisor, os prêmios
+   e o horário — só dados conferidos em fonte pública.
+4. **Menu** — três cartões com foto, categoria, nome e o que tem em cada um.
+5. **Faixa escura** com os três prêmios de 2024.
+6. **Nossa casa** — a história, desde 1999.
+7. **Avaliações** — Google, Tripadvisor e o convite para avaliar.
+8. **Fotos e novidades** — publicações reais do Instagram e do Facebook.
+9. **Visite** — mapa, endereço, horário e as ações de contato num bloco só.
+10. **Rodapé largo** em quatro colunas.
 
 ## O que está ligado
 
@@ -86,8 +70,8 @@ fotos dos três cartões do menu. Repetir uma foto em duas seções faz o site
 parecer montado por robô.
 
 Para acrescentar um item ao menu: coloque a foto em `assets/` (de preferência
-`.webp`) e copie um bloco `<article class="cat">` no `index.html`, trocando
-`src`, `alt`, `data-photo`, `data-caption`, o nome, a nota e a lista. A
+`.webp`) e copie um bloco `<article class="dish">` no `index.html`, trocando
+`src`, `alt`, `data-photo`, `data-caption`, a categoria, o nome e a lista. A
 ampliação ao clique já funciona sozinha.
 
 O feed do **Facebook** é o plugin oficial da página e se atualiza sozinho: o

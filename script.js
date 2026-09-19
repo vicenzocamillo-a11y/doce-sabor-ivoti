@@ -1,3 +1,5 @@
+document.documentElement.classList.add('js');
+
 /* ---------- menu do celular ---------- */
 const toggle = document.querySelector('.menu-toggle');
 const menu = document.querySelector('#mobile-menu');
@@ -120,3 +122,22 @@ const onScroll = () => topbar.classList.toggle('is-scrolled', window.scrollY > 8
 onScroll();
 window.addEventListener('scroll', onScroll, { passive: true });
 
+/* ---------- entrada suave, so para o que ainda nao esta na tela ---------- */
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const revealTargets = document.querySelectorAll('main > section:not(.hero), .dish, .score, footer');
+
+if (!reduceMotion && 'IntersectionObserver' in window) {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      io.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+
+  revealTargets.forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight) return;
+    el.classList.add('reveal');
+    io.observe(el);
+  });
+}
