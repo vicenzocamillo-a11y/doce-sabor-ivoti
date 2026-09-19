@@ -88,7 +88,7 @@
 <div class="utility">
   <div class="utility-inner">
     <span class="open-state" hidden></span>
-    <a href="https://www.google.com/maps/search/?api=1&amp;query=Padaria+e+Confeitaria+Doce+Sabor+Av+Pres+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#map-pin"/></svg>Av. Presidente Lucena, 1983 — Ivoti/RS</a>
+    <a href="https://www.google.com/maps/search/?api=1&amp;query=Padaria+e+Confeitaria+Doce+Sabor+Av+Pres+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#map-pin"/></svg>Av. Presidente Lucena, 1983, Ivoti/RS</a>
     <a href="tel:+5551980375842"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#phone"/></svg>(51) 98037-5842</a>
   </div>
 </div>
@@ -110,93 +110,87 @@
   <section class="hero" id="inicio">
     <img class="hero-bg" fetchpriority="high" decoding="async" src="assets/cucas.webp" srcset="assets/cucas-800.webp 800w, assets/cucas.webp 1536w" sizes="100vw" width="1536" height="1024" alt="Cucas da Doce Sabor cobertas com farofa">
     <div class="hero-inner">
-      <p class="kicker light">Ivoti, Rio Grande do Sul · desde 1999</p>
-      <h1>Café com<br><i>gosto de casa.</i></h1>
-      <p class="hero-lead">Padaria, confeitaria e café colonial na Avenida Presidente Lucena. Todos os dias, das 7h às 20h.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#menu">Ver o menu</a>
-        <a class="btn btn-outline-light" href="https://www.google.com/maps/dir/?api=1&amp;destination=Doce+Sabor+Ivoti+Av+Presidente+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#map-pin"/></svg>Como chegar</a>
+      <div class="hero-words">
+        <h1>Café com<br>gosto de casa.</h1>
+        <p class="hero-lead">Padaria, confeitaria e café colonial em Ivoti, no Rio Grande do Sul, desde 1999. Todos os dias, das 7h às 20h.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#menu">Ver o menu</a>
+          <a class="btn btn-outline-light" href="https://www.google.com/maps/dir/?api=1&amp;destination=Doce+Sabor+Ivoti+Av+Presidente+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#map-pin"/></svg>Como chegar</a>
+        </div>
       </div>
+      <a class="hero-note" href="#avaliacoes">
+        <strong>4,5</strong>
+        <span>2.343 avaliações no Google<sup>*</sup></span>
+      </a>
     </div>
-    <a class="hero-score" href="#avaliacoes"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><strong>4,5</strong><span>2.343 avaliações<br>no Google*</span></a>
   </section>
 
-  <section class="trust" aria-label="A casa em números">
-    <div class="trust-inner">
-      <div class="trust-item"><strong>4,5</strong><span>no Google</span></div>
-      <div class="trust-item"><strong>4,3</strong><span>no Tripadvisor</span></div>
-      <div class="trust-item"><strong>2º</strong><span>entre os 26 restaurantes de Ivoti</span></div>
-      <div class="trust-item"><strong>3</strong><span>prêmios VIPS DO SUL em 2024</span></div>
-      <div class="trust-item"><strong>7h — 20h</strong><span>todos os dias</span></div>
-    </div>
+  <section class="facts" aria-label="A casa em números">
+    <dl class="facts-inner">
+      <div><dt>4,5</dt><dd>no Google</dd></div>
+      <div><dt>4,3</dt><dd>no Tripadvisor</dd></div>
+      <div><dt>2º</dt><dd>entre os 26 restaurantes de Ivoti</dd></div>
+      <div><dt>3</dt><dd>prêmios VIPS DO SUL em 2024</dd></div>
+      <div><dt>7h às 20h</dt><dd>todos os dias</dd></div>
+    </dl>
   </section>
 
   <section class="menu" id="menu">
     <div class="section-head">
-      <span class="kicker">O que te espera</span>
-      <h2>Padaria, confeitaria<br>e café colonial.</h2>
+      <h2>Padaria, confeitaria e café colonial.</h2>
       <p>Para o café da manhã, a pausa da tarde ou aquele encontro que merece durar.</p>
     </div>
     <!-- COMO ACRESCENTAR UM ITEM COM FOTO:
          1. ponha o arquivo em assets/ (de preferencia .webp, 1200px de largura);
-         2. copie um bloco <article class="dish"> inteiro aqui dentro;
-         3. troque src, alt, data-photo, data-caption, a categoria, o nome e a lista.
+         2. copie um bloco <article class="cat"> inteiro aqui dentro;
+         3. troque src, alt, data-photo, data-caption, o nome, a nota e a lista.
          A grade se ajusta sozinha e a ampliacao ao clique ja funciona. -->
-    <div class="dish-grid">
-      <article class="dish">
-        <button class="dish-photo" data-photo="assets/buffet.webp" data-caption="Buffet da Doce Sabor. Fotografia real tratada digitalmente." aria-label="Ampliar foto: Buffet com pães, salgados, doces e torta de morango">
+    <div class="cat-grid">
+      <article class="cat">
+        <button class="cat-photo" data-photo="assets/buffet.webp" data-caption="Buffet da Doce Sabor. Fotografia real tratada digitalmente." aria-label="Ampliar foto: Buffet com pães, salgados, doces e torta de morango">
           <img loading="lazy" decoding="async" src="assets/buffet.webp" srcset="assets/buffet-800.webp 800w, assets/buffet.webp 1367w" sizes="(max-width:760px) 100vw, 33vw" alt="Buffet com pães, salgados, doces e torta de morango">
-          <span class="dish-zoom"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#plus"/></svg></span>
+          <span class="cat-zoom">ampliar</span>
         </button>
-        <div class="dish-body">
-          <span class="kicker">Para dividir</span>
-          <h3>Café colonial</h3>
-          <ul class="dish-list"><li>Buffet de doces e salgados</li><li>Mesa farta para provar de tudo</li><li>Três vezes premiado em 2024</li></ul>
-          <a class="dish-link" href="https://wa.me/5551980375842?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20o%20caf%C3%A9%20colonial." target="_blank" rel="noopener noreferrer">Consultar pelo WhatsApp <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
-        </div>
+        <h3>Café colonial <span>para dividir</span></h3>
+        <ul class="cat-list"><li>Buffet de doces e salgados</li><li>Mesa farta para provar de tudo</li><li>Três vezes premiado em 2024</li></ul>
+        <a class="link" href="https://wa.me/5551980375842?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20o%20caf%C3%A9%20colonial." target="_blank" rel="noopener noreferrer">Consultar pelo WhatsApp <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
       </article>
-      <article class="dish">
-        <button class="dish-photo" data-photo="assets/casa-real.webp" data-caption="O balcão da Doce Sabor, registro de 2021." aria-label="Ampliar foto: Vitrine da Doce Sabor com pães e salgados">
+      <article class="cat">
+        <button class="cat-photo" data-photo="assets/casa-real.webp" data-caption="O balcão da Doce Sabor, registro de 2021." aria-label="Ampliar foto: Vitrine da Doce Sabor com pães e salgados">
           <img loading="lazy" decoding="async" src="assets/casa-real.webp" width="666" height="444" alt="Vitrine da Doce Sabor com pães e salgados">
-          <span class="dish-zoom"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#plus"/></svg></span>
+          <span class="cat-zoom">ampliar</span>
         </button>
-        <div class="dish-body">
-          <span class="kicker">Para levar</span>
-          <h3>Da padaria</h3>
-          <ul class="dish-list"><li>Cucas</li><li>Roscas</li><li>Pães quentinhos</li><li>Salgados frescos</li></ul>
-          
-        </div>
+        <h3>Da padaria <span>para levar</span></h3>
+        <ul class="cat-list"><li>Cucas</li><li>Roscas</li><li>Pães quentinhos</li><li>Salgados frescos</li></ul>
+        
       </article>
-      <article class="dish">
-        <button class="dish-photo" data-photo="assets/confeitaria.webp" data-caption="Tortas da Doce Sabor em fotografia de Kátia Della Tôrres para VIPS DO SUL." aria-label="Ampliar foto: Mesa com tortas decoradas da Doce Sabor">
+      <article class="cat">
+        <button class="cat-photo" data-photo="assets/confeitaria.webp" data-caption="Tortas da Doce Sabor em fotografia de Kátia Della Tôrres para VIPS DO SUL." aria-label="Ampliar foto: Mesa com tortas decoradas da Doce Sabor">
           <img loading="lazy" decoding="async" src="assets/confeitaria.webp" width="666" height="444" alt="Mesa com tortas decoradas da Doce Sabor">
-          <span class="dish-zoom"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#plus"/></svg></span>
+          <span class="cat-zoom">ampliar</span>
         </button>
-        <div class="dish-body">
-          <span class="kicker">Para a mesa</span>
-          <h3>Da confeitaria</h3>
-          <ul class="dish-list"><li>Tortas</li><li>Doces artesanais</li><li>Café</li></ul>
-          <a class="dish-link" href="tel:+5551980375842">Encomendar por telefone <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
-        </div>
+        <h3>Da confeitaria <span>para a mesa</span></h3>
+        <ul class="cat-list"><li>Tortas</li><li>Doces artesanais</li><li>Café</li></ul>
+        <a class="link" href="tel:+5551980375842">Encomendar por telefone <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
       </article>
     </div>
   </section>
 
-  <section class="band">
-    <div class="band-inner">
-      <span class="kicker light">Reconhecimento local</span>
-      <h2>Três vezes<br>uma favorita.</h2>
-      <ul class="awards">
-        <li><b>2024</b> Melhor confeitaria</li>
-        <li><b>2024</b> Melhor padaria</li>
-        <li><b>2024</b> Melhor mini café colonial</li>
-      </ul>
-      <small>Os Melhores da Gastronomia · VIPS DO SUL · Ivoti</small>
+  <section class="awards">
+    <div class="awards-inner">
+      <div class="awards-copy">
+        <h2>Três vezes<br>uma favorita.</h2>
+        <p>Os Melhores da Gastronomia, prêmio da VIPS DO SUL em Ivoti.</p>
+      </div>
+      <div class="awards-list">
+        <p class="awards-year">2024</p>
+        <ul><li>Melhor confeitaria</li><li>Melhor padaria</li><li>Melhor mini café colonial</li></ul>
+      </div>
     </div>
   </section>
 
   <section class="story" id="historia">
-    <div class="story-mark"><span>desde</span><strong>1999</strong></div>
+    <p class="story-year"><span>desde</span>1999</p>
     <div class="story-copy">
       <h2>Uma casa feita<br>de encontros.</h2>
       <p>Na Avenida Presidente Lucena, a Doce Sabor acompanha quem vive em Ivoti e quem segue viagem pela Rota Romântica.</p>
@@ -206,45 +200,45 @@
   </section>
 
   <section class="reviews" id="avaliacoes">
-    <div class="section-head center">
-      <span class="kicker">Quem já veio</span>
-      <blockquote>“Lugar perfeito para um café da manhã de domingo! Um buffet maravilhoso, atendimento muito bom.”</blockquote>
-      <p class="byline">Carla Costa <span>Avaliação no Google</span></p>
+    <blockquote>“Lugar perfeito para um café da manhã de domingo! Um buffet maravilhoso, atendimento muito bom.”</blockquote>
+    <p class="byline">Carla Costa, avaliação no Google</p>
+
+    <ul class="ratings">
+      <li>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Padaria+e+Confeitaria+Doce+Sabor+Av+Pres+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer">
+          <span class="rating-where">Google</span>
+          <span class="rating-value">4,5</span>
+          <span class="rating-detail">2.343 avaliações</span>
+          <span class="rating-go">Ver a ficha <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.tripadvisor.com.br/Restaurant_Review-g2572696-d6003664-Reviews-Doce_Sabor_Ivoti-Ivoti_State_of_Rio_Grande_do_Sul.html" target="_blank" rel="noopener noreferrer">
+          <span class="rating-where">Tripadvisor</span>
+          <span class="rating-value">4,3</span>
+          <span class="rating-detail">86 avaliações, 2º entre os 26 restaurantes de Ivoti</span>
+          <span class="rating-go">Ver a ficha <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="review-cta">
+      <p>Passou aqui hoje? Uma avaliação ajuda quem ainda não conhece a casa a decidir parar.</p>
+      <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&amp;query=Padaria+e+Confeitaria+Doce+Sabor+Av+Pres+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer">Avaliar no Google</a>
     </div>
-    <div class="scores">
-      <a class="score" href="https://www.google.com/maps/search/?api=1&amp;query=Padaria+e+Confeitaria+Doce+Sabor+Av+Pres+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer">
-        <span class="score-source"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#brand-google"/></svg>Google</span>
-        <strong>4,5</strong>
-        <span class="stars" role="img" aria-label="4,5 de 5 estrelas"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon half" aria-hidden="true"><use href="assets/icons.svg#star"/></svg></span>
-        <span class="score-note">2.343 avaliações</span>
-        <span class="dish-link">Ver no Google <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></span>
-      </a>
-      <a class="score" href="https://www.tripadvisor.com.br/Restaurant_Review-g2572696-d6003664-Reviews-Doce_Sabor_Ivoti-Ivoti_State_of_Rio_Grande_do_Sul.html" target="_blank" rel="noopener noreferrer">
-        <span class="score-source">Tripadvisor</span>
-        <strong>4,3</strong>
-        <span class="stars" role="img" aria-label="4,3 de 5 estrelas"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><svg class="icon half" aria-hidden="true"><use href="assets/icons.svg#star"/></svg></span>
-        <span class="score-note">86 avaliações · 2º lugar entre os 26 restaurantes de Ivoti</span>
-        <span class="dish-link">Ver no Tripadvisor <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></span>
-      </a>
-      <div class="score score-cta">
-        <span class="score-source"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#message-2"/></svg>Sua vez</span>
-        <p>Passou aqui hoje? Uma avaliação ajuda quem ainda não conhece a casa a decidir parar.</p>
-        <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&amp;query=Padaria+e+Confeitaria+Doce+Sabor+Av+Pres+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer">Avaliar no Google</a>
-      </div>
-    </div>
-    <small class="footnote">*Notas e depoimento conforme as fichas públicas do Google e do Tripadvisor. Podem mudar a qualquer momento.</small>
+
+    <p class="footnote"><sup>*</sup>Notas e depoimento conforme as fichas públicas do Google e do Tripadvisor. Podem mudar a qualquer momento.</p>
   </section>
 
   <section class="social" id="fotos">
     <div class="section-head">
-      <span class="kicker">Fotos e novidades</span>
-      <h2>Direto<br>das redes.</h2>
+      <h2>Direto das redes.</h2>
       <p>As publicações são carregadas do Instagram e do Facebook da casa. O que a equipe posta lá aparece aqui.</p>
     </div>
 
     <div class="net">
       <div class="net-head">
-        <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#brand-instagram"/></svg>Instagram</h3>
+        <h3>Instagram</h3>
         <a class="link" href="https://www.instagram.com/docesaborivoti/" target="_blank" rel="noopener noreferrer">@docesaborivoti <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
       </div>
       <div class="ig-grid">
@@ -261,7 +255,7 @@
 
     <div class="net">
       <div class="net-head">
-        <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#brand-facebook"/></svg>Facebook</h3>
+        <h3>Facebook</h3>
         <a class="link" href="https://www.facebook.com/DoceSaborIvoti/" target="_blank" rel="noopener noreferrer">Abrir a página <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
       </div>
       <div class="fb-row">
@@ -269,7 +263,7 @@
           <iframe title="Publicações recentes da Doce Sabor no Facebook" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FDoceSaborIvoti%2F&amp;tabs=timeline&amp;width=500&amp;height=640&amp;small_header=false&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=false&amp;locale=pt_BR" loading="lazy" scrolling="no" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
         </div>
         <div class="fb-aside">
-          <strong>Encomenda de torta<br>ou café colonial?</strong>
+          <h3>Encomenda de torta<br>ou café colonial?</h3>
           <p>Combine direto com a equipe. É por ali que saem as confirmações de data, sabor e tamanho.</p>
           <a class="btn btn-dark" href="https://wa.me/5551980375842?text=Ol%C3%A1%21%20Gostaria%20de%20fazer%20uma%20encomenda." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#brand-whatsapp"/></svg>Chamar no WhatsApp</a>
         </div>
@@ -282,31 +276,26 @@
       <iframe title="Mapa da Doce Sabor na Av. Presidente Lucena, 1983, Ivoti/RS" src="https://www.google.com/maps?q=Padaria+e+Confeitaria+Doce+Sabor%2C+Av.+Pres.+Lucena%2C+1983%2C+Ivoti+-+RS&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
     </div>
     <div class="visit-panel">
-      <span class="kicker">Visite a casa</span>
       <h2>A próxima pausa<br>é aqui.</h2>
-      <address>Av. Presidente Lucena, 1983<br>Harmonia, Ivoti — RS, 93900-000</address>
+      <address>Av. Presidente Lucena, 1983<br>Harmonia, Ivoti/RS, 93900-000</address>
 
-      <div class="hours-head">
-        <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#clock"/></svg>Horários</h3>
-        <span class="open-state" hidden></span>
+      <div class="hours">
+        <div class="hours-top"><h3>Horários</h3><span class="open-state" hidden></span></div>
+        <!-- Horario conforme a propria bio do Instagram da casa. Mudou? Ajuste so
+             esta tabela: o selo "aberto agora" acompanha sozinho. -->
+        <table class="hours-table">
+          <caption class="sr-only">Horário de funcionamento da Doce Sabor</caption>
+          <tbody><tr data-days="0,1,2,3,4,5,6"><th scope="row">Todos os dias</th><td>7h — 20h</td></tr></tbody>
+        </table>
+        <p class="note">Horário informado pela própria casa no Instagram. Feriados e o buffet de café colonial podem ter horário próprio.</p>
       </div>
-      <!-- Horario conforme a propria bio do Instagram da casa. Mudou? Ajuste so
-           esta tabela: o selo "aberto agora" acompanha sozinho. -->
-      <table class="hours-table">
-        <caption class="sr-only">Horário de funcionamento da Doce Sabor</caption>
-        <tbody><tr data-days="0,1,2,3,4,5,6"><th scope="row">Todos os dias</th><td>7h — 20h</td></tr></tbody>
-      </table>
-      <p class="note">Horário informado pela própria casa no Instagram. Feriados e o buffet de café colonial podem ter horário próprio.</p>
 
       <div class="visit-actions">
         <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=Doce+Sabor+Ivoti+Av+Presidente+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#map-pin"/></svg>Traçar rota</a>
         <a class="btn btn-outline" href="https://wa.me/5551980375842" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#brand-whatsapp"/></svg>WhatsApp</a>
         <a class="btn btn-outline" href="tel:+5551980375842"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#phone"/></svg>(51) 98037-5842</a>
       </div>
-      <div class="visit-links">
-        <a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=Padaria+e+Confeitaria+Doce+Sabor+Av+Pres+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#brand-google"/></svg>Ver ficha no Google</a>
-        <a class="link" href="https://www.waze.com/ul?q=Av.%20Pres.%20Lucena%2C%201983%2C%20Ivoti%20RS&amp;navigate=yes" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#navigation"/></svg>Abrir no Waze</a>
-      </div>
+      <p class="visit-links"><a href="https://www.google.com/maps/search/?api=1&amp;query=Padaria+e+Confeitaria+Doce+Sabor+Av+Pres+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer">Ver a ficha no Google</a><a href="https://www.waze.com/ul?q=Av.%20Pres.%20Lucena%2C%201983%2C%20Ivoti%20RS&amp;navigate=yes" target="_blank" rel="noopener noreferrer">Abrir no Waze</a></p>
     </div>
   </section>
 </main>
@@ -326,13 +315,13 @@
       <ul>
         <li><a href="https://wa.me/5551980375842" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
         <li><a href="tel:+5551980375842">(51) 98037-5842</a></li>
-        <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Padaria+e+Confeitaria+Doce+Sabor+Av+Pres+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer">Av. Presidente Lucena, 1983<br>Harmonia, Ivoti — RS</a></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Padaria+e+Confeitaria+Doce+Sabor+Av+Pres+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer">Av. Presidente Lucena, 1983<br>Harmonia, Ivoti/RS</a></li>
       </ul>
     </div>
     <div>
       <h4>Horário e redes</h4>
       <ul>
-        <li>Todos os dias, 7h — 20h</li>
+        <li>Todos os dias, das 7h às 20h</li>
         <li><a href="https://www.instagram.com/docesaborivoti/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
         <li><a href="https://www.facebook.com/DoceSaborIvoti/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
         <li><button class="sources-open" type="button">Fotos e fontes</button></li>
