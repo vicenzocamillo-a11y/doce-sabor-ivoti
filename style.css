@@ -305,3 +305,57 @@ dialog::backdrop{background:#2c1a12db}
   .js .reveal{opacity:1;transform:none}
   *{transition:none!important}
 }
+
+/* ============ Encomendas ============ */
+.order{padding:var(--section) var(--gutter);background:var(--white);border-top:1px solid var(--line)}
+.order-grid{max-width:var(--max);margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(24px,3vw,48px);align-items:start}
+.order-steps{display:flex;flex-direction:column}
+.order-steps li{display:grid;grid-template-columns:auto 1fr;gap:22px;padding:26px 0;border-top:1px solid var(--line)}
+.order-steps li:last-child{border-bottom:1px solid var(--line)}
+.order-steps span{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--blush);color:var(--pink);font:600 16px/1 'DM Sans',sans-serif;font-variant-numeric:tabular-nums}
+.order-steps h3{font:500 25px/1.15 'Playfair Display',Georgia,serif;letter-spacing:-.02em}
+.order-steps p{margin-top:9px;font-size:15px;color:var(--muted);max-width:52ch}
+.order-cta{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(28px,3.2vw,44px);background:var(--blush)}
+.order-cta h3{font-size:30px}
+.order-cta p{font-size:15px;color:var(--cocoa)}
+.order-cta .btn{width:100%}
+
+/* ============ Rota Romântica ============ */
+.route{padding:var(--section) var(--gutter);background:var(--paper);border-top:1px solid var(--line)}
+.route-inner{max-width:var(--max);margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(30px,5vw,72px);align-items:center}
+.route-copy h2{margin-top:14px}
+.route-copy p{margin-top:22px;font-size:17px;max-width:56ch}
+.route-facts{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.route-facts>div{display:flex;align-items:baseline;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
+.route-facts dt{flex:none;min-width:98px;font:500 clamp(30px,3vw,42px)/1 'Playfair Display',Georgia,serif;color:var(--pink);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.route-facts dd{font-size:15px;line-height:1.45;color:var(--muted)}
+
+/* ============ Perguntas frequentes ============ */
+.faq{padding:var(--section) var(--gutter);background:var(--blush)}
+.faq-list{max-width:900px;margin-inline:auto;border-top:1px solid #e9ccd5}
+.faq-item{border-bottom:1px solid #e9ccd5}
+.faq-item summary{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 4px;cursor:pointer;list-style:none;font:500 clamp(20px,2vw,27px)/1.25 'Playfair Display',Georgia,serif;letter-spacing:-.02em}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary .icon{width:22px;height:22px;color:var(--pink);transition:transform .3s var(--ease)}
+.faq-item[open] summary .icon{transform:rotate(45deg)}
+.faq-answer{padding:0 4px 26px}
+.faq-answer p{font-size:16px;line-height:1.65;max-width:68ch;color:var(--cocoa)}
+
+@media(hover:hover){
+  .faq-item summary:hover{color:var(--pink)}
+  .route-facts>div:hover dd{color:var(--ink)}
+}
+@media(max-width:1080px) and (min-width:761px){
+  .order-grid,.route-inner{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .order,.route,.faq{padding:var(--section) 22px}
+  .order-grid,.route-inner{grid-template-columns:1fr;gap:28px}
+  .order-steps li{gap:16px;padding:22px 0}
+  .order-steps span{width:36px;height:36px;font-size:14px}
+  .order-steps h3{font-size:22px}
+  .order-cta{padding:26px 22px}
+  .route-facts dt{min-width:78px;font-size:28px}
+  .faq-item summary{padding:20px 0;font-size:19px}
+  .faq-answer{padding:0 0 22px}
+}

@@ -31,12 +31,14 @@ A página segue o padrão das redes grandes de cafeteria e padaria:
 3. **Faixa de números** com as notas, a posição no Tripadvisor, os prêmios
    e o horário — só dados conferidos em fonte pública.
 4. **Menu** — três cartões com foto, categoria, nome e o que tem em cada um.
-5. **Faixa escura** com os três prêmios de 2024.
-6. **Nossa casa** — a história, desde 1999.
-7. **Avaliações** — Google, Tripadvisor e o convite para avaliar.
-8. **Fotos e novidades** — publicações reais do Instagram e do Facebook.
-9. **Visite** — mapa, endereço, horário e as ações de contato num bloco só.
-10. **Rodapé largo** em quatro colunas.
+   Prêmios numa faixa escura logo depois.
+7. **Nossa casa** — a história, desde 1999.
+8. **Rota Romântica** — por que a casa está no caminho de quem viaja.
+9. **Avaliações** — Google, Tripadvisor e o convite para avaliar.
+10. **Fotos e novidades** — publicações reais do Instagram e do Facebook.
+11. **Perguntas frequentes** — cinco respostas, em `<details>` nativo.
+12. **Visite** — mapa, endereço, horário e as ações de contato num bloco só.
+13. **Rodapé largo** em quatro colunas.
 
 ## O que está ligado
 
@@ -53,6 +55,13 @@ A página segue o padrão das redes grandes de cafeteria e padaria:
 | WhatsApp | topo, menu, Facebook, Visite e barra fixa do celular |
 | Telefone | barra de utilidade, menu do celular, Visite e rodapé |
 | Aberto agora / fechado | três selos calculados da tabela de horários, no fuso de Ivoti |
+
+As perguntas frequentes também saem como `schema.org/FAQPage`, que é o que
+faz o Google mostrar as perguntas direto na busca.
+
+Sobre as respostas: só entrou o que dá para sustentar. Horário, endereço,
+canais de encomenda e o que é café colonial são verificáveis. Pergunta que
+eu não sabia responder de verdade ficou de fora.
 
 Também configurados: dados estruturados `schema.org/Bakery` (endereço,
 telefone, horários, nota, prêmios, mapa e perfis), Open Graph com imagem

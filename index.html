@@ -81,6 +81,54 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "O que é café colonial?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "É a mesa farta da tradição dos imigrantes alemães: cucas, pães, bolos, frios, geleias, conservas, café, chá e sucos servidos juntos, para a mesa provar um pouco de tudo. Na Doce Sabor é buffet de doces e salgados."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Qual é o horário de funcionamento?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Todos os dias, das 7h às 20h, conforme o perfil da própria casa no Instagram. Feriados e o buffet de café colonial podem ter horário próprio, então vale confirmar com a equipe."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Onde fica e como chego?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Av. Presidente Lucena, 1983, bairro Harmonia, Ivoti/RS, CEP 93900-000. Fica na avenida principal da cidade. O botão \"Traçar rota\" abre o caminho no Google Maps, e há também link para o Waze."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como faço uma encomenda?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Por WhatsApp ou telefone, informando a data e o horário de retirada, o sabor, o tamanho ou a quantidade de pessoas. A equipe confirma disponibilidade, valor e prazo. O site não faz pedido automático."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Dá para levar para casa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. Cucas, roscas, pães e salgados saem da padaria para levar. Tortas e doces da confeitaria podem ser encomendados."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
@@ -95,14 +143,14 @@
 
 <header class="topbar">
   <a class="logo" href="#inicio" aria-label="Doce Sabor Ivoti, início"><img src="assets/logo-oficial.jpg" width="720" height="720" alt="Doce Sabor"></a>
-  <nav aria-label="Navegação principal"><a href="#menu">Menu</a><a href="#historia">Nossa casa</a><a href="#avaliacoes">Avaliações</a><a href="#fotos">Fotos</a><a href="#visite">Visite</a></nav>
+  <nav aria-label="Navegação principal"><a href="#menu">Menu</a><a href="#encomendas">Encomendas</a><a href="#historia">Nossa casa</a><a href="#avaliacoes">Avaliações</a><a href="#fotos">Fotos</a><a href="#visite">Visite</a></nav>
   <a class="btn btn-primary btn-sm topbar-cta" href="https://wa.me/5551980375842" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#brand-whatsapp"/></svg>WhatsApp</a>
   <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu"><span>Menu</span><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#menu-2"/></svg></button>
 </header>
 
 <nav id="mobile-menu" class="mobile-menu" hidden>
   <span class="open-state" hidden></span>
-  <a href="#menu">Menu</a><a href="#historia">Nossa casa</a><a href="#avaliacoes">Avaliações</a><a href="#fotos">Fotos</a><a href="#visite">Visite</a>
+  <a href="#menu">Menu</a><a href="#encomendas">Encomendas</a><a href="#historia">Nossa casa</a><a href="#avaliacoes">Avaliações</a><a href="#fotos">Fotos</a><a href="#visite">Visite</a>
   <a class="mobile-call" href="tel:+5551980375842"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#phone"/></svg>(51) 98037-5842</a>
 </nav>
 
@@ -182,6 +230,27 @@
     </div>
   </section>
 
+  <section class="order" id="encomendas">
+    <div class="section-head">
+      <span class="kicker">Encomendas</span>
+      <h2>Torta de aniversário,<br>café colonial, bandeja.</h2>
+      <p>A encomenda é combinada direto com a equipe, por WhatsApp ou telefone. Não há pedido automático pelo site.</p>
+    </div>
+    <div class="order-grid">
+      <ol class="order-steps">
+        <li><span>1</span><div><h3>Escolha o canal</h3><p>WhatsApp para mandar referência de foto e acertar detalhe por escrito. Telefone para resolver na hora.</p></div></li>
+        <li><span>2</span><div><h3>Diga quatro coisas</h3><p>A data e o horário de retirada, o sabor, o tamanho ou a quantidade de pessoas, e se é para levar ou consumir na casa.</p></div></li>
+        <li><span>3</span><div><h3>Confirme com a equipe</h3><p>Disponibilidade, valor e prazo são confirmados por eles. Datas de mais movimento pedem antecedência.</p></div></li>
+      </ol>
+      <div class="order-cta">
+        <h3>Fale agora</h3>
+        <p>Todos os dias, das 7h às 20h.</p>
+        <a class="btn btn-primary" href="https://wa.me/5551980375842?text=Ol%C3%A1%21%20Gostaria%20de%20fazer%20uma%20encomenda." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#brand-whatsapp"/></svg>Encomendar pelo WhatsApp</a>
+        <a class="btn btn-outline" href="tel:+5551980375842"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#phone"/></svg>(51) 98037-5842</a>
+      </div>
+    </div>
+  </section>
+
   <section class="band">
     <div class="band-inner">
       <span class="kicker light">Reconhecimento local</span>
@@ -202,6 +271,22 @@
       <p>Na Avenida Presidente Lucena, a Doce Sabor acompanha quem vive em Ivoti e quem segue viagem pela Rota Romântica.</p>
       <p>O balcão reúne receitas artesanais, cuidado e uma equipe que transformou a parada para o café em parte da história da cidade.</p>
       <a class="link" href="https://www.instagram.com/docesaborivoti/" target="_blank" rel="noopener noreferrer">Ver o dia a dia no Instagram <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
+    </div>
+  </section>
+
+  <section class="route">
+    <div class="route-inner">
+      <div class="route-copy">
+        <span class="kicker">Para quem está de passagem</span>
+        <h2>Uma parada<br>na Rota Romântica.</h2>
+        <p>Ivoti é uma das quatorze cidades de colonização alemã da Rota Romântica, a cerca de 55 km de Porto Alegre. A cidade guarda o maior conjunto de casas enxaimel do Brasil e é conhecida como Cidade das Flores.</p>
+        <p>A Doce Sabor fica na avenida principal, no caminho de quem segue para Dois Irmãos, Nova Petrópolis e Gramado.</p>
+      </div>
+      <dl class="route-facts">
+        <div><dt>14</dt><dd>cidades na Rota Romântica</dd></div>
+        <div><dt>55 km</dt><dd>de Porto Alegre</dd></div>
+        <div><dt>1824</dt><dd>chegada dos imigrantes alemães ao Rio Grande do Sul</dd></div>
+      </dl>
     </div>
   </section>
 
@@ -277,6 +362,36 @@
     </div>
   </section>
 
+  <section class="faq" id="perguntas">
+    <div class="section-head">
+      <span class="kicker">Perguntas frequentes</span>
+      <h2>O que a gente<br>mais ouve.</h2>
+      <p>Se a sua pergunta não estiver aqui, chame a equipe no WhatsApp. Eles respondem durante o horário da casa.</p>
+    </div>
+    <div class="faq-list">
+        <details class="faq-item" open>
+          <summary><span>O que é café colonial?</span><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#plus"/></svg></summary>
+          <div class="faq-answer"><p>É a mesa farta da tradição dos imigrantes alemães: cucas, pães, bolos, frios, geleias, conservas, café, chá e sucos servidos juntos, para a mesa provar um pouco de tudo. Na Doce Sabor é buffet de doces e salgados.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary><span>Qual é o horário de funcionamento?</span><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#plus"/></svg></summary>
+          <div class="faq-answer"><p>Todos os dias, das 7h às 20h, conforme o perfil da própria casa no Instagram. Feriados e o buffet de café colonial podem ter horário próprio, então vale confirmar com a equipe.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary><span>Onde fica e como chego?</span><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#plus"/></svg></summary>
+          <div class="faq-answer"><p>Av. Presidente Lucena, 1983, bairro Harmonia, Ivoti/RS, CEP 93900-000. Fica na avenida principal da cidade. O botão "Traçar rota" abre o caminho no Google Maps, e há também link para o Waze.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary><span>Como faço uma encomenda?</span><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#plus"/></svg></summary>
+          <div class="faq-answer"><p>Por WhatsApp ou telefone, informando a data e o horário de retirada, o sabor, o tamanho ou a quantidade de pessoas. A equipe confirma disponibilidade, valor e prazo. O site não faz pedido automático.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary><span>Dá para levar para casa?</span><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#plus"/></svg></summary>
+          <div class="faq-answer"><p>Sim. Cucas, roscas, pães e salgados saem da padaria para levar. Tortas e doces da confeitaria podem ser encomendados.</p></div>
+        </details>
+    </div>
+  </section>
+
   <section class="visit" id="visite">
     <div class="visit-map">
       <iframe title="Mapa da Doce Sabor na Av. Presidente Lucena, 1983, Ivoti/RS" src="https://www.google.com/maps?q=Padaria+e+Confeitaria+Doce+Sabor%2C+Av.+Pres.+Lucena%2C+1983%2C+Ivoti+-+RS&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
@@ -319,7 +434,7 @@
     </div>
     <div>
       <h4>Navegação</h4>
-      <ul><li><a href="#menu">Menu</a></li><li><a href="#historia">Nossa casa</a></li><li><a href="#avaliacoes">Avaliações</a></li><li><a href="#fotos">Fotos</a></li><li><a href="#visite">Visite</a></li></ul>
+      <ul><li><a href="#menu">Menu</a></li><li><a href="#historia">Nossa casa</a></li><li><a href="#avaliacoes">Avaliações</a></li><li><a href="#fotos">Fotos</a></li><li><a href="#encomendas">Encomendas</a></li><li><a href="#perguntas">Perguntas frequentes</a></li><li><a href="#visite">Visite</a></li></ul>
     </div>
     <div>
       <h4>Contato</h4>
