@@ -52,6 +52,12 @@
   --layers-dark:linear-gradient(var(--cocoa) 0 3px,transparent 3px 5px,var(--pink) 5px 8px,transparent 8px 10px,var(--cocoa) 10px 13px);
   --layers-light:linear-gradient(var(--cream) 0 3px,transparent 3px 5px,var(--pink) 5px 8px,transparent 8px 10px,var(--cream) 10px 13px);
   --enxaimel:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='48' fill='none' stroke='%23000' stroke-width='2'%3E%3Cpath d='M0 1h96M0 47h96M0 24h96M1 0v48M49 0v48M1 47 49 1M49 1l47 46'/%3E%3C/svg%3E");
+  /* Marca de quem vai aparecer no quadro, no fundo dele: enquanto o embed
+     carrega, ou quando o navegador bloqueia rastreador de rede social, o
+     quadro diz o que e em vez de ficar um bloco vazio. Parada, sem brilho. */
+  --glifo-ig:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z'/%3E%3Cpath d='M9 12a3 3 0 1 0 6 0a3 3 0 0 0-6 0'/%3E%3Cpath d='M16.5 7.5v.01'/%3E%3C/svg%3E");
+  --glifo-fb:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 10v4h3v7h4v-7h3l1-4h-4V8a1 1 0 0 1 1-1h3V3h-3a5 5 0 0 0-5 5v2H7'/%3E%3C/svg%3E");
+  --glifo-pin:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 11a3 3 0 1 0 6 0a3 3 0 0 0-6 0'/%3E%3Cpath d='M17.657 16.657l-4.243 4.243a2 2 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0'/%3E%3C/svg%3E");
   --serif:'Playfair Display',Georgia,serif;
   --sans:'DM Sans',system-ui,sans-serif;
   --focus:var(--pink);
@@ -150,7 +156,7 @@ a.link{min-height:44px}
 /* logo-topo.png: o desenho de logo-oficial.jpg recortado, sem fundo e nas
    tintas exatas da logo (4,5KB; refaca com ferramentas/gera-logo-topo.py);
    no vidro, o JPG mostrava a caixa branca. */
-.logo{display:block;width:112px}
+.logo{display:block;width:100px}
 .logo img{width:100%;height:auto}
 .topbar nav{display:flex;align-items:center;justify-content:center;gap:clamp(16px,2.4vw,36px);font-size:14px}
 /* Alvo de 44px nos dois sentidos: 4px de folga de cada lado, devolvidos pela
@@ -350,6 +356,10 @@ a.score:active{scale:.98;transition-duration:var(--t-ui),var(--t-hover),var(--t-
 .reel-grid{--embed-h:700px;margin-top:var(--gap)}
 .ig-post,.reel-post,.fb-frame{position:relative;height:var(--embed-h);background:var(--bone);border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden}
 .fb-frame{--embed-h:640px}
+.ig-post,.reel-post{--glifo:var(--glifo-ig)}
+.fb-frame{--glifo:var(--glifo-fb)}
+.visit-map{--glifo:var(--glifo-pin)}
+:is(.ig-post,.reel-post,.fb-frame,.visit-map)::before{content:"";position:absolute;inset:0;margin:auto;width:40px;height:40px;background:var(--sand);-webkit-mask:var(--glifo) center/contain no-repeat;mask:var(--glifo) center/contain no-repeat}
 .visit-map{position:relative;min-height:620px;background:var(--bone)}
 .ig-post iframe,.reel-post iframe,.fb-frame iframe,.visit-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;transition:opacity 400ms var(--ease-out)}
 /* Mesmo contrato das fotos: so esconde o que o script marcou para esperar. */
@@ -365,7 +375,9 @@ a.score:active{scale:.98;transition-duration:var(--t-ui),var(--t-hover),var(--t-
 /* ---------- perguntas frequentes ---------- */
 .faq{background:var(--blush)}
 .faq-inner{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(30px,5vw,72px);align-items:start}
-.faq-inner .section-head{position:sticky;top:calc(var(--topbar-h) + 32px);margin-bottom:0}
+/* margin-inline:0 porque margem auto em item de grade vira largura justa e
+   centrada: o titulo caia 17px para dentro da linha das outras secoes. */
+.faq-inner .section-head{position:sticky;top:calc(var(--topbar-h) + 32px);margin-bottom:0;margin-inline:0}
 .faq-list{border-top:1px solid var(--line-blush)}
 .faq-item{border-bottom:1px solid var(--line-blush)}
 .faq-item summary{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 4px;cursor:pointer;list-style:none;font:500 clamp(20px,1.8vw,25px)/1.25 var(--serif);letter-spacing:-.012em;transition:color var(--t-hover) ease}
@@ -469,7 +481,7 @@ dialog::backdrop{background:var(--scrim)}
   .utility-addr{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .utility-city{display:none}
   .topbar{grid-template-columns:1fr auto;gap:10px}
-  .logo{width:96px}
+  .logo{width:84px}
   .topbar nav,.topbar-cta{display:none}
   /* O botao so aparece depois que o script o liga (.is-ready): sem script, nada
      de botao morto; a navegacao do rodape continua ao alcance. */

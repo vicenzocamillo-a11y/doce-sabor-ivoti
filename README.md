@@ -183,13 +183,16 @@ Verificado em fonte pública:
 
 1. **"2.343 avaliações"** (primeira dobra e cartão do Google). Esse número
    veio da ficha que foi passada para quem montou o site, não de uma fonte
-   que eu pudesse conferir. Confira no perfil e ajuste em dois lugares:
-   `index.html` (texto) e o `reviewCount` no bloco `application/ld+json`.
+   que eu pudesse conferir. Confira no perfil e ajuste os dois textos do
+   `index.html` (selo do hero e cartão do Google). A nota não vai para o
+   bloco `application/ld+json`: o Google não aceita, em dado estruturado da
+   própria empresa, nota agregada vinda de outro site.
 2. **Horários** — agora **7h às 20h, todos os dias**, conforme a bio do
    próprio Instagram da casa. Antes o site dizia 7h30–21h30, que veio de
    agregador. Para corrigir, mexa só na tabela `.hours-table` do
    `index.html`: o selo "aberto agora" (topo, menu do celular e seção de
-   horários) e o JSON-LD acompanham sozinhos.
+   horários) acompanha sozinho. O `openingHoursSpecification` do JSON-LD
+   precisa ser ajustado à mão para bater.
 3. **"desde 1999"**, no hero e na seção Nossa casa.
 4. **Telefone** (51) 98037-5842, usado em `wa.me/5551980375842` e `tel:`.
 5. **Ordem das 14 cidades da Rota Romântica** (linha da seção Rota). A lista e
