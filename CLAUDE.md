@@ -27,7 +27,11 @@ Não rode `playwright install`. O padrão usado até aqui é um script `.mjs` qu
 abre a página em 1440, 900 e 390 px e reporta numa linha: erros de JavaScript,
 recursos faltando, texto dos selos de horário, contagem de seções e se há
 rolagem lateral. Ao mexer no layout, vale repetir essa checagem nos três
-tamanhos.
+tamanhos. Desde o redesenho a rodada também cobre 320 px (nada pode vazar para
+o lado), celular deitado (a cápsula não sobe na primeira dobra), Tab pela
+página inteira (foco nunca atrás da cápsula ou da barra), o script quebrado
+logo depois da linha 1 (nada pode ficar escondido), o contraste do texto do
+hero no pior pixel da foto, cores forçadas e impressão.
 
 Ao tirar captura de página inteira (`fullPage: true`), imagens com
 `loading="lazy"` às vezes saem como bloco vazio mesmo tendo carregado. Antes de
@@ -50,7 +54,11 @@ O `style.css` traz as regras de manutenção no topo. As três que mais importam
 um bloco `@media` por ponto de quebra e nunca dois; seção nova não declara
 padding nem largura, porque `main>section` e a lista de contêineres `.wrap`
 cuidam disso; e no celular muda a variável `--gutter`, não o padding de cada
-seção.
+seção. O `--gutter` já nunca fica menor que a área segura do iPhone
+(`viewport-fit=cover`); elemento fixo novo encosta na borda com
+`max(12px, env(safe-area-inset-*))`, como a cápsula. Todo `:hover` mora no
+bloco `(hover:hover) and (pointer:fine)`, inclusive a versão com movimento
+reduzido, aninhada nele.
 
 ## Como a página se sustenta
 
@@ -72,12 +80,35 @@ verdade está escrita em três lugares que precisam concordar: os `@media` do
 **Fotos não se repetem.** São quatro imagens reais em `assets/`, cada uma com um
 único lugar na página: `cucas` no hero, `buffet`, `casa-real` e `confeitaria`
 nos três cartões do menu. Repetir foto foi um problema real já corrigido; se
-acrescentar seção com imagem, use arquivo novo.
+acrescentar seção com imagem, use arquivo novo. `casa-real` e `confeitaria`
+têm só 666 px: a caixa delas não passa de ~470 px na tela (1,4x em tela 2x).
+
+**Nada fica escondido sem o script.** A classe que esconde (`.aguarda` nas
+fotos e iframes, `.reveal` nas entradas) é posta pela mesma parte do
+`script.js` que depois a tira, e cada parte roda isolada em `parte()`. Regra
+nova de CSS que esconda algo precisa seguir o mesmo contrato, nunca depender
+só de `.js`.
 
 **Os embeds carregam no navegador de quem visita**, não neste ambiente. Seis
 publicações do Instagram (`/p/CODIGO/embed` e `/reel/CODIGO/embed`), a linha do
 tempo do Facebook e o mapa do Google. Em captura local eles aparecem vazios
 porque a rede desta sessão bloqueia esses domínios — isso não é defeito.
+
+## O que muda junto
+
+- `assets/logo-topo.png` sai de `assets/logo-oficial.jpg`: trocou a logo, rode
+  `python3 ferramentas/gera-logo-topo.py .` (Pillow) e depois `--confere`.
+- O texto de cada `.dish-credit` é igual ao `data-caption` do botão da foto.
+- A mensagem pronta de encomenda (`wa.me/...?text=`) está em dois lugares — o
+  botão de Encomendas e o quadro do Facebook — e segue os cinco campos do
+  passo 2. Mudou um, mude os três.
+- Os limites do marca-texto do período (manhã até 10h59, tarde até 17h59,
+  noite até o fechamento) estão em `atualizarSelos`, no `script.js`.
+- A cor da barra do navegador começa em cacau (`<meta name="theme-color">`,
+  igual ao `theme_color` do `site.webmanifest`); o script troca para papel
+  quando o topo gruda, lendo `--cocoa` e `--paper` do CSS.
+- O selo do prêmio (`.dish-award`) só entra num cartão do menu quando a fonte
+  premia a casa naquela mesma categoria (ver README, "Dados", item 6).
 
 ## Regra de conteúdo
 

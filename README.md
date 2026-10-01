@@ -19,6 +19,8 @@ robots.txt
 sitemap.xml
 assets/           fotos reais, logo, ícones, fontes WOFF2 e imagem de
                   compartilhamento
+ferramentas/      gera-logo-topo.py: refaz assets/logo-topo.png a partir da
+                  logo oficial (requer Pillow); não entra na página
 PRODUCT.md        briefing do produto
 ```
 
@@ -26,21 +28,37 @@ PRODUCT.md        briefing do produto
 
 A página segue o padrão das redes grandes de cafeteria e padaria:
 
-1. **Barra de utilidade** — "aberto agora", endereço e telefone, sempre no topo.
-2. **Topo fixo** enxuto: logo, navegação e o botão de WhatsApp.
-3. **Hero de largura total** com a foto das cucas, chamada e duas ações.
+1. **Barra de utilidade** — "aberto agora", endereço e telefone, sempre no topo
+   (no celular, numa linha só).
+2. **Topo de vidro**: logo, navegação com a seção em leitura marcada e o botão
+   de WhatsApp. Papel com a linha fina de sempre no alto da página; vira vidro
+   translúcido só quando gruda e há conteúdo passando por baixo. No celular, o
+   menu abre como bandeja, com cortina, e prende o Tab enquanto está aberto.
+3. **Hero de largura total** com a foto das cucas, chamada, duas ações, o selo
+   da nota e o crédito da foto. No celular a foto vem primeiro.
 4. **A casa em números**: notas, posição no Tripadvisor, prêmios e horário.
    Só dados conferidos em fonte pública.
-5. **Menu** — três cartões com foto, categoria, nome e o que tem em cada um.
-6. **Encomendas** — os três passos e os dois canais, com o que informar.
+5. **Menu** — o café colonial em destaque, de ponta a ponta; padaria e
+   confeitaria lado a lado, cada uma com a foto ao lado do texto e o selo do
+   prêmio de 2024 da própria categoria. Toda foto tem a etiqueta de origem.
+6. **Encomendas** — os três passos, os dois canais e atalhos por ocasião que
+   abrem o WhatsApp com a mensagem pronta.
 7. **Prêmios** numa faixa escura, com os três títulos de 2024.
 8. **Nossa casa** — a história, desde 1999.
-9. **Rota Romântica** — por que a casa está no caminho de quem viaja.
+9. **Rota Romântica** — por que a casa está no caminho de quem viaja, com a
+    linha das 14 cidades e Ivoti marcada.
 10. **Avaliações** — Google, Tripadvisor e o convite para avaliar.
-11. **Fotos e novidades** — publicações reais do Instagram e do Facebook.
+11. **Fotos e novidades** — publicações reais do Instagram e do Facebook (no
+    celular, em fileiras com botões de anterior e próximo).
 12. **Perguntas frequentes** — cinco respostas, em `<details>` nativo.
-13. **Visite** — mapa, endereço, horário e as ações de contato num bloco só.
-14. **Rodapé largo** em quatro colunas.
+13. **Visite** — mapa, endereço, horário com relógio na hora de Ivoti e as
+    ações de contato num bloco só.
+14. **Rodapé largo** em quatro colunas, aberto pela assinatura "Café com gosto
+    de casa." sob um telhado de enxaimel, a trama das casas de Ivoti.
+
+No celular, WhatsApp e "Como chegar" ficam numa cápsula flutuante, que sobe
+quando os botões do hero começam a sumir sob a barra: nunca há trecho sem
+botão de ação, e botão quase transparente não recebe toque.
 
 ## O que está ligado
 
@@ -57,6 +75,8 @@ A página segue o padrão das redes grandes de cafeteria e padaria:
 | WhatsApp | topo, menu, Facebook, Visite e barra fixa do celular |
 | Telefone | barra de utilidade, menu do celular, Visite e rodapé |
 | Aberto agora / fechado | três selos calculados da tabela de horários, no fuso de Ivoti |
+| Mensagem pronta no WhatsApp | botão de Encomendas, atalhos por ocasião e quadro do Facebook |
+| Seção em leitura marcada | navegação do topo e menu do celular |
 
 As perguntas frequentes também saem como `schema.org/FAQPage`, que é o que
 faz o Google mostrar as perguntas direto na busca.
@@ -80,10 +100,28 @@ Cada fotografia aparece **uma única vez**. São quatro imagens reais:
 fotos dos três cartões do menu. Repetir uma foto em duas seções faz o site
 parecer montado por robô.
 
+Cada foto do menu mostra embaixo uma etiqueta (`.dish-credit`) com o mesmo
+texto do `data-caption`: de onde veio e que tratamento recebeu.
+
+As fotos do balcão e da confeitaria têm só 666 px de largura. Por isso ficam
+lado a lado na linha de baixo do menu, com no máximo ~470 px na tela: numa
+tela de densidade 2x, nenhuma foto do menu é ampliada mais que 1,4x. Foto nova
+para o menu precisa de pelo menos 700 px de largura.
+
 Para acrescentar um item ao menu: coloque a foto em `assets/` (de preferência
-`.webp`) e copie um bloco `<article class="dish">` no `index.html`, trocando
-`src`, `alt`, `data-photo`, `data-caption`, a categoria, o nome e a lista. A
-ampliação ao clique já funciona sozinha.
+`.webp`) e copie um bloco `<article class="dish">` no `index.html`, sem a
+classe `dish--feature`, trocando `src`, `alt`, `data-photo`, `data-caption`, a
+etiqueta, a categoria, o nome e a lista. O selo `.dish-award` só entra se houver
+prêmio conferido. A ampliação ao clique já funciona sozinha.
+
+A logo do topo é `assets/logo-topo.png`: o mesmo desenho de `logo-oficial.jpg`,
+recortado e com fundo transparente, porque sobre o vidro o JPG mostrava a caixa
+branca. As duas tintas saem do miolo sólido da própria logo (marrom `#603610`,
+rosa `#d01d41`), com alfa cheio dentro das letras; 4,5 KB. Para refazer, depois
+de trocar a logo oficial: `python3 ferramentas/gera-logo-topo.py .` (requer
+Pillow). `--confere` compara o PNG sobre o papel com o JPG: Delta E médio 1,0
+no marrom e 0,5 no rosa (abaixo de 2, a diferença não se vê). Rodapé e página
+404 continuam com o JPG.
 
 O feed do **Facebook** é o plugin oficial da página e se atualiza sozinho: o
 que a equipe postar aparece ali sem ninguém mexer no site.
@@ -107,7 +145,12 @@ mensalidade.
 
 ## Peso da página
 
-Primeira visita em desktop: **703 KB**, contra 1.502 KB antes da limpeza.
+Primeira visita em desktop, do jeito que o GitHub Pages entrega (HTML, CSS e
+JS comprimidos): **668 KB**, 11 KB a mais que antes do redesenho (657 KB). Em
+bytes crus, 761 KB contra 703 KB — e 1.502 KB antes da limpeza. O acréscimo é
+só texto (o CSS e o JS do novo acabamento); nenhuma imagem, fonte ou biblioteca
+nova, e o topo trocou o JPG de 11 KB por `logo-topo.png`, de 4,5 KB. Teto
+combinado: até 15 KB acima de antes, medido comprimido.
 
 | O que mudou | Ganho |
 |---|---|
@@ -130,7 +173,11 @@ Verificado em fonte pública:
 - **4,3 no Tripadvisor, 86 avaliações, 2º entre 26 restaurantes de Ivoti** —
   confirmado no Tripadvisor.
 - **Endereço e CEP** — Av. Presidente Lucena, 1983, Harmonia, 93900-000.
-- **Prêmios 2024** — Os Melhores da Gastronomia, VIPS DO SUL, Ivoti.
+- **Prêmios 2024** — Os Melhores da Gastronomia, VIPS DO SUL, Ivoti: a casa
+  foi eleita melhor confeitaria, melhor padaria e melhor mini café colonial de
+  Ivoti. O cartão do café colonial dizia "Três vezes premiado em 2024", como se
+  os três prêmios fossem dele; agora diz "A casa foi eleita o melhor mini café
+  colonial de Ivoti em 2024" (ver o item 6 abaixo).
 
 **Não verificado — confirme antes de divulgar:**
 
@@ -145,34 +192,52 @@ Verificado em fonte pública:
    horários) e o JSON-LD acompanham sozinhos.
 3. **"desde 1999"**, no hero e na seção Nossa casa.
 4. **Telefone** (51) 98037-5842, usado em `wa.me/5551980375842` e `tel:`.
+5. **Ordem das 14 cidades da Rota Romântica** (linha da seção Rota). A lista e
+   a ordem vieram de guias de viagem e da Wikipédia, não da fonte oficial.
+   Confira em rotaromantica.com.br e ajuste o `<ol class="route-line">` no
+   `index.html`.
+6. **A qual produto cada prêmio se refere.** A VIPS DO SUL premia a casa nas
+   categorias melhor padaria, melhor confeitaria e melhor mini café colonial,
+   sem citar produto nem foto. Por isso os selos "Melhor padaria de Ivoti ·
+   2024" e "Melhor confeitaria de Ivoti · 2024" ficam no texto dos cartões de
+   mesmo nome, nunca sobre a foto, e o cartão do café colonial não tem selo:
+   nada nas fontes liga o "mini café colonial" ao buffet fotografado. Se a
+   casa confirmar que é o buffet, o selo pode voltar àquele cartão.
+7. **Origem da foto do balcão** (`casa-real`). O crédito — Kátia Della Tôrres
+   para a VIPS DO SUL, edição de 2021 — vem dos créditos da primeira versão
+   deste site, que apontavam para
+   `vipsdosul.com.br/site/index.php/edicoes-686` (o arquivo original se
+   chamava `doce-sabor-2021.jpg`). Não foi reconferido agora: o site da VIPS
+   DO SUL não abre daqui. Se não bater, tire o crédito da etiqueta, do
+   `data-caption` e do diálogo "Fotos e fontes".
 
-## Antes de publicar
+## Movimento
 
-**Endereço do site.** Está apontando para o GitHub Pages
-(`https://vicenzocamillo-a11y.github.io/doce-sabor-ivoti/`). Quando tiver
-domínio próprio, troque em `index.html` (canonical, `og:url`, `og:image` e os
-três campos do JSON-LD), `robots.txt` e `sitemap.xml`.
+Cada animação tem um porquê e mexe em `transform` (translate, scale, rotate),
+`opacity` ou `clip-path`. Exceções conscientes, curtas ou presas à rolagem:
+`background-size` no marca-texto do período do dia, `background-position` na
+citação que enche com a rolagem, `block-size` na abertura do FAQ (onde há
+`::details-content`) e `filter` (desfoque de 2 px) na troca do ícone do botão
+do menu. Recorte que anima tem as duas pontas em `inset()`: entre `none` e
+`inset()` o navegador salta em vez de animar.
 
-**Link direto de avaliação.** O botão "Avaliar no Google" leva à ficha, onde a
-pessoa clica em "Escrever avaliação". Para levar direto ao formulário, pegue o
-Place ID em
-<https://developers.google.com/maps/documentation/places/web-service/place-id>
-e troque o link por
-`https://search.google.com/local/writereview?placeid=SEU_PLACE_ID`.
+Ação de teclado não anima: Esc fecha menu e diálogos na hora, abrir a foto
+pelo teclado é só um esmaecer de 150 ms, e o Tab rola a página sem deslizar.
+Com "reduzir movimento", deslocamento vira opacidade (menos e mais suave, não
+zero). Os efeitos ligados à rolagem (citação e sumiço do texto do
+hero) só existem onde o navegador suporta; nos outros, o estado parado já é o
+final.
 
-## Publicar
+Recusado de propósito, para uma próxima rodada não trazer de volta:
 
-Workflow de GitHub Pages em `.github/workflows/deploy-pages.yml`. Em
-**Settings › Pages**, escolha **Source: GitHub Actions**. Cada push publica.
-
-No plano gratuito do GitHub, o Pages exige repositório público. Para manter o
-código fechado, **Cloudflare Pages** ou **Netlify** publicam repositório
-privado de graça: conecte o repo, deixe o comando de build vazio e a pasta de
-publicação como `/`.
-
-## Rodar na sua máquina
-
-```bash
-python3 -m http.server 8000
-# abra http://localhost:8000
-```
+- contagem progressiva nos números (mostraria notas falsas no caminho);
+- paralaxe, deriva ou movimento contínuo na foto do hero (ela só assenta 3%
+  na carga, uma vez, e nunca muda de opacidade);
+- qualquer faixa ou letreiro de produtos correndo de lado, sozinho ou com a
+  rolagem: o dono pediu para tirar a fita de sabores porque parecia robô;
+- pulso infinito no "aberto agora" (o anel sai uma vez, só na barra de cima);
+- topo que encolhe ou some na rolagem, e cápsula que some;
+- efeito que segue o cursor e brilho piscando nos embeds;
+- citação quebrada palavra por palavra;
+- destaque animado no "1999" e anel de texto no selo: dariam ênfase a dados
+  não verificados.
