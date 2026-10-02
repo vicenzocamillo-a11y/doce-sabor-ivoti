@@ -1,15 +1,10 @@
 document.documentElement.classList.add('js');
 
-/* Cada parte roda isolada: um erro numa nao derruba as outras. E nenhuma
-   esconde nada antes de se ligar: a classe que esconde (.aguarda, .reveal) e
-   posta pela propria parte que depois a tira. Sem script, a pagina inteira
-   aparece parada. */
+/* Cada parte roda isolada; quem esconde algo e a parte que depois mostra. */
 const parte = (nome, fn) => {
   try { fn(); } catch (erro) { console.error(`[Doce Sabor] ${nome}:`, erro); }
 };
 
-/* Lido a cada uso: se a pessoa liga "reduzir movimento" com a pagina aberta,
-   o proximo gesto ja respeita. */
 const reduz = window.matchMedia('(prefers-reduced-motion: reduce)');
 const largo = window.matchMedia('(min-width: 901px)');
 const EASE_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
@@ -17,20 +12,23 @@ const EASE_DRAWER = 'cubic-bezier(0.32, 0.72, 0, 1)';
 const temIO = 'IntersectionObserver' in window;
 const topbar = document.querySelector('.topbar');
 const html = document.documentElement;
-/* Safari ate a 13 nao tem addEventListener em MediaQueryList. */
+/* Safari ate a 13: addListener */
 const aoMudar = (mq, fn) => (mq.addEventListener ? mq.addEventListener('change', fn) : mq.addListener(fn));
-/* Clique fora da caixa do dialogo (no fundo escurecido). */
 const foraDe = (dialogo, event) => {
   const r = dialogo.getBoundingClientRect();
   return event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom;
 };
-/* Clique vindo do teclado (Enter/Espaco) chega com detail 0: nao anima. */
+/* clique de teclado chega com detail 0 */
 const doTeclado = event => event.detail === 0;
+/* teclado nao anima: data-instant por dois quadros (regra no CSS) */
+const naHora = (fn = () => {}) => {
+  html.dataset.instant = '';
+  fn();
+  requestAnimationFrame(() => requestAnimationFrame(() => delete html.dataset.instant));
+};
+const conforme = (event, fn) => (doTeclado(event) ? naHora(fn) : fn());
 
-/* ---------- fotos e embeds entram quando carregam ----------
-   Primeira parte de todas. A foto chega sobre o proprio tom (--ph-*), nunca
-   sobre um buraco preto. Quem ja carregou nao chega a ser escondido; o hero
-   fica de fora (imagem principal, aparece sem esperar). */
+/* ---------- fotos e embeds entram quando carregam ---------- */
 parte('carregamento', () => {
   document.querySelectorAll('.dish-photo img').forEach(img => {
     const pronta = () => img.classList.add('is-loaded');
@@ -40,30 +38,29 @@ parte('carregamento', () => {
     img.addEventListener('error', pronta, { once: true });
   });
 
-  /* Iframe nao diz se ja carregou: os que ja estao perto da tela ficam como
-     estao; os de baixo esperam o 'load', com 6s de garantia contados de quando
-     se aproximam (rede que nunca responde nao deixa o quadro vazio). */
+  /* iframe: so o que esta longe espera o 'load' (6s de garantia) */
   const mostrar = quadro => quadro.classList.add('is-loaded');
-  const longe = [...document.querySelectorAll('.ig-post iframe, .reel-post iframe, .fb-frame iframe, .visit-map iframe')]
-    .filter(quadro => quadro.getBoundingClientRect().top > window.innerHeight + 200);
-  longe.forEach(quadro => {
-    quadro.classList.add('aguarda');
-    quadro.addEventListener('load', () => mostrar(quadro), { once: true });
-  });
-  if (!temIO) return longe.forEach(mostrar);
-  const vigia = new IntersectionObserver(entradas => entradas.forEach(({ isIntersecting, target }) => {
+  const quadros = document.querySelectorAll('.ig-post iframe, .reel-post iframe, .fb-frame iframe, .visit-map iframe');
+  quadros.forEach(quadro => quadro.addEventListener('load', () => mostrar(quadro), { once: true }));
+  if (!temIO) return;
+  const vistos = new WeakSet();
+  const vigia = new IntersectionObserver(entradas => entradas.forEach(({ isIntersecting, target, boundingClientRect, rootBounds }) => {
+    if (!vistos.has(target)) {
+      vistos.add(target);
+      /* rootBounds, nunca innerHeight: sem layout forcado */
+      const longe = !isIntersecting && !!rootBounds && boundingClientRect.top > rootBounds.bottom;
+      if (longe && !target.classList.contains('is-loaded')) target.classList.add('aguarda');
+      else vigia.unobserve(target);
+      return;
+    }
     if (!isIntersecting) return;
     vigia.unobserve(target);
     setTimeout(() => mostrar(target), 6000);
   }), { rootMargin: '200px 0px' });
-  longe.forEach(quadro => vigia.observe(quadro));
+  quadros.forEach(quadro => vigia.observe(quadro));
 });
 
-/* ---------- menu do celular ----------
-   A bandeja sai da borda real de baixo da barra (que muda quando a barra de
-   utilidade rola). Aberta, o resto da pagina fica inert, como atras de um
-   dialogo: o Tab circula entre a barra e a bandeja. O botao so aparece
-   (.is-ready) depois de ligado: sem script, nada de botao morto. */
+/* ---------- menu do celular ---------- */
 parte('menu', () => {
   const toggle = document.querySelector('.menu-toggle');
   const menu = document.querySelector('#mobile-menu');
@@ -84,29 +81,21 @@ parte('menu', () => {
   };
   const closeMenu = () => setMenu(false);
 
-  toggle.addEventListener('click', () => setMenu(!menuAberto()));
-  menu.addEventListener('click', event => { if (event.target.closest('a')) closeMenu(); });
-  /* Toque na cortina (fora da bandeja e do botao) fecha. */
+  toggle.addEventListener('click', event => conforme(event, () => setMenu(!menuAberto())));
+  menu.addEventListener('click', event => { if (event.target.closest('a')) conforme(event, closeMenu); });
   document.addEventListener('click', event => {
     if (menuAberto() && !menu.contains(event.target) && !toggle.contains(event.target)) closeMenu();
   });
-  /* Tecla fecha na hora: acao de teclado nao anima (bandeja, cortina e icone). */
   document.addEventListener('keydown', event => {
     if (event.key !== 'Escape' || !menuAberto()) return;
-    html.dataset.instant = '';
-    closeMenu();
+    naHora(closeMenu);
     toggle.focus();
-    requestAnimationFrame(() => requestAnimationFrame(() => delete html.dataset.instant));
   });
   aoMudar(largo, event => { if (event.matches) closeMenu(); });
   toggle.classList.add('is-ready');
 });
 
-/* ---------- foto ampliada ----------
-   A foto do cartao cresce ate o dialogo e volta a ele ao fechar (FLIP com Web
-   Animations). Fechar no meio do caminho parte de onde a foto esta, para a
-   frente e em ease-out. Teclado e movimento reduzido: so opacidade, curta.
-   Esc fecha na hora (nativo). */
+/* ---------- foto ampliada ---------- */
 parte('foto ampliada', () => {
   const photoDialog = document.querySelector('.photo-dialog');
   const dialogPhoto = document.querySelector('#dialog-photo');
@@ -114,24 +103,20 @@ parte('foto ampliada', () => {
   const dialogClose = photoDialog.querySelector('.dialog-close');
   const extras = [dialogCaption, dialogClose];
   let aberta = null;    /* foto no dialogo: { botao, miniatura, simples } */
-  let fechando = null;  /* foto cujo dialogo esta fechando */
+  let fechando = null;
   let abrindo = false;
   let zoom = null;
 
   const raio = el => parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0;
   const pousada = () => ({ transform: 'none', clipPath: `inset(0px 0px round ${raio(dialogPhoto)}px)` });
-  /* A miniatura some e volta por visibility, que nao tem transicao: no quadro
-     em que o dialogo fecha, ela ja esta inteira no cartao. */
   const esconder = (foto, sim) => { foto.miniatura.style.visibility = sim ? 'hidden' : ''; };
 
-  /* Onde a imagem do dialogo precisa estar para coincidir com a miniatura: mesma
-     escala do recorte "cover", mesmo centro, e uma janela do tamanho do cartao. */
   function naMiniatura({ botao, miniatura }) {
     const V = botao.getBoundingClientRect();
     const I = miniatura.getBoundingClientRect();
     const D = dialogPhoto.getBoundingClientRect();
-    const nw = miniatura.naturalWidth || D.width;
-    const nh = miniatura.naturalHeight || D.height;
+    const nw = miniatura.naturalWidth || dialogPhoto.naturalWidth || D.width;
+    const nh = miniatura.naturalHeight || dialogPhoto.naturalHeight || D.height;
     const s = (nw * Math.max(I.width / nw, I.height / nh)) / D.width;
     const dx = (I.left + I.width / 2) - (D.left + D.width / 2);
     const dy = (I.top + I.height / 2) - (D.top + D.height / 2);
@@ -140,8 +125,7 @@ parte('foto ampliada', () => {
     return { transform: `translate(${dx}px, ${dy}px) scale(${s})`, clipPath: `inset(${iy}px ${ix}px round ${raio(botao) / s}px)` };
   }
 
-  /* Desfaz o que uma abertura fez. Presa a foto, e nao a "foto atual": o evento
-     'close' chega depois, e a pessoa pode ja ter aberto outra foto. */
+  /* presa a foto: o 'close' pode chegar depois de outra abrir */
   function limpar(foto) {
     if (!foto || foto.limpa) return;
     foto.limpa = true;
@@ -158,13 +142,12 @@ parte('foto ampliada', () => {
     abrindo = true;
     const miniatura = botao.querySelector('img');
     const foto = { botao, miniatura, simples: porTeclado || reduz.matches };
-    /* Comeca pela imagem ja decodificada da miniatura (caixa com a proporcao
-       certa, sem quadro vazio); a versao grande entra por cima quando chegar. */
     dialogPhoto.src = miniatura.currentSrc || miniatura.src;
     dialogPhoto.alt = miniatura.alt;
-    if (miniatura.naturalWidth) dialogPhoto.style.setProperty('--ar', miniatura.naturalWidth / miniatura.naturalHeight);
     dialogCaption.textContent = botao.dataset.caption;
     try { await dialogPhoto.decode(); } catch {}
+    const ref = dialogPhoto.naturalWidth ? dialogPhoto : miniatura;
+    if (ref.naturalWidth) dialogPhoto.style.setProperty('--ar', ref.naturalWidth / ref.naturalHeight);
     abrindo = false;
     aberta = foto;
     photoDialog.showModal();
@@ -194,8 +177,7 @@ parte('foto ampliada', () => {
       ms = 150;
       saida = () => dialogPhoto.animate({ opacity: [1, 0] }, { duration: ms, easing: EASE_OUT, fill: 'forwards' });
     } else if (zoom && zoom.playState === 'running') {
-      /* Interrompida: le onde a foto esta AGORA e volta dali, para a frente, em
-         ease-out. Inverter a abertura (playbackRate negativo) seria ease-in. */
+      /* interrompida: volta de onde esta, em ease-out */
       const agora = getComputedStyle(dialogPhoto);
       const de = { transform: agora.transform, clipPath: agora.clipPath };
       ms = Math.round(Math.max(180, 300 * (zoom.effect.getComputedTiming().progress ?? 1)));
@@ -205,10 +187,14 @@ parte('foto ampliada', () => {
       ms = 300;
       saida = () => { zoom?.cancel(); return dialogPhoto.animate([pousada(), naMiniatura(foto)], { duration: ms, easing: EASE_DRAWER, fill: 'forwards' }); };
     }
-    /* O veu sai no mesmo tempo da foto (dialog.is-closing::backdrop le --saida). */
     photoDialog.style.setProperty('--saida', `${ms}ms`);
     photoDialog.classList.add('is-closing');
-    extras.forEach(el => el.animate({ opacity: [1, 0] }, { duration: Math.min(120, ms), easing: EASE_OUT, fill: 'forwards' }));
+    /* saem do valor em que estao */
+    extras.forEach(el => {
+      const de = getComputedStyle(el).opacity;
+      el.getAnimations().forEach(a => a.cancel());
+      el.animate({ opacity: [de, 0] }, { duration: Math.min(120, ms), easing: EASE_OUT, fill: 'forwards' });
+    });
     try { zoom = saida(); await zoom.finished; } catch {}
     if (aberta !== foto) return;   /* fechou por outro caminho (Esc) no meio */
     fechando = foto;
@@ -217,11 +203,15 @@ parte('foto ampliada', () => {
   }
 
   const fecharNaHora = () => { fechando = aberta; photoDialog.close(); };
-  /* Esc (nativo): 'cancel' marca qual foto fecha, 'close' limpa. */
   photoDialog.addEventListener('cancel', () => { fechando = aberta; });
   photoDialog.addEventListener('close', () => limpar(fechando || aberta));
+  /* sem script, o link abre a foto */
   document.querySelectorAll('[data-photo]').forEach(botao => {
-    botao.addEventListener('click', event => abrirFoto(botao, doTeclado(event)));
+    botao.addEventListener('click', event => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      abrirFoto(botao, doTeclado(event));
+    });
   });
   dialogClose.addEventListener('click', event => (doTeclado(event) ? fecharNaHora() : fecharFoto()));
   photoDialog.addEventListener('click', event => {
@@ -232,20 +222,25 @@ parte('foto ampliada', () => {
 /* ---------- fotos e fontes ---------- */
 parte('fotos e fontes', () => {
   const dialogo = document.querySelector('.sources-dialog');
+  let saida = 0;
   const fecharAnimado = () => {
     if (!dialogo.open || dialogo.classList.contains('is-closing')) return;
     dialogo.classList.add('is-closing');
-    setTimeout(() => dialogo.close(), reduz.matches ? 120 : 150);
+    saida = setTimeout(() => dialogo.close(), reduz.matches ? 120 : 150);
   };
-  document.querySelector('.sources-open').addEventListener('click', () => dialogo.showModal());
-  document.querySelector('.sources-close').addEventListener('click', event => (doTeclado(event) ? dialogo.close() : fecharAnimado()));
+  document.querySelector('.sources-open').addEventListener('click', event => {
+    if (!dialogo.open) conforme(event, () => dialogo.showModal());
+  });
+  document.querySelector('.sources-close').addEventListener('click', event => {
+    event.preventDefault();
+    if (doTeclado(event)) dialogo.close(); else fecharAnimado();
+  });
   dialogo.addEventListener('click', event => { if (event.target === dialogo && foraDe(dialogo, event)) fecharAnimado(); });
-  dialogo.addEventListener('close', () => dialogo.classList.remove('is-closing'));
+  /* o temporizador velho nao fecha o reaberto */
+  dialogo.addEventListener('close', () => { clearTimeout(saida); dialogo.classList.remove('is-closing'); });
 });
 
-/* ---------- selo "aberto agora", relogio e periodo do dia ----------
-   A tabela de horarios e a unica fonte. Mudou a tabela, mudam os tres selos,
-   o relogio e o marca-texto do periodo. Recalcula a cada minuto. */
+/* ---------- selo "aberto agora", relogio e periodo ---------- */
 parte('horario', () => {
   const hoursTable = document.querySelector('.hours-table');
   const openStates = document.querySelectorAll('.open-state');
@@ -253,8 +248,6 @@ parte('horario', () => {
   const periodos = document.querySelectorAll('.periodo');
   if (!hoursTable || !openStates.length) return;
   let relogioAtivo = false;
-  /* Ponteiros partem do desenho parado (hora 0 grau, minuto 135) e so andam
-     para a frente: ao virar a hora, soma uma volta. */
   let ultimoM = 135;
   let ultimoH = 0;
 
@@ -263,8 +256,7 @@ parte('horario', () => {
     return m ? Number(m[1]) * 60 + Number(m[2] || 0) : null;
   };
 
-  /* Hora de Ivoti (America/Sao_Paulo), e nao a do visitante: quem olha de
-     outro fuso tambem precisa saber se a casa esta aberta AGORA la. */
+  /* hora de Ivoti, nao a do visitante */
   function horaDeIvoti() {
     try {
       const parts = new Intl.DateTimeFormat('en-US', {
@@ -289,33 +281,39 @@ parte('horario', () => {
     while (h < ultimoH) h += 360;
     ultimoM = m;
     ultimoH = h;
-    relogio.querySelector('.ponteiro-m').style.rotate = `${m}deg`;
-    relogio.querySelector('.ponteiro-h').style.rotate = `${h}deg`;
+    relogio.querySelector('.ponteiro-m').style.transform = `rotate(${m}deg)`;
+    relogio.querySelector('.ponteiro-h').style.transform = `rotate(${h}deg)`;
   }
 
   function atualizarSelos() {
     const { today, nowMinutes } = horaDeIvoti();
+    const amanha = (today + 1) % 7;
     let isOpen = false;
     let closesAt = null;
-    let opensAt = null;
+    let opensAt = null;     /* proxima abertura hoje: { min, txt } */
+    let abreAmanha = null;  /* primeira abertura de amanha */
 
     hoursTable.querySelectorAll('tr').forEach(row => {
-      if (!(row.dataset.days || '').split(',').map(Number).includes(today)) return;
+      const dias = (row.dataset.days || '').split(',').map(Number);
       /* Aceita meia-risca (7h–20h) e travessao (7h — 20h). */
       const [from, to] = row.querySelector('td').textContent.split(/[–—]/);
       if (!to) return;
       const start = toMinutes(from);
       const end = toMinutes(to);
       if (start === null || end === null) return;
+      if (dias.includes(amanha) && (!abreAmanha || start < abreAmanha.min)) abreAmanha = { min: start, txt: from.trim() };
+      if (!dias.includes(today)) return;
       if (nowMinutes >= start && nowMinutes < end) {
         isOpen = true;
         closesAt = to.trim();
-      } else if (nowMinutes < start) {
-        opensAt = from.trim();
+      } else if (nowMinutes < start && (!opensAt || start < opensAt.min)) {
+        opensAt = { min: start, txt: from.trim() };
       }
     });
 
-    const texto = isOpen ? `Aberto agora · até ${closesAt}` : opensAt ? `Fechado · abre às ${opensAt}` : 'Fechado agora';
+    const texto = isOpen ? `Aberto agora · até ${closesAt}`
+      : opensAt ? `Fechado · abre às ${opensAt.txt}`
+      : abreAmanha ? `Fechado · abre amanhã às ${abreAmanha.txt}` : 'Fechado agora';
     openStates.forEach(selo => {
       selo.hidden = false;
       selo.classList.toggle('is-open', isOpen);
@@ -332,7 +330,6 @@ parte('horario', () => {
   atualizarSelos();
   setTimeout(() => { atualizarSelos(); setInterval(atualizarSelos, 60000); }, (60 - new Date().getSeconds()) * 1000);
 
-  /* O relogio gira ate a hora certa quando a secao Visite aparece. */
   if (!relogio) return;
   const ligarRelogio = () => { relogioAtivo = true; apontar(horaDeIvoti().nowMinutes); };
   if (!temIO || reduz.matches) return ligarRelogio();
@@ -344,27 +341,25 @@ parte('horario', () => {
   vigia.observe(relogio);
 });
 
-/* ---------- vidro no topo quando ha conteudo por baixo ----------
-   A barra gruda depois que a barra de utilidade sai da tela; so ai vira vidro.
-   A cor da barra do navegador acompanha o que esta no alto: cacau, depois papel. */
+/* ---------- vidro no topo ---------- */
 parte('topo de vidro', () => {
   const utility = document.querySelector('.utility');
   const tema = document.querySelector('meta[name="theme-color"]');
-  const tokens = getComputedStyle(html);
-  const cor = { solto: tokens.getPropertyValue('--cocoa').trim(), colado: tokens.getPropertyValue('--paper').trim() };
-  let limite = utility ? utility.offsetHeight : 0;
-  let colado = null;
+  let cor = null;
+  const cores = () => cor || (cor = (t => ({ solto: t.getPropertyValue('--cocoa').trim(), colado: t.getPropertyValue('--paper').trim() }))(getComputedStyle(html)));
+  let limite = Infinity;
+  let colado = false;
   const aoRolar = () => {
     const agora = window.scrollY > limite;
-    if (agora === colado) return;   /* so escreve quando o estado vira */
+    if (agora === colado) return;
     colado = agora;
     topbar.classList.toggle('is-scrolled', agora);
-    if (tema && cor.solto && cor.colado) tema.setAttribute('content', agora ? cor.colado : cor.solto);
+    const c = tema && cores();
+    if (c && c.solto && c.colado) tema.setAttribute('content', agora ? c.colado : c.solto);
   };
-  if (utility && 'ResizeObserver' in window) {
-    new ResizeObserver(() => { limite = utility.offsetHeight; colado = null; aoRolar(); }).observe(utility);
-  }
-  aoRolar();
+  const medir = () => { limite = utility ? utility.offsetHeight : 0; aoRolar(); };
+  if (utility && 'ResizeObserver' in window) new ResizeObserver(medir).observe(utility);
+  else medir();
   window.addEventListener('scroll', aoRolar, { passive: true });
 });
 
@@ -382,33 +377,39 @@ parte('secao atual', () => {
   document.querySelectorAll('main > section').forEach(secao => espia.observe(secao));
 });
 
-/* ---------- capsula do celular ----------
-   Sobe quando os botoes do hero COMECAM a sumir sob a barra (o topo deles a
-   120px da barra, o inicio do hero-sai), para nunca haver trecho sem botao.
-   Sem o sumico (movimento reduzido, navegador sem animacao por rolagem), sobe
-   quando eles encostam na barra. So conta quem ja passou por cima: botao
-   abaixo da dobra (celular deitado) nao faz a capsula subir. */
+/* ---------- capsula do celular (README) ---------- */
 parte('capsula', () => {
   const acoes = document.querySelector('.hero-actions');
   if (!acoes) return;
-  if (!temIO) return document.body.classList.add('past-hero');
   const somem = () => !reduz.matches && !!(window.CSS && CSS.supports('animation-timeline: view()'));
-  let vigia = null;
-  const ligar = () => {
-    if (vigia) vigia.disconnect();
-    const topo = topbar.offsetHeight + (somem() ? 120 : 0);
-    vigia = new IntersectionObserver(([e]) => {
-      document.body.classList.toggle('past-hero', e.boundingClientRect.top < (e.rootBounds ? e.rootBounds.top : topo));
-    }, { rootMargin: `-${topo}px 0px 0px 0px`, threshold: [0, 1] });
-    vigia.observe(acoes);
+  /* offsetTop ignora o transform da entrada e do sumico */
+  const topoNaPagina = el => { let y = 0; for (let e = el; e; e = e.offsetParent) y += e.offsetTop; return y; };
+  let limite = Infinity;
+  let passou = false;
+  const aoRolar = () => {
+    const agora = window.scrollY > limite;
+    if (agora === passou) return;
+    passou = agora;
+    document.body.classList.toggle('past-hero', agora);
   };
-  ligar();
-  aoMudar(reduz, ligar);
-  aoMudar(largo, ligar);
+  const medir = () => { limite = topoNaPagina(acoes) - topbar.offsetHeight - (somem() ? 120 : 0); aoRolar(); };
+  if ('ResizeObserver' in window) {
+    const ro = new ResizeObserver(medir);
+    document.querySelectorAll('.utility, .hero').forEach(el => ro.observe(el));
+  } else {
+    medir();
+    window.addEventListener('resize', medir);
+  }
+  aoMudar(reduz, medir);
+  aoMudar(largo, medir);
+  window.addEventListener('scroll', aoRolar, { passive: true });
 });
 
 /* ---------- fileiras de posts no celular: anterior e proximo ---------- */
 parte('fileiras', () => {
+  /* aria-disabled, nao disabled: o foco nao cai no <body> */
+  const marcar = (botao, fim) => { if (botao.getAttribute('aria-disabled') !== String(fim)) botao.setAttribute('aria-disabled', String(fim)); };
+  const filas = [];
   document.querySelectorAll('.paddles').forEach(par => {
     const fila = document.getElementById(par.dataset.for);
     if (!fila) return;
@@ -417,48 +418,47 @@ parte('fileiras', () => {
       const item = fila.firstElementChild;
       return item ? item.getBoundingClientRect().width + (parseFloat(getComputedStyle(fila).columnGap) || 0) : fila.clientWidth;
     };
-    const atualizar = () => {
-      anterior.disabled = fila.scrollLeft <= 1;
-      proximo.disabled = fila.scrollLeft + fila.clientWidth >= fila.scrollWidth - 1;
-    };
+    const ler = () => [fila.scrollLeft <= 1, fila.scrollLeft + fila.clientWidth >= fila.scrollWidth - 1];
+    const escrever = ([inicio, fim]) => { marcar(anterior, inicio); marcar(proximo, fim); };
     par.addEventListener('click', event => {
       const botao = event.target.closest('.paddle');
-      if (botao) fila.scrollBy({ left: Number(botao.dataset.dir) * passo(), behavior: reduz.matches ? 'auto' : 'smooth' });
+      if (!botao || botao.getAttribute('aria-disabled') === 'true') return;
+      fila.scrollBy({ left: Number(botao.dataset.dir) * passo(), behavior: reduz.matches ? 'auto' : 'smooth' });
     });
-    fila.addEventListener('scroll', atualizar, { passive: true });
-    if ('ResizeObserver' in window) new ResizeObserver(atualizar).observe(fila);
-    atualizar();
+    fila.addEventListener('scroll', () => escrever(ler()), { passive: true });
+    filas.push({ fila, ler, escrever });
     par.classList.add('is-ready');
   });
+  const todas = () => filas.map(f => f.ler()).forEach((v, i) => filas[i].escrever(v));
+  if ('ResizeObserver' in window) {
+    const ro = new ResizeObserver(todas);
+    filas.forEach(f => ro.observe(f.fila));
+  } else todas();
 });
 
-/* Sem um ouvinte de toque no proprio elemento, o Safari do iPhone nao aplica
-   :active, e o aperto (.97) nao aparece. */
+/* Safari do iPhone so aplica :active com um ouvinte de toque */
 parte('toque e ano', () => {
-  document.querySelectorAll('.btn, .chip, .paddle, .mobile-actions a, .menu-toggle, .dish-photo, a.score, .hero-score, .dialog-close, .sources-close')
-    .forEach(el => el.addEventListener('touchstart', () => {}, { passive: true }));
+  document.addEventListener('touchstart', () => {}, { passive: true });
   document.querySelectorAll('[data-ano]').forEach(el => { el.textContent = new Date().getFullYear(); });
 });
 
-/* ---------- entrada suave, so para o que ainda nao esta na tela ----------
-   Quem decide se ha movimento e o CSS; aqui so entram e saem classes. O fundo
-   das secoes nao se move: animam os filhos de cada grupo, com --i para o
-   intervalo, e as classes saem depois de assentar, para hover e toque de cada
-   cartao voltarem a valer. Das redes so anima o cabecalho: mexer nos sete
-   iframes custaria composicao. */
+/* pergunta aberta pelo teclado abre na hora */
+parte('perguntas', () => {
+  const lista = document.querySelector('.faq-list');
+  if (lista) lista.addEventListener('click', event => { if (doTeclado(event) && event.target.closest('summary')) naHora(); });
+});
+
+/* ---------- entrada suave, so para o que ainda nao esta na tela ---------- */
 parte('entrada', () => {
   if (!temIO) return;
-  const GRUPOS = '.section-head, .dish-grid, .order-steps, .band-copy, .awards, .story-inner, .route-copy, .route-facts, .scores, .faq-list, .visit-panel, .foot-grid';
-  const SOLOS = '.order-cta, .band small, .route-line, .footnote, .foot-sign, .foot-bottom';
+  const GRUPOS = ['.section-head', '.order-steps', '.band-copy', '.awards', '.story-inner', '.route-copy', '.route-facts', '.scores', '.faq-list', '.visit-panel', '.foot-grid'];
+  const SOLOS = ['.order-cta', '.band small', '.route-line', '.footnote', '.foot-sign', '.foot-bottom'];
+  if (largo.matches) GRUPOS.push('.dish-grid'); else SOLOS.push('.dish-grid > .dish');
   const SOLTA = 1500;
-  const grupos = new Set(document.querySelectorAll(GRUPOS));
-  const alvos = [...grupos, ...document.querySelectorAll(SOLOS)];
+  const grupos = new Set(document.querySelectorAll(GRUPOS.join(', ')));
+  const alvos = [...grupos, ...document.querySelectorAll(SOLOS.join(', '))];
 
-  /* Le todas as posicoes antes de escrever (uma passada de layout so). Arma o
-     que esta fora da tela E alcanca a faixa de disparo: o que mora nos
-     ultimos 10% da pagina nunca entraria nela e ficaria invisivel. A conta
-     inclui os ate 28px que o proprio elemento desce quando armado (o
-     IntersectionObserver ve a caixa ja deslocada), mais 8px de folga. */
+  /* uma leitura so, antes de escrever (README) */
   const fundo = html.scrollHeight - window.innerHeight * 0.1;
   const foraDaTela = alvos.filter(el => {
     const { top } = el.getBoundingClientRect();
@@ -485,12 +485,13 @@ parte('entrada', () => {
     io.observe(el);
   });
 
-  /* Foco por teclado dentro de um grupo ainda escondido: o grupo aparece na
-     hora, sem transicao. O anel nunca contorna algo transparente. */
+  /* foco num grupo que nao assentou: aparece na hora */
   document.addEventListener('focusin', event => {
-    const alvo = event.target.closest && event.target.closest('.reveal:not(.is-visible), .reveal-solo:not(.is-visible)');
+    const alvo = event.target.closest && event.target.closest('.reveal, .reveal-solo');
     if (!alvo) return;
     io.unobserve(alvo);
     soltar(alvo);
+    /* sem a classe, transition-property volta a "all" e a entrada em curso seguiria: termina agora */
+    alvo.getAnimations({ subtree: true }).forEach(a => { if (a instanceof CSSTransition) a.finish(); });
   });
 });

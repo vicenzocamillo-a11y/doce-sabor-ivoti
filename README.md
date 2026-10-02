@@ -68,7 +68,7 @@ botão de ação, e botão quase transparente não recebe toque.
 | Ficha do Google (avaliações) | cartão "Google" e link "Ver ficha no Google" |
 | Avaliar no Google | botão no cartão amarelo "Sua vez" |
 | Tripadvisor | cartão ao lado do Google |
-| Instagram | três publicações embutidas, cabeçalho e rodapé |
+| Instagram | seis publicações embutidas (três do feed, três reels), cabeçalho e rodapé |
 | Facebook | linha do tempo ao vivo, cabeçalho e rodapé |
 | Traçar rota | hero, seção Visite e barra fixa do celular |
 | Waze | seção Visite |
@@ -86,9 +86,9 @@ canais de encomenda e o que é café colonial são verificáveis. Pergunta que
 eu não sabia responder de verdade ficou de fora.
 
 Também configurados: dados estruturados `schema.org/Bakery` (endereço,
-telefone, horários, nota, prêmios, mapa e perfis), Open Graph com imagem
+telefone, horários, prêmios, mapa e perfis), Open Graph com imagem
 própria, manifest, robots, sitemap com data, página 404, pré-carregamento da
-foto de abertura e pré-conexão com Instagram e Facebook.
+foto de abertura e DNS antecipado para Instagram, Facebook e Google.
 
 O selo "aberto agora" calcula no **horário de Ivoti** (America/Sao_Paulo),
 não no do visitante — quem olha de outro fuso vê o estado real da casa.
@@ -146,11 +146,15 @@ mensalidade.
 ## Peso da página
 
 Primeira visita em desktop, do jeito que o GitHub Pages entrega (HTML, CSS e
-JS comprimidos): **668 KB**, 11 KB a mais que antes do redesenho (657 KB). Em
-bytes crus, 761 KB contra 703 KB — e 1.502 KB antes da limpeza. O acréscimo é
+JS comprimidos): **663 KB**, 6 KB a mais que antes do redesenho (657 KB). Em
+bytes crus, 753 KB contra 703 KB — e 1.502 KB antes da limpeza. O acréscimo é
 só texto (o CSS e o JS do novo acabamento); nenhuma imagem, fonte ou biblioteca
 nova, e o topo trocou o JPG de 11 KB por `logo-topo.png`, de 4,5 KB. Teto
 combinado: até 15 KB acima de antes, medido comprimido.
+
+O `style.css` bloqueia a primeira pintura, então cada KB dele conta: os
+comentários longos saíram do CSS e do script para as "Notas de manutenção",
+no fim deste arquivo, e o `style.css` comprimido caiu de 18 para 13,4 KB.
 
 | O que mudou | Ganho |
 |---|---|
@@ -193,7 +197,7 @@ Verificado em fonte pública:
    `index.html`: o selo "aberto agora" (topo, menu do celular e seção de
    horários) acompanha sozinho. O `openingHoursSpecification` do JSON-LD
    precisa ser ajustado à mão para bater.
-3. **"desde 1999"**, no hero e na seção Nossa casa.
+3. **"desde 1999"**, no hero, na seção Nossa casa e no rodapé.
 4. **Telefone** (51) 98037-5842, usado em `wa.me/5551980375842` e `tel:`.
 5. **Ordem das 14 cidades da Rota Romântica** (linha da seção Rota). A lista e
    a ordem vieram de guias de viagem e da Wikipédia, não da fonte oficial.
@@ -213,19 +217,32 @@ Verificado em fonte pública:
    chamava `doce-sabor-2021.jpg`). Não foi reconferido agora: o site da VIPS
    DO SUL não abre daqui. Se não bater, tire o crédito da etiqueta, do
    `data-caption` e do diálogo "Fotos e fontes".
+8. **Café colonial por encomenda.** O buffet de café colonial servido na casa
+   é conferido (e premiado); que ele também saia por encomenda não foi. Está
+   no título de Encomendas, no atalho "Café colonial" e no quadro do Facebook,
+   sempre com a ressalva de que a equipe confirma disponibilidade. Se a casa
+   não fizer, tire os três. A "bandeja", que aparecia ali sem fonte nenhuma,
+   já saiu: o campo da mensagem pronta agora é só "O que vai ser:".
+9. **Depoimento de Carla Costa** (seção Avaliações). Veio da primeira versão
+   do site, tirado da ficha do Google Maps passada para quem montou a página,
+   como o total do item 1. Não foi reconferido: confira na ficha do Google e,
+   se não estiver mais lá, troque ou tire a citação.
 
 ## Movimento
 
-Cada animação tem um porquê e mexe em `transform` (translate, scale, rotate),
-`opacity` ou `clip-path`. Exceções conscientes, curtas ou presas à rolagem:
-`background-size` no marca-texto do período do dia, `background-position` na
-citação que enche com a rolagem, `block-size` na abertura do FAQ (onde há
-`::details-content`) e `filter` (desfoque de 2 px) na troca do ícone do botão
-do menu. Recorte que anima tem as duas pontas em `inset()`: entre `none` e
-`inset()` o navegador salta em vez de animar.
+Cada animação tem um porquê e mexe em `transform` (translate, scale, rotate)
+ou `opacity`, que rodam no compositor. Exceções conscientes, curtas ou presas
+à rolagem: `clip-path` na bandeja do menu do celular (escala distorceria os
+links), `background-size` no marca-texto do período do dia,
+`background-position` na citação que enche com a rolagem, `block-size` na
+abertura do FAQ (onde há `::details-content`) e `filter` (desfoque de 2 px) na
+troca do ícone do botão do menu. Recorte que anima tem as duas pontas em
+`inset()`: entre `none` e `inset()` o navegador salta em vez de animar.
 
-Ação de teclado não anima: Esc fecha menu e diálogos na hora, abrir a foto
-pelo teclado é só um esmaecer de 150 ms, e o Tab rola a página sem deslizar.
+Ação de teclado não anima: Esc fecha menu e diálogos na hora; pelo teclado, o
+botão do menu, os links dele, "Fotos e fontes" e as perguntas abrem e fecham
+sem transição; abrir a foto pelo teclado é só um esmaecer de 150 ms; e o Tab
+rola a página sem deslizar.
 Com "reduzir movimento", deslocamento vira opacidade (menos e mais suave, não
 zero). Os efeitos ligados à rolagem (citação e sumiço do texto do
 hero) só existem onde o navegador suporta; nos outros, o estado parado já é o
@@ -244,3 +261,138 @@ Recusado de propósito, para uma próxima rodada não trazer de volta:
 - citação quebrada palavra por palavra;
 - destaque animado no "1999" e anel de texto no selo: dariam ênfase a dados
   não verificados.
+
+## Notas de manutenção
+
+O CSS e o script vão para o ar como estão, sem build: por isso carregam só
+comentários curtos, e o porquê de cada escolha mora aqui.
+
+### Folha de estilo
+
+- **Fontes.** Só as cinco faces da lista; pedir Playfair acima de 500 ou DM
+  Sans em itálico faz o navegador sintetizar. Número de dado (faixa de
+  números, notas, ficha da Rota) é DM Sans 600: o Playfair do subconjunto só
+  tem algarismos de estilo antigo, que sobem e descem.
+- **Cores e raios.** Toda cor é variável no `:root`. `--muted` era `#7b6960`,
+  que reprovava no blush (4,37:1); `#6b5950` dá 5,6:1. `--ph-*` é o tom médio
+  de cada foto, mostrado enquanto ela carrega. Faixas de ponta a ponta (hero,
+  faixa dos prêmios, Visite, rodapé) ficam retas. O "E" em camadas da logo
+  (`--layers-*`) e a trama enxaimel (`--enxaimel`) são ornamentos de Ivoti,
+  não enfeite para tirar.
+- **Gutter.** `--gutter` nunca fica menor que a área segura do iPhone deitado
+  (`viewport-fit=cover`); fora do iPhone, `env()` vale 0. `.utility-inner` e
+  `.hero-inner` levam o gutter no próprio box, para a borda esquerda cair no
+  mesmo x das seções. Nas grades, `minmax(0,1fr)` e não `1fr`: coluna `1fr`
+  não encolhe abaixo do conteúdo, e um rótulo longo alargava a página a 320px.
+- **Toque e foco.** Botão, chip, seta e cápsula afundam (.97 em 100 ms, soltam
+  em 160 ms); texto que se toca (links, perguntas, menu, rodapé, barra de
+  utilidade) responde por opacidade, porque o tap highlight está desligado. Um
+  ouvinte de toque no documento faz o Safari do iPhone aplicar `:active`. Os
+  alvos têm 44px: os links do topo com folga de 4px devolvida pela margem
+  negativa, as linhas do rodapé com 40px (44 no celular). Cada container escuro
+  declara o próprio `--focus`. O anel de foco da barra de utilidade fica dentro
+  dela: fora, o topo da tela e a barra grudada o cortavam. Navegando pelo
+  teclado, a página pula na hora (`html:has(:focus-visible)`); o clique desliza.
+- **Topo.** Em repouso, papel com a linha fina; vira vidro (`.is-scrolled`)
+  só quando gruda, isto é, quando a rolagem passa da barra de utilidade. O
+  sublinhado do link cresce e recolhe pela esquerda: trocar a origem no meio do
+  caminho fazia o traço saltar de lado.
+- **Hero.** `overflow:clip`, não `hidden`: `hidden` faria do hero um contêiner
+  de rolagem e prenderia as animações ligadas à rolagem a um scroll que não
+  anda. O véu diagonal nunca clareia antes de 560px (a coluna do texto) e o de
+  baixo segura o crédito de 12px (sem ele, 3,1:1 em 901px). A máscara de cada
+  linha do título é só vertical: a cauda do "g" itálico passa da caixa. Cada
+  peça (sobrelinha, texto, botões, selo, crédito) tem um invólucro `.hero-sai`
+  que carrega a saída ligada à rolagem; a entrada fica no elemento de dentro.
+  Assim nenhum elemento leva duas animações de opacidade e deslocamento, e o
+  compositor roda as duas. No celular a comida vem primeiro e o véu escurece em
+  px (`--hero-pt`), não em % da altura: manteiga sobre a foto dá 5,1:1 no pior
+  pixel. O anel de foco do selo tem duas cores, porque manteiga sobre manteiga
+  sumia na parte clara da foto.
+- **Faixa de números e avaliações.** Acima de 900px os cinco números ficam numa
+  linha. Abaixo, `flex-basis: clamp(calc(20% - 20px), (680px - 100%) * 999,
+  calc(50% - 13px))`: o termo do meio é enorme abaixo de 680px de conteúdo e
+  negativo acima, então a base salta de 1/5 para 1/2. Dá cinco numa linha ou
+  2+2+1, nunca 4+1. Os três cartões de avaliação usam a mesma conta (1/3 ou
+  100%, limite de 600px): três lado a lado ou um embaixo do outro, nunca 2+1.
+- **Menu.** O café colonial abre de ponta a ponta. Padaria e confeitaria
+  dividem a linha de baixo, foto ao lado do texto, na proporção da própria foto
+  (3:2, sem recorte). A foto tem 1,05fr contra 1fr do texto: a caixa fica
+  perto de 300px no desktop (até 1,4x em tela 2x) e o selo do prêmio cabe numa
+  linha de 1240px para cima. Abaixo disso o selo quebra equilibrado, com o ano
+  preso a "de Ivoti". O selo fica no texto, nunca sobre a foto (ver "Dados",
+  item 6). Até 1080px a foto vai para cima e o texto ocupa o cartão inteiro.
+- **Embeds e fotos.** `.aguarda` só esconde o que o script marcou para esperar;
+  sem script, nada se esconde. Enquanto o embed carrega, ou se o navegador
+  bloquear rede social, o quadro mostra a marca de quem vai aparecer.
+- **Rota.** Acima de 1080px, uma linha de 14 cidades. Abaixo, duas colunas de
+  sete, porque em 14 colunas estreitas os nomes quebravam em três linhas.
+- **Perguntas.** O título usa `margin-inline:0`: margem automática em item de
+  grade vira largura justa e centrada.
+- **Diálogos.** A foto ampliada não tem moldura, e a caixa tem a proporção da
+  foto (`--ar`, posta pelo script). O fundo não tem desfoque: atrás de um véu
+  88% opaco ele quase não se vê e custaria um desfoque de tela inteira a cada
+  quadro do voo. A legenda não define a largura (`width:0; min-width`), senão,
+  com o celular deitado, o "x" ficava fora da foto. "Fotos e fontes" é
+  `position:fixed`; com `relative` o diálogo ia para o topo do documento e a
+  página rolava até lá ao abrir.
+- **Cápsula.** Escondida fica `visibility:hidden`, para o foco nunca cair fora
+  da tela. As margens somam a área segura; `scroll-padding-bottom` mantém o
+  foco longe dela, e o rodapé reserva a altura dela mais a área segura.
+- **Movimento.** O CSS decide; o script só põe e tira classes. A primeira dobra
+  usa `fill: backwards`, nunca `both`: depois de pousar, hover e toque voltam a
+  valer. Na entrada por grupo os filhos sobem com 70ms de intervalo (`--i`, no
+  máximo 6) e armar é instantâneo: a transição mora só no estado visível, então
+  esconder o que está fora da tela não custa nada na carga. O pano das fotos do
+  menu e as réguas dos prêmios animam por escala, não por recorte; os ponteiros
+  do relógio são `<svg>` próprios girados por `transform` (em elemento SVG, a
+  propriedade `rotate` não vai para o compositor). Ação de teclado liga
+  `data-instant` no `<html>` por dois quadros, e uma regra só desliga as
+  transições do menu, do diálogo de fontes e das perguntas. Todo `:hover` mora
+  no bloco `(hover:hover) and (pointer:fine)`, com a versão reduzida aninhada.
+- **Preferências do sistema.** Sem vidro, ou sem o sumiço do hero (Firefox), o
+  vidro fica quase sólido. Com mais contraste, todo material vira quase sólido
+  com borda definida. Em cores forçadas o modo preserva o alfa do fundo, então
+  o material translúcido vira `Canvas` sólido, e o que só existia por fundo ou
+  sombra ganha borda ou cor de sistema.
+
+### Script
+
+- **Partes.** Cada parte roda isolada em `parte()`: um erro numa não derruba as
+  outras, e a classe que esconde é posta pela mesma parte que depois a tira.
+  `reduz` e `largo` são lidos a cada uso.
+- **Carga sem layout forçado.** Só a parte de entrada lê posições na carga, de
+  uma vez, antes de escrever. O resto espera os observadores: o primeiro aviso
+  do `ResizeObserver` dá a altura da barra de utilidade, a posição dos botões do
+  hero e o estado das setas; o do `IntersectionObserver` aponta os iframes
+  longe da tela (`rootBounds`, nunca `innerHeight`). `--cocoa` e `--paper` são
+  lidos na primeira virada do topo.
+- **Iframes.** Iframe não diz se já carregou: o `load` é ouvido desde o início,
+  e só os que estão longe da tela esperam por ele, com 6s de garantia contados
+  de quando se aproximam.
+- **Foto ampliada.** A foto do cartão cresce até o diálogo e volta a ele (FLIP
+  com Web Animations). Fechar no meio do caminho parte de onde a foto está, em
+  ease-out; inverter a abertura seria ease-in. Legenda e "x" também saem do
+  valor em que estão. A miniatura some e volta por `visibility`, que não tem
+  transição. A limpeza fica presa à foto, porque o `close` chega depois e a
+  pessoa pode já ter aberto outra. A proporção da caixa vem da imagem que vai
+  aparecer, mesmo que a miniatura ainda não tenha chegado. Sem script, a foto
+  do cartão é um link para o arquivo.
+- **Fotos e fontes.** Sem script, `command`/`commandfor` abrem e fecham o
+  diálogo. Com script, o mouse fecha animado (`preventDefault` segura o comando
+  nativo) e um Esc no meio da saída cancela o temporizador velho.
+- **Selo e relógio.** A tabela de horários é a única fonte. Depois do
+  fechamento o selo diz quando a casa abre amanhã. Os ponteiros só andam para
+  a frente: ao virar a hora, soma uma volta.
+- **Cápsula.** O estado sai da posição da rolagem a cada evento (o topo dos
+  botões do hero menos a barra e, com o sumiço, mais 120px), e não de um
+  cruzamento de limite: salto de página, link, "Voltar ao topo" e celular
+  deitado acertam do mesmo jeito.
+- **Setas das fileiras.** No fim da fileira a seta fica `aria-disabled`, não
+  `disabled`: botão desligado com foco jogaria o foco do teclado no `<body>`.
+- **Entrada.** Arma o que está fora da tela e alcança a faixa de disparo; o que
+  mora nos últimos 10% da página nunca entraria nela e ficaria invisível. A
+  conta inclui os até 28px que o elemento desce quando armado, mais 8px de
+  folga. No celular cada cartão do menu entra sozinho, quando chega. Foco por
+  teclado dentro de um grupo que ainda não assentou faz o grupo aparecer na
+  hora.

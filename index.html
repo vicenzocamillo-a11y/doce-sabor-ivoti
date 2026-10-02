@@ -117,7 +117,7 @@
         "name": "Como faço uma encomenda?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Por WhatsApp ou telefone, informando a data e o horário de retirada, o sabor, o tamanho ou a quantidade de pessoas. A equipe confirma disponibilidade, valor e prazo. O site não faz pedido automático."
+          "text": "Por WhatsApp ou telefone, dizendo o que vai ser, a data e o horário de retirada, o sabor, o tamanho ou a quantidade de pessoas, e se é para levar ou consumir na casa. A equipe confirma disponibilidade, valor e prazo. O site não faz pedido automático."
         }
       },
       {
@@ -135,7 +135,7 @@
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
-<div class="utility">
+<div class="utility" role="region" aria-label="Horário e contato">
   <div class="utility-inner">
     <span class="open-state" hidden></span>
     <a href="https://www.google.com/maps/search/?api=1&amp;query=Padaria+e+Confeitaria+Doce+Sabor+Av+Pres+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#map-pin"/></svg><span class="utility-addr">Av. Presidente Lucena, 1983<span class="utility-city"> — Ivoti/RS</span></span></a>
@@ -160,25 +160,25 @@
   <section class="hero" id="inicio">
     <img class="hero-bg" fetchpriority="high" decoding="async" src="assets/cucas.webp" srcset="assets/cucas-800.webp 800w, assets/cucas-1200.webp 1200w, assets/cucas.webp 1536w" sizes="100vw" width="1536" height="1024" alt="Cucas da Doce Sabor cobertas com farofa">
     <div class="hero-inner">
-      <p class="kicker light">Ivoti, Rio Grande do Sul · desde 1999</p>
+      <div class="hero-sai"><p class="kicker light">Ivoti, Rio Grande do Sul · desde 1999</p></div>
       <h1><span class="line"><span>Café com</span></span>
         <span class="line"><i>gosto de casa.</i></span></h1>
-      <p class="hero-lead">Padaria, confeitaria e café colonial na Avenida Presidente Lucena. Todos os dias, das 7h às 20h.</p>
-      <div class="hero-actions">
+      <div class="hero-sai"><p class="hero-lead">Padaria, confeitaria e café colonial na Avenida Presidente Lucena. Todos os dias, das 7h às 20h.</p></div>
+      <div class="hero-sai hero-sai--toque"><div class="hero-actions">
         <a class="btn btn-primary" href="#menu">Ver o menu</a>
         <a class="btn btn-outline-light" href="https://www.google.com/maps/dir/?api=1&amp;destination=Doce+Sabor+Ivoti+Av+Presidente+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#map-pin"/></svg>Como chegar</a>
-      </div>
+      </div></div>
     </div>
-    <a class="hero-score" href="#avaliacoes"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><strong>4,5</strong> <span>2.343 avaliações <br>no Google*</span></a>
-    <small class="hero-credit">Foto: Kátia Della Tôrres para VIPS DO SUL · luz, cor e resolução tratadas com IA</small>
+    <div class="hero-sai hero-sai--toque hero-selo"><a class="hero-score" href="#avaliacoes"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg><strong>4,5</strong> <span>2.343 avaliações <br>no&nbsp;Google*</span></a></div>
+    <div class="hero-sai hero-legenda"><small class="hero-credit">Foto: Kátia Della Tôrres para VIPS DO SUL · luz, cor e resolução tratadas com IA</small></div>
   </section>
 
   <section class="trust" aria-label="A casa em números">
     <div class="trust-inner">
       <div class="trust-item"><strong>4,5</strong><span>no Google</span></div>
       <div class="trust-item"><strong>4,3</strong><span>no Tripadvisor</span></div>
-      <div class="trust-item"><strong>2º</strong><span>entre os 26 restaurantes de Ivoti</span></div>
-      <div class="trust-item"><strong>3</strong><span>prêmios VIPS DO SUL em 2024</span></div>
+      <div class="trust-item"><strong>2º</strong><span>no Tripadvisor, entre 26 restaurantes de Ivoti</span></div>
+      <div class="trust-item"><strong>3</strong><span>prêmios VIPS&nbsp;DO&nbsp;SUL em 2024</span></div>
       <div class="trust-item"><strong>7h–20h</strong><span>todos os dias</span></div>
     </div>
   </section>
@@ -195,7 +195,8 @@
             a caixa chega a ~480px e nao deve ampliar mais que 1,4x em tela 2x);
          2. copie um bloco <article class="dish"> inteiro (sem a classe
             dish--feature, que e so do cafe colonial) aqui dentro;
-         3. troque src, alt, width/height, data-photo, data-caption, o texto de
+         3. troque src, alt, width/height, href e data-photo (o mesmo arquivo:
+            sem script, o link abre a foto), data-caption, o texto de
             .dish-credit (sempre igual ao data-caption), a categoria, o nome e a
             lista. O selo .dish-award so entra quando a fonte premia a casa
             naquela mesma categoria (ver README, "Dados").
@@ -203,10 +204,10 @@
          deixa uma vaga. A cor de espera da foto sai de --ph-* em style.css. -->
     <div class="dish-grid">
       <article class="dish dish--feature">
-        <button class="dish-photo" data-photo="assets/buffet.webp" data-caption="Buffet da Doce Sabor. Fotografia real com luz, cor e resolução tratadas com IA." aria-label="Ampliar foto: Buffet com pães, salgados, doces e torta de morango">
+        <a class="dish-photo" href="assets/buffet.webp" data-photo="assets/buffet.webp" data-caption="Buffet da Doce Sabor. Fotografia real com luz, cor e resolução tratadas com IA." aria-label="Ampliar foto: Buffet com pães, salgados, doces e torta de morango">
           <img loading="lazy" decoding="async" src="assets/buffet.webp" srcset="assets/buffet-800.webp 800w, assets/buffet.webp 1367w" sizes="(max-width:900px) 100vw, min(780px, 53vw)" width="1367" height="1150" alt="Buffet com pães, salgados, doces e torta de morango">
           <span class="dish-zoom"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#plus"/></svg></span>
-        </button>
+        </a>
         <p class="dish-credit">Buffet da Doce Sabor. Fotografia real com luz, cor e resolução tratadas com IA.</p>
         <div class="dish-body">
           <span class="kicker">Para dividir</span>
@@ -216,31 +217,31 @@
         </div>
       </article>
       <article class="dish">
-        <button class="dish-photo" data-photo="assets/casa-real.webp" data-caption="O balcão da Doce Sabor em 2021, em fotografia de Kátia Della Tôrres para VIPS DO SUL." aria-label="Ampliar foto: Vitrine da Doce Sabor com pães e salgados">
+        <a class="dish-photo" href="assets/casa-real.webp" data-photo="assets/casa-real.webp" data-caption="O balcão da Doce Sabor em 2021, em fotografia de Kátia Della Tôrres para VIPS DO SUL." aria-label="Ampliar foto: Vitrine da Doce Sabor com pães e salgados">
           <img loading="lazy" decoding="async" src="assets/casa-real.webp" width="666" height="444" alt="Vitrine da Doce Sabor com pães e salgados">
           <span class="dish-zoom"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#plus"/></svg></span>
-        </button>
+        </a>
         <p class="dish-credit">O balcão da Doce Sabor em 2021, em fotografia de Kátia Della Tôrres para VIPS DO SUL.</p>
         <div class="dish-body">
           <span class="kicker">Para levar</span>
           <h3>Da padaria</h3>
-          <span class="dish-award"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg>Melhor padaria de Ivoti · 2024</span>
+          <span class="dish-award"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg>Melhor padaria de&nbsp;Ivoti&nbsp;·&nbsp;2024</span>
           <ul class="dish-list"><li>Cucas</li><li>Roscas</li><li>Pães quentinhos</li><li>Salgados frescos</li></ul>
           <a class="link link-strong" href="https://www.instagram.com/reel/DGBcKmetGy_/" target="_blank" rel="noopener noreferrer">Ver pães e roscas no Instagram <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
         </div>
       </article>
       <article class="dish">
-        <button class="dish-photo" data-photo="assets/confeitaria.webp" data-caption="Tortas da Doce Sabor em fotografia de Kátia Della Tôrres para VIPS DO SUL." aria-label="Ampliar foto: Mesa com tortas decoradas da Doce Sabor">
+        <a class="dish-photo" href="assets/confeitaria.webp" data-photo="assets/confeitaria.webp" data-caption="Tortas da Doce Sabor em fotografia de Kátia Della Tôrres para VIPS DO SUL." aria-label="Ampliar foto: Mesa com tortas decoradas da Doce Sabor">
           <img loading="lazy" decoding="async" src="assets/confeitaria.webp" width="666" height="444" alt="Mesa com tortas decoradas da Doce Sabor">
           <span class="dish-zoom"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#plus"/></svg></span>
-        </button>
+        </a>
         <p class="dish-credit">Tortas da Doce Sabor em fotografia de Kátia Della Tôrres para VIPS DO SUL.</p>
         <div class="dish-body">
           <span class="kicker">Para a mesa</span>
           <h3>Da confeitaria</h3>
-          <span class="dish-award"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg>Melhor confeitaria de Ivoti · 2024</span>
+          <span class="dish-award"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#star"/></svg>Melhor confeitaria de&nbsp;Ivoti&nbsp;·&nbsp;2024</span>
           <ul class="dish-list"><li>Tortas</li><li>Doces artesanais</li><li>Café</li></ul>
-          <a class="link link-strong" href="tel:+5551980375842">Encomendar por telefone <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
+          <a class="link link-strong" href="tel:+5551980375842"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#phone"/></svg>Encomendar por telefone</a>
         </div>
       </article>
     </div>
@@ -249,13 +250,13 @@
   <section class="order" id="encomendas">
     <div class="section-head">
       <span class="kicker">Encomendas</span>
-      <h2>Torta de aniversário,<br><i>café colonial, bandeja.</i></h2>
+      <h2>Torta de aniversário<br><i>e café colonial.</i></h2>
       <p><strong>A encomenda é combinada direto com a equipe</strong>, por WhatsApp ou telefone. Não há pedido automático pelo site.</p>
     </div>
     <div class="order-grid">
       <ol class="order-steps">
         <li><span>1</span><div><h3>Escolha o canal</h3><p>WhatsApp para mandar referência de foto e acertar detalhe por escrito. Telefone para resolver na hora.</p></div></li>
-        <li><span>2</span><div><h3>Diga cinco coisas</h3><p>O que vai ser (torta, café colonial ou bandeja), a data e o horário de retirada, o sabor, o tamanho ou a quantidade de pessoas, e se é para levar ou consumir na casa.</p></div></li>
+        <li><span>2</span><div><h3>Diga cinco coisas</h3><p>O que vai ser, a data e o horário de retirada, o sabor, o tamanho ou a quantidade de pessoas, e se é para levar ou consumir na casa.</p></div></li>
         <li><span>3</span><div><h3>Confirme com a equipe</h3><p>Disponibilidade, valor e prazo são confirmados por eles. Datas de mais movimento pedem antecedência.</p></div></li>
       </ol>
       <div class="order-cta">
@@ -265,11 +266,10 @@
         <div class="chips">
           <a class="chip" href="https://wa.me/5551980375842?text=Ol%C3%A1%21%20Gostaria%20de%20encomendar%3A%20torta%20de%20anivers%C3%A1rio." target="_blank" rel="noopener noreferrer">Torta de aniversário</a>
           <a class="chip" href="https://wa.me/5551980375842?text=Ol%C3%A1%21%20Gostaria%20de%20encomendar%3A%20caf%C3%A9%20colonial." target="_blank" rel="noopener noreferrer">Café colonial</a>
-          <a class="chip" href="https://wa.me/5551980375842?text=Ol%C3%A1%21%20Gostaria%20de%20encomendar%3A%20bandeja." target="_blank" rel="noopener noreferrer">Bandeja</a>
         </div>
         <!-- MENSAGEM PRONTA: os cinco campos do passo 2, na mesma ordem. Esta
              mesma URL esta no quadro do Facebook (.fb-aside); mudou uma, mude a outra. -->
-        <a class="btn btn-primary" href="https://wa.me/5551980375842?text=Ol%C3%A1%21%20Gostaria%20de%20fazer%20uma%20encomenda.%0AO%20que%20vai%20ser%20(torta%2C%20caf%C3%A9%20colonial%20ou%20bandeja)%3A%20%0AData%20e%20hor%C3%A1rio%20de%20retirada%3A%20%0ASabor%3A%20%0ATamanho%20ou%20n%C3%BAmero%20de%20pessoas%3A%20%0APara%20levar%20ou%20consumir%20na%20casa%3A%20" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#brand-whatsapp"/></svg>Encomendar pelo WhatsApp</a>
+        <a class="btn btn-primary" href="https://wa.me/5551980375842?text=Ol%C3%A1%21%20Gostaria%20de%20fazer%20uma%20encomenda.%0AO%20que%20vai%20ser%3A%20%0AData%20e%20hor%C3%A1rio%20de%20retirada%3A%20%0ASabor%3A%20%0ATamanho%20ou%20n%C3%BAmero%20de%20pessoas%3A%20%0APara%20levar%20ou%20consumir%20na%20casa%3A%20" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#brand-whatsapp"/></svg>Encomendar pelo WhatsApp</a>
         <a class="btn btn-outline" href="tel:+5551980375842"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#phone"/></svg>(51) 98037-5842</a>
       </div>
     </div>
@@ -318,13 +318,14 @@
       <!-- Ordem das cidades conforme guias e Wikipedia; conferir na fonte
            oficial (rotaromantica.com.br). Ver README, "Dados". -->
       <ol class="route-line" aria-label="As 14 cidades da Rota Romântica, de São Leopoldo a São Francisco de Paula">
-        <li>São Leopoldo</li><li>Novo Hamburgo</li><li>Estância Velha</li><li class="is-here" aria-current="location"><b>Ivoti</b><span>Doce Sabor</span></li><li>Dois Irmãos</li><li>Morro Reuter</li><li>Santa Maria do Herval</li><li>Presidente Lucena</li><li>Linha Nova</li><li>Picada Café</li><li>Nova Petrópolis</li><li>Gramado</li><li>Canela</li><li>São Francisco de Paula</li>
+        <li>São Leopoldo</li><li>Novo Hamburgo</li><li>Estância Velha</li><li class="is-here" aria-current="location"><b>Ivoti</b><wbr><span>Doce Sabor</span></li><li>Dois Irmãos</li><li>Morro Reuter</li><li>Santa Maria do Herval</li><li>Presidente Lucena</li><li>Linha Nova</li><li>Picada Café</li><li>Nova Petrópolis</li><li>Gramado</li><li>Canela</li><li>São Francisco de Paula</li>
       </ol>
     </div>
   </section>
 
   <section class="reviews" id="avaliacoes">
     <div class="section-head center">
+      <h2 class="sr-only">Avaliações</h2>
       <span class="kicker">Quem já veio</span>
       <blockquote><span class="fill">“Lugar perfeito para um café da manhã de domingo! Um buffet maravilhoso, atendimento muito bom.”</span></blockquote>
       <p class="byline">Carla Costa <span>Avaliação no Google</span></p>
@@ -357,7 +358,7 @@
     <div class="section-head">
       <span class="kicker">Fotos e novidades</span>
       <h2>Direto<br><i>das redes.</i></h2>
-      <p>As publicações são carregadas do Instagram e do Facebook da casa. <strong>O que a equipe posta lá aparece aqui.</strong></p>
+      <p>Seis publicações escolhidas do Instagram e a linha do tempo do Facebook. <strong>O que a equipe posta no Facebook aparece aqui sozinho.</strong></p>
     </div>
 
     <div class="net">
@@ -389,10 +390,10 @@
           <iframe title="Publicações recentes da Doce Sabor no Facebook" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FDoceSaborIvoti%2F&amp;tabs=timeline&amp;width=500&amp;height=640&amp;small_header=false&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=false&amp;locale=pt_BR" loading="lazy" scrolling="no" frameborder="0" allowfullscreen allow="encrypted-media; picture-in-picture"></iframe>
         </div>
         <div class="fb-aside">
-          <strong>Encomenda de torta<br>ou café colonial?</strong>
-          <p>Combine direto com a equipe. É por ali que saem as confirmações de data, sabor e tamanho.</p>
+          <strong>Encomenda de&nbsp;torta ou&nbsp;café&nbsp;colonial?</strong>
+          <p>Combine direto com a equipe. É pelo WhatsApp que saem as confirmações de data, sabor e tamanho.</p>
           <!-- MENSAGEM PRONTA: igual a do botao de Encomendas (ver la). -->
-          <a class="btn btn-dark" href="https://wa.me/5551980375842?text=Ol%C3%A1%21%20Gostaria%20de%20fazer%20uma%20encomenda.%0AO%20que%20vai%20ser%20(torta%2C%20caf%C3%A9%20colonial%20ou%20bandeja)%3A%20%0AData%20e%20hor%C3%A1rio%20de%20retirada%3A%20%0ASabor%3A%20%0ATamanho%20ou%20n%C3%BAmero%20de%20pessoas%3A%20%0APara%20levar%20ou%20consumir%20na%20casa%3A%20" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#brand-whatsapp"/></svg>Chamar no WhatsApp</a>
+          <a class="btn btn-dark" href="https://wa.me/5551980375842?text=Ol%C3%A1%21%20Gostaria%20de%20fazer%20uma%20encomenda.%0AO%20que%20vai%20ser%3A%20%0AData%20e%20hor%C3%A1rio%20de%20retirada%3A%20%0ASabor%3A%20%0ATamanho%20ou%20n%C3%BAmero%20de%20pessoas%3A%20%0APara%20levar%20ou%20consumir%20na%20casa%3A%20" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#brand-whatsapp"/></svg>Chamar no WhatsApp</a>
         </div>
       </div>
     </div>
@@ -420,7 +421,7 @@
         </details>
         <details class="faq-item">
           <summary><span>Como faço uma encomenda?</span><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#plus"/></svg></summary>
-          <div class="faq-answer"><p>Por WhatsApp ou telefone, informando a data e o horário de retirada, o sabor, o tamanho ou a quantidade de pessoas. A equipe confirma disponibilidade, valor e prazo. O site não faz pedido automático.</p></div>
+          <div class="faq-answer"><p>Por WhatsApp ou telefone, dizendo o que vai ser, a data e o horário de retirada, o sabor, o tamanho ou a quantidade de pessoas, e se é para levar ou consumir na casa. A equipe confirma disponibilidade, valor e prazo. O site não faz pedido automático.</p></div>
         </details>
         <details class="faq-item">
           <summary><span>Dá para levar para casa?</span><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#plus"/></svg></summary>
@@ -440,7 +441,7 @@
       <address>Av. Presidente Lucena, 1983<br>Harmonia, Ivoti — RS, 93900-000</address>
 
       <div class="hours-head">
-        <h3><svg class="icon live-clock" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line class="ponteiro-h" x1="12" y1="12" x2="12" y2="7.5"/><line class="ponteiro-m" x1="12" y1="12" x2="12" y2="5"/></svg>Horários</h3>
+        <h3><span class="live-clock" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg><svg class="icon ponteiro-h" viewBox="0 0 24 24"><line x1="12" y1="12" x2="12" y2="7.5"/></svg><svg class="icon ponteiro-m" viewBox="0 0 24 24"><line x1="12" y1="12" x2="12" y2="5"/></svg></span>Horários</h3>
         <span class="open-state" hidden></span>
       </div>
       <!-- Horario conforme a propria bio do Instagram da casa. Mudou? Ajuste so
@@ -473,14 +474,14 @@
     </div>
     <div>
       <h4>Navegação</h4>
-      <ul><li><a href="#menu">Menu</a></li><li><a href="#historia">Nossa casa</a></li><li><a href="#avaliacoes">Avaliações</a></li><li><a href="#fotos">Fotos</a></li><li><a href="#encomendas">Encomendas</a></li><li><a href="#perguntas">Perguntas frequentes</a></li><li><a href="#visite">Visite</a></li></ul>
+      <ul><li><a href="#menu">Menu</a></li><li><a href="#encomendas">Encomendas</a></li><li><a href="#historia">Nossa casa</a></li><li><a href="#avaliacoes">Avaliações</a></li><li><a href="#fotos">Fotos</a></li><li><a href="#perguntas">Perguntas frequentes</a></li><li><a href="#visite">Visite</a></li></ul>
     </div>
     <div>
       <h4>Contato</h4>
       <ul>
         <li><a href="https://wa.me/5551980375842" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
         <li><a href="tel:+5551980375842">(51) 98037-5842</a></li>
-        <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Padaria+e+Confeitaria+Doce+Sabor+Av+Pres+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer">Av.&nbsp;Presidente Lucena,&nbsp;1983<br>Harmonia, Ivoti&nbsp;—&nbsp;RS</a></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Padaria+e+Confeitaria+Doce+Sabor+Av+Pres+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer">Av.&nbsp;Presidente&nbsp;Lucena, 1983<br>Harmonia, Ivoti&nbsp;—&nbsp;RS</a></li>
       </ul>
     </div>
     <div>
@@ -489,12 +490,12 @@
         <li>Todos os dias, <span class="nowrap">7h–20h</span></li>
         <li><a href="https://www.instagram.com/docesaborivoti/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
         <li><a href="https://www.facebook.com/DoceSaborIvoti/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-        <li><button class="sources-open" type="button">Fotos e fontes</button></li>
+        <li><button class="sources-open" type="button" command="show-modal" commandfor="fontes">Fotos e fontes</button></li>
       </ul>
     </div>
   </div>
   <div class="foot-bottom">
-    <p>© <span data-ano>2026</span> Padaria e Confeitaria Doce Sabor · Ivoti/RS</p>
+    <p>© <span data-ano>2026</span> Padaria e Confeitaria <span class="nowrap">Doce Sabor · Ivoti/RS</span></p>
     <a href="#inicio">Voltar ao topo <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-up"/></svg></a>
   </div>
 </footer>
@@ -504,7 +505,7 @@
   <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Doce+Sabor+Ivoti+Av+Presidente+Lucena+1983+Ivoti+RS" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#map-pin"/></svg>Como chegar</a>
 </div>
 
-<dialog class="photo-dialog"><button class="dialog-close" aria-label="Fechar"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#x"/></svg></button><img id="dialog-photo" alt="" decoding="async"><p id="dialog-caption"></p></dialog>
-<dialog class="sources-dialog"><button class="sources-close" aria-label="Fechar"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#x"/></svg></button><h2>Fotos e fontes</h2><p>A logo foi obtida no Facebook oficial da Doce Sabor. As fotografias das cucas, da confeitaria e do balcão foram publicadas pela VIPS DO SUL, com crédito de Kátia Della Tôrres; a do balcão, na edição de 2021. A fotografia do buffet vem da galeria da Doce Sabor no Restaurant Guru. As fotos das cucas e do buffet tiveram luz, cor e resolução tratadas com IA, preservando a cena original.</p><p>Os registros históricos podem não representar a configuração atual da casa. Produtos, valores e horários devem ser confirmados com a equipe.</p><div><a href="https://www.facebook.com/DoceSaborIvoti/" target="_blank" rel="noopener noreferrer">Facebook oficial</a><a href="https://vipsdosul.com.br/site/index.php/dicas-da-semana/pagina-128" target="_blank" rel="noopener noreferrer">VIPS DO SUL</a><a href="https://www.vipsdosul.com.br/site/index.php/edicoes-686" target="_blank" rel="noopener noreferrer">VIPS DO SUL, 2021</a><a href="https://restaurantguru.com.br/Doce-Sabor-Ivoti-Ivoti" target="_blank" rel="noopener noreferrer">Restaurant Guru</a></div></dialog>
+<dialog class="photo-dialog" aria-labelledby="dialog-caption"><button class="dialog-close" type="button" aria-label="Fechar"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#x"/></svg></button><img id="dialog-photo" alt="" decoding="async"><p id="dialog-caption"></p></dialog>
+<dialog class="sources-dialog" id="fontes" aria-labelledby="fontes-titulo"><button class="sources-close" type="button" command="close" commandfor="fontes" aria-label="Fechar"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#x"/></svg></button><h2 id="fontes-titulo">Fotos e fontes</h2><p>A logo foi obtida no Facebook oficial da Doce Sabor. As fotografias das cucas, da confeitaria e do balcão foram publicadas pela VIPS DO SUL, com crédito de Kátia Della Tôrres; a do balcão, na edição de 2021. A fotografia do buffet vem da galeria da Doce Sabor no Restaurant Guru. As fotos das cucas e do buffet tiveram luz, cor e resolução tratadas com IA, preservando a cena original.</p><p>Os registros históricos podem não representar a configuração atual da casa. Produtos, valores e horários devem ser confirmados com a equipe.</p><div><a href="https://www.facebook.com/DoceSaborIvoti/" target="_blank" rel="noopener noreferrer">Facebook oficial</a><a href="https://vipsdosul.com.br/site/index.php/dicas-da-semana/pagina-128" target="_blank" rel="noopener noreferrer">VIPS DO SUL</a><a href="https://www.vipsdosul.com.br/site/index.php/edicoes-686" target="_blank" rel="noopener noreferrer">VIPS DO SUL, 2021</a><a href="https://restaurantguru.com.br/Doce-Sabor-Ivoti-Ivoti" target="_blank" rel="noopener noreferrer">Restaurant Guru</a></div></dialog>
 <script src="script.js" defer></script>
 </body></html>
