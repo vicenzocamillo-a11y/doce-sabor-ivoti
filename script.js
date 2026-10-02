@@ -64,7 +64,6 @@ parte('carregamento', () => {
 parte('menu', () => {
   const toggle = document.querySelector('.menu-toggle');
   const menu = document.querySelector('#mobile-menu');
-  const rotulo = toggle.querySelector('.toggle-label');
   const atras = ['.skip', '.utility', 'main', 'footer', '.mobile-actions'].map(s => document.querySelector(s)).filter(Boolean);
   [...menu.children].forEach((item, i) => item.style.setProperty('--i', i));
   menu.inert = true;
@@ -77,7 +76,6 @@ parte('menu', () => {
     atras.forEach(el => { el.inert = open; });
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
-    rotulo.textContent = open ? 'Fechar' : 'Menu';
   };
   const closeMenu = () => setMenu(false);
 
@@ -371,8 +369,23 @@ parte('secao atual', () => {
     if (link.getAttribute('href') === `#${id}`) link.setAttribute('aria-current', 'true');
     else link.removeAttribute('aria-current');
   });
+  /* salto por ancora: marca o destino no clique; o espiao espera a rolagem parar */
+  let atual = '';
+  let alvo = false;
+  let solta = 0;
+  const esperar = ms => { clearTimeout(solta); solta = setTimeout(() => { alvo = false; marcar(atual); }, ms); };
+  document.addEventListener('click', event => {
+    const ancora = event.target.closest('a[href^="#"]');
+    if (!ancora || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    alvo = true;
+    conforme(event, () => marcar(ancora.hash.slice(1)));
+    esperar(1200);
+  });
+  /* sem 'scrollend': o Safari antigo nao tem */
+  window.addEventListener('scroll', () => { if (alvo) esperar(150); }, { passive: true });
   const espia = new IntersectionObserver(entradas => {
-    entradas.forEach(entrada => { if (entrada.isIntersecting) marcar(entrada.target.id); });
+    entradas.forEach(entrada => { if (entrada.isIntersecting) atual = entrada.target.id; });
+    if (!alvo) marcar(atual);
   }, { rootMargin: '-45% 0px -50% 0px' });
   document.querySelectorAll('main > section').forEach(secao => espia.observe(secao));
 });
@@ -423,7 +436,7 @@ parte('fileiras', () => {
     par.addEventListener('click', event => {
       const botao = event.target.closest('.paddle');
       if (!botao || botao.getAttribute('aria-disabled') === 'true') return;
-      fila.scrollBy({ left: Number(botao.dataset.dir) * passo(), behavior: reduz.matches ? 'auto' : 'smooth' });
+      fila.scrollBy({ left: Number(botao.dataset.dir) * passo(), behavior: reduz.matches || doTeclado(event) ? 'auto' : 'smooth' });
     });
     fila.addEventListener('scroll', () => escrever(ler()), { passive: true });
     filas.push({ fila, ler, escrever });
@@ -446,6 +459,13 @@ parte('toque e ano', () => {
 parte('perguntas', () => {
   const lista = document.querySelector('.faq-list');
   if (lista) lista.addEventListener('click', event => { if (doTeclado(event) && event.target.closest('summary')) naHora(); });
+});
+
+/* ancora ativada pelo teclado pula na hora (README) */
+parte('ancoras', () => {
+  document.addEventListener('click', event => {
+    if (doTeclado(event) && event.target.closest('a[href^="#"]')) naHora();
+  });
 });
 
 /* ---------- entrada suave, so para o que ainda nao esta na tela ---------- */

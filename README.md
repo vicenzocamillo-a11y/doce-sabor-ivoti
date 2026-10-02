@@ -235,14 +235,17 @@ ou `opacity`, que rodam no compositor. Exceções conscientes, curtas ou presas
 à rolagem: `clip-path` na bandeja do menu do celular (escala distorceria os
 links), `background-size` no marca-texto do período do dia,
 `background-position` na citação que enche com a rolagem, `block-size` na
-abertura do FAQ (onde há `::details-content`) e `filter` (desfoque de 2 px) na
-troca do ícone do botão do menu. Recorte que anima tem as duas pontas em
-`inset()`: entre `none` e `inset()` o navegador salta em vez de animar.
+abertura do FAQ (onde há `::details-content`) e `filter`: o desfoque de 2 px na
+troca do ícone do botão do menu e, com "reduzir movimento", o brilho que
+substitui o giro do selo do hero no hover. Recorte que anima tem as duas pontas
+em `inset()`: entre `none` e `inset()` o navegador salta em vez de animar.
 
 Ação de teclado não anima: Esc fecha menu e diálogos na hora; pelo teclado, o
-botão do menu, os links dele, "Fotos e fontes" e as perguntas abrem e fecham
-sem transição; abrir a foto pelo teclado é só um esmaecer de 150 ms; e o Tab
-rola a página sem deslizar.
+botão do menu (ícone e rótulo), os links dele, "Fotos e fontes" e as perguntas
+abrem e fecham sem transição; abrir a foto pelo teclado é só um esmaecer de
+150 ms; link de âncora salta sem deslizar e o traço da navegação marca o
+destino sem animar; as setas das fileiras avançam sem deslizar; e o Tab rola a
+página sem deslizar.
 Com "reduzir movimento", deslocamento vira opacidade (menos e mais suave, não
 zero). Os efeitos ligados à rolagem (citação e sumiço do texto do
 hero) só existem onde o navegador suporta; nos outros, o estado parado já é o
@@ -285,18 +288,24 @@ comentários curtos, e o porquê de cada escolha mora aqui.
   mesmo x das seções. Nas grades, `minmax(0,1fr)` e não `1fr`: coluna `1fr`
   não encolhe abaixo do conteúdo, e um rótulo longo alargava a página a 320px.
 - **Toque e foco.** Botão, chip, seta e cápsula afundam (.97 em 100 ms, soltam
-  em 160 ms); texto que se toca (links, perguntas, menu, rodapé, barra de
-  utilidade) responde por opacidade, porque o tap highlight está desligado. Um
-  ouvinte de toque no documento faz o Safari do iPhone aplicar `:active`. Os
-  alvos têm 44px: os links do topo com folga de 4px devolvida pela margem
-  negativa, as linhas do rodapé com 40px (44 no celular). Cada container escuro
-  declara o próprio `--focus`. O anel de foco da barra de utilidade fica dentro
-  dela: fora, o topo da tela e a barra grudada o cortavam. Navegando pelo
-  teclado, a página pula na hora (`html:has(:focus-visible)`); o clique desliza.
+  em 160 ms); texto que se toca (links, perguntas, menu, navegação e logo do
+  topo, rodapé, barra de utilidade, links de "Fotos e fontes") responde por
+  opacidade, porque o tap highlight está desligado. Um ouvinte de toque no
+  documento faz o Safari do iPhone aplicar `:active`. Os alvos têm 44px: os
+  links do topo com folga de 4px devolvida pela margem negativa, as linhas do
+  rodapé com 40px (44 no celular). Cada container escuro declara o próprio
+  `--focus`. O anel de foco da barra de utilidade fica dentro dela: fora, o
+  topo da tela e a barra grudada o cortavam. Navegando pelo teclado, a página
+  pula na hora (`html:has(:focus-visible)` para o Tab; link de âncora ativado
+  pelo teclado liga `data-instant`); o clique desliza.
 - **Topo.** Em repouso, papel com a linha fina; vira vidro (`.is-scrolled`)
   só quando gruda, isto é, quando a rolagem passa da barra de utilidade. O
   sublinhado do link cresce e recolhe pela esquerda: trocar a origem no meio do
-  caminho fazia o traço saltar de lado.
+  caminho fazia o traço saltar de lado. No clique num link de âncora, o traço
+  vai direto ao destino; antes, corria por todos os links do caminho (ver
+  "Seção em leitura", no script). No celular, "Menu" e "Fechar" dividem a mesma
+  célula do botão, que fica sempre com a largura de "Fechar": a troca é um
+  esmaecimento cruzado e o botão não muda de tamanho.
 - **Hero.** `overflow:clip`, não `hidden`: `hidden` faria do hero um contêiner
   de rolagem e prenderia as animações ligadas à rolagem a um scroll que não
   anda. O véu diagonal nunca clareia antes de 560px (a coluna do texto) e o de
@@ -347,14 +356,19 @@ comentários curtos, e o porquê de cada escolha mora aqui.
   menu e as réguas dos prêmios animam por escala, não por recorte; os ponteiros
   do relógio são `<svg>` próprios girados por `transform` (em elemento SVG, a
   propriedade `rotate` não vai para o compositor). Ação de teclado liga
-  `data-instant` no `<html>` por dois quadros, e uma regra só desliga as
-  transições do menu, do diálogo de fontes e das perguntas. Todo `:hover` mora
+  `data-instant` no `<html>` por dois quadros: uma regra desliga as transições
+  do menu (bandeja, ícone e rótulo do botão), do diálogo de fontes, das
+  perguntas e do traço da navegação, e outra põe a rolagem em `auto`, para o
+  link de âncora saltar. Só o `html:has(:focus-visible)` não basta: ao seguir a
+  âncora, o navegador tira o foco do link antes de rolar. Todo `:hover` mora
   no bloco `(hover:hover) and (pointer:fine)`, com a versão reduzida aninhada.
 - **Preferências do sistema.** Sem vidro, ou sem o sumiço do hero (Firefox), o
-  vidro fica quase sólido. Com mais contraste, todo material vira quase sólido
-  com borda definida. Em cores forçadas o modo preserva o alfa do fundo, então
-  o material translúcido vira `Canvas` sólido, e o que só existia por fundo ou
-  sombra ganha borda ou cor de sistema.
+  vidro fica quase sólido. Com menos transparência, topo e cápsula viram papel
+  e os botões de vidro (zoom, fechar e "Como chegar"), tinta sólida. Com mais
+  contraste, todo material vira quase sólido com borda definida. Em cores
+  forçadas o modo preserva o alfa do fundo, então o material translúcido vira
+  `Canvas` sólido, e o que só existia por fundo ou sombra ganha borda ou cor de
+  sistema.
 
 ### Script
 
@@ -388,8 +402,15 @@ comentários curtos, e o porquê de cada escolha mora aqui.
   botões do hero menos a barra e, com o sumiço, mais 120px), e não de um
   cruzamento de limite: salto de página, link, "Voltar ao topo" e celular
   deitado acertam do mesmo jeito.
+- **Seção em leitura.** O clique num link de âncora marca o destino na hora e
+  suspende o espião; ele volta 150 ms depois do último evento de rolagem (ou
+  1,2 s depois do clique, se nada rolar) e marca a seção que de fato está na
+  faixa do meio. É debounce de `scroll`, não `scrollend`, que o Safari antigo
+  não tem.
 - **Setas das fileiras.** No fim da fileira a seta fica `aria-disabled`, não
   `disabled`: botão desligado com foco jogaria o foco do teclado no `<body>`.
+  A seta apagada esmaece em 200 ms; pelo teclado, a fileira avança sem
+  deslizar.
 - **Entrada.** Arma o que está fora da tela e alcança a faixa de disparo; o que
   mora nos últimos 10% da página nunca entraria nela e ficaria invisível. A
   conta inclui os até 28px que o elemento desce quando armado, mais 8px de
